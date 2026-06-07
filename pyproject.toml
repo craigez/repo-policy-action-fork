@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "repo-policy-action"
+version = "0.1.0"
+description = "GitHub Action to enforce repository policy standards for Qualcomm open-source projects"
+requires-python = ">=3.13"
+
+[tool.black]
+line-length = 80
+target-version = ["py313"]
+
+[tool.isort]
+profile = "black"
+line_length = 80
+
+[tool.pylint.format]
+max-line-length = 80
+
+[tool.pylint.messages_control]
+# too-few-public-methods: dataclasses and simple result classes trigger this
+disable = ["too-few-public-methods"]

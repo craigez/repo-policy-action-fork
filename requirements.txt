@@ -1,0 +1,3 @@
+# Runtime dependency — only what main.py actually imports at runtime.
+# requests is used solely for fetching the default config from config_url.
+requests==2.32.3
