@@ -1,0 +1,35 @@
+name: Repository Policy Check
+description: Enforces repository structure and policy standards for Qualcomm open-source projects. Replaces todogroup/repolinter-action.
+author: Qualcomm
+
+inputs:
+  config_file:
+    description: Path to a local repo-policy.json or repolint.json override at the repo root. If not provided, auto-detection is used.
+    required: false
+  config_url:
+    description: URL to fetch the default policy config from when no local config file is found.
+    default: https://raw.githubusercontent.com/qualcomm/.github/main/repolint.json
+    required: false
+  fail-on-error:
+    description: Exit non-zero when any error-level rule fails.
+    default: 'true'
+    required: false
+  fail-on-warning:
+    description: Exit non-zero when any warning-level rule fails.
+    default: 'false'
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Run repository policy checks
+      shell: bash
+      run: |
+        python3 "${{ github.action_path }}/src/main.py" \
+          --repo-path "${{ github.workspace }}" \
+          --config-url "${{ inputs.config_url }}" \
+          ${{ inputs.config_file && format('--config-file "{0}"', inputs.config_file) || '' }} \
+          ${{ inputs.fail-on-error == 'true' && '--fail-on-error' || '' }} \
+          ${{ inputs.fail-on-warning == 'true' && '--fail-on-warning' || '' }}
+      env:
+        PYTHONPATH: ${{ github.action_path }}
