@@ -22,6 +22,11 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Install Python dependencies
+      shell: bash
+      run: |
+        pip install --quiet -r "${{ github.action_path }}/requirements.txt"
+
     - name: Run repository policy checks
       shell: bash
       run: |
@@ -29,7 +34,7 @@ runs:
           --repo-path "${{ github.workspace }}" \
           --config-url "${{ inputs.config_url }}" \
           ${{ inputs.config_file && format('--config-file "{0}"', inputs.config_file) || '' }} \
-          ${{ inputs.fail-on-error == 'true' && '--fail-on-error' || '' }} \
-          ${{ inputs.fail-on-warning == 'true' && '--fail-on-warning' || '' }}
+          ${{ inputs.fail-on-error == 'true' && '--fail-on-error' || '--no-fail-on-error' }} \
+          ${{ inputs.fail-on-warning == 'true' && '--fail-on-warning' || '--no-fail-on-warning' }}
       env:
-        PYTHONPATH: ${{ github.action_path }}
+        PYTHONPATH: ${{ github.action_path }}/src

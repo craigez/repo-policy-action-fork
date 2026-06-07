@@ -1,3 +1,9 @@
-# Runtime dependency — only what main.py actually imports at runtime.
-# requests is used solely for fetching the default config from config_url.
+# Runtime dependencies.
+# requests: fetches the default config from config_url.
+# click: CLI argument parsing.
+# python-magic: magic-byte detection for the binary prohibition rule.
+#   Requires libmagic to be present on the runner (pre-installed on
+#   ubuntu-latest GitHub-hosted runners).
 requests==2.32.3
+click==8.1.8
+python-magic==0.4.27
