@@ -146,7 +146,6 @@ class TestFileContentsRule(unittest.TestCase):
         )
         self.assertTrue(result.passed)
 
-
     def test_skip_paths_matching_extension(self):
         """Files with a skipped extension are not checked."""
         repo = self._make_repo(
@@ -192,8 +191,16 @@ class TestFileContentsRule(unittest.TestCase):
     def test_skip_binary_files_option(self):
         """skip-binary-files skips files detected as binary by magic."""
         repo = self._make_repo({})
-        # Write a minimal ELF header — libmagic identifies this as binary
-        (Path(repo) / "tool").write_bytes(b"\x7fELF" + b"\x00" * 12)
+        # Write a minimal ELF64 header — libmagic identifies this as binary
+        elf = bytearray(64)
+        elf[0:4] = b"\x7fELF"
+        elf[4] = 2
+        elf[5] = 1
+        elf[6] = 1
+        elf[16:18] = b"\x02\x00"
+        elf[18:20] = b"\x3e\x00"
+        elf[20:24] = b"\x01\x00\x00\x00"
+        (Path(repo) / "tool").write_bytes(bytes(elf))
         result = run(
             repo_path=repo,
             rule_name="source-qualcomm-license-headers-exist",

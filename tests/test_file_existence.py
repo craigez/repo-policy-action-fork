@@ -90,7 +90,6 @@ class TestFileExistenceRule(unittest.TestCase):
         )
         self.assertTrue(result.passed)
 
-
     def test_passes_case_insensitive_with_nocase(self):
         """nocase=True finds a file regardless of case."""
         repo = self._make_repo(["license"])  # lowercase filename

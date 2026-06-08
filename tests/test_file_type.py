@@ -16,10 +16,16 @@ from src.rules.file_type import run
 
 
 def _write_elf_header(path: Path) -> None:
-    """Write a minimal ELF magic header to simulate a Linux binary."""
-    # ELF magic bytes: 0x7f 'E' 'L' 'F' followed by padding
-    elf_header = b"\x7fELF" + b"\x00" * 12
-    path.write_bytes(elf_header)
+    """Write a minimal but valid ELF64 header to simulate a Linux binary."""
+    elf = bytearray(64)
+    elf[0:4] = b"\x7fELF"
+    elf[4] = 2  # ELFCLASS64
+    elf[5] = 1  # ELFDATA2LSB
+    elf[6] = 1  # EI_VERSION=1
+    elf[16:18] = b"\x02\x00"  # ET_EXEC
+    elf[18:20] = b"\x3e\x00"  # EM_X86_64
+    elf[20:24] = b"\x01\x00\x00\x00"  # e_version=1
+    path.write_bytes(bytes(elf))
 
 
 def _write_pe_header(path: Path) -> None:
@@ -111,7 +117,6 @@ class TestFileTypeRule(unittest.TestCase):
             reporter=self.reporter,
         )
         self.assertTrue(result.passed)
-
 
     def test_passes_explicitly_when_no_binaries(self):
         """Pass result is explicitly returned (not just no failure) for

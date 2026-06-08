@@ -11,6 +11,7 @@ restricted to specific subdirectories).
 from __future__ import annotations
 
 import logging
+import os
 from pathlib import Path
 from typing import Any
 
@@ -69,8 +70,9 @@ def run(
                 matches = _glob_nocase(base, pattern)
             else:
                 matches = [
-                    p for p in base.glob(pattern)
-                    if _is_accessible_file(p)
+                    p
+                    for p in base.glob(pattern)
+                    if _is_accessible_file(p) and _case_matches(p, pattern)
                 ]
             if matches:
                 logger.debug(
@@ -83,17 +85,39 @@ def run(
                     f"Found: {matches[0].relative_to(root)}",
                 )
 
-    searched = ", ".join(
-        (str(root / d) if d else str(root)) for d in dirs
-    )
-    message = fail_message or (
-        f"No file matching {globs} found in: {searched}"
-    )
+    searched = ", ".join((str(root / d) if d else str(root)) for d in dirs)
+    message = fail_message or (f"No file matching {globs} found in: {searched}")
     return reporter.rule_failed(
         rule_name=rule_name,
         level=level,
         message=message,
     )
+
+
+def _case_matches(path: Path, pattern: str) -> bool:
+    """Return True if the filename's case exactly matches the pattern.
+
+    On case-insensitive filesystems (macOS HFS+), Path.glob() normalises
+    the returned name to match the pattern, hiding the actual on-disk
+    casing. When nocase=False we read the real name via os.listdir to
+    enforce exact case.
+
+    Args:
+        path: Candidate file path.
+        pattern: The original glob pattern string.
+
+    Returns:
+        True if the file name matches the last component of the pattern
+        exactly (case-sensitive), or if the pattern contains a wildcard.
+    """
+    pattern_name = Path(pattern).name
+    if any(c in pattern_name for c in ("*", "?", "[")):
+        return True
+    try:
+        disk_names = os.listdir(path.parent)
+    except OSError:
+        return False
+    return pattern_name in disk_names
 
 
 def _is_accessible_file(path: Path) -> bool:
