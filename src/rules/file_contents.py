@@ -38,6 +38,73 @@ _SKIP_DIRS = frozenset(
 )
 
 
+def _parse_options(
+    options: dict[str, Any],
+) -> tuple[
+    list[str],
+    str,
+    list[str],
+    int | None,
+    bool,
+    list[str],
+    bool,
+    str | None,
+]:
+    """Normalise rule options into canonical types.
+
+    Handles two schemas:
+    - Internal (``content``, ``flags`` as list, ``fail-on-non-existent``,
+      ``skip-paths-matching`` as list).
+    - repolint.json v2 (``patterns`` list, ``flags`` as string ``"i"``,
+      ``succeed-on-non-existent``, ``skip-paths-matching`` as object).
+
+    Returns a tuple:
+        (globs, content_pattern, flag_names, line_count,
+         fail_on_missing, skip_paths, skip_binary, fail_message)
+    """
+    globs: list[str] = options.get("globsAll", [])
+
+    content_pattern: str = options.get("content", "")
+    if not content_pattern:
+        raw_patterns = options.get("patterns", [])
+        if isinstance(raw_patterns, list) and raw_patterns:
+            content_pattern = "|".join(f"(?:{p})" for p in raw_patterns)
+        elif isinstance(raw_patterns, str):
+            content_pattern = raw_patterns
+
+    raw_flags = options.get("flags", [])
+    if isinstance(raw_flags, str):
+        flag_names: list[str] = [raw_flags] if raw_flags else []
+    else:
+        flag_names = list(raw_flags)
+
+    line_count: int | None = options.get("lineCount")
+
+    fail_on_missing: bool = options.get("fail-on-non-existent", False)
+    if not fail_on_missing and "succeed-on-non-existent" in options:
+        fail_on_missing = not options["succeed-on-non-existent"]
+
+    raw_skip = options.get("skip-paths-matching", [])
+    if isinstance(raw_skip, dict):
+        skip_paths: list[str] = raw_skip.get("patterns", [])
+    else:
+        skip_paths = list(raw_skip)
+
+    skip_binary: bool = options.get("skip-binary-files", False)
+    fail_message: str | None = options.get("fail-message")
+
+    return (
+        globs,
+        content_pattern,
+        flag_names,
+        line_count,
+        fail_on_missing,
+        skip_paths,
+        skip_binary,
+        fail_message,
+    )
+
+
 def run(
     repo_path: str,
     rule_name: str,
@@ -54,36 +121,23 @@ def run(
         repo_path: Absolute path to the repository root.
         rule_name: Rule identifier for annotations.
         level: ``"error"`` or ``"warning"``.
-        options: Rule options from the config. Expected keys:
-            - ``"globsAll"`` (list[str]): every matched file must
-              contain the required content.
-            - ``"content"`` (str): regex pattern to match.
-            - ``"flags"`` (list[str], optional): regex flags
-              e.g. ``["IGNORECASE"]``.
-            - ``"lineCount"`` (int, optional): only check the first N
-              lines (file-starts-with semantics).
-            - ``"fail-on-non-existent"`` (bool, optional): fail if no
-              files match the glob (default: False).
-            - ``"skip-paths-matching"`` (list[str], optional): skip
-              files whose path matches any of these regex patterns or
-              whose extension is in this list.
-            - ``"skip-binary-files"`` (bool, optional): skip files
-              detected as binary by libmagic (default: False).
-            - ``"fail-message"`` (str, optional): custom failure
-              message to emit instead of the default.
+        options: Rule options from the config. See ``_parse_options``
+            for the full list of supported keys.
         reporter: Reporter instance.
 
     Returns:
         A RuleResult indicating pass or failure.
     """
-    globs: list[str] = options.get("globsAll", [])
-    content_pattern: str = options.get("content", "")
-    flag_names: list[str] = options.get("flags", [])
-    line_count: int | None = options.get("lineCount")
-    fail_on_missing: bool = options.get("fail-on-non-existent", False)
-    skip_paths: list[str] = options.get("skip-paths-matching", [])
-    skip_binary: bool = options.get("skip-binary-files", False)
-    fail_message: str | None = options.get("fail-message")
+    (
+        globs,
+        content_pattern,
+        flag_names,
+        line_count,
+        fail_on_missing,
+        skip_paths,
+        skip_binary,
+        fail_message,
+    ) = _parse_options(options)
 
     if not content_pattern:
         logger.warning(

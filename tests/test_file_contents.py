@@ -269,6 +269,102 @@ class TestFileContentsRule(unittest.TestCase):
         self.assertFalse(result.passed)
         self.assertIn("bad.py", result.file_path or "")
 
+    def test_patterns_list_any_must_match(self):
+        """repolint 'patterns' list: a file matches if ANY pattern is found."""
+        repo = self._make_repo(
+            {"src/main.py": "# SPDX-License-Identifier: Apache-2.0"}
+        )
+        result = run(
+            repo_path=repo,
+            rule_name="source-license-headers-exist",
+            level="error",
+            options={
+                "globsAll": ["src/*.py"],
+                "patterns": [
+                    "Copyright(\\s)*(\\(c\\)|©)?",
+                    "SPDX-License-Identifier",
+                ],
+                "flags": "i",
+                "lineCount": 5,
+                "succeed-on-non-existent": True,
+            },
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
+    def test_patterns_list_fails_when_none_match(self):
+        """'patterns' list fails when no pattern is found in any file."""
+        repo = self._make_repo({"src/main.py": "print('hello')"})
+        result = run(
+            repo_path=repo,
+            rule_name="source-license-headers-exist",
+            level="error",
+            options={
+                "globsAll": ["src/*.py"],
+                "patterns": [
+                    "Copyright",
+                    "SPDX-License-Identifier",
+                ],
+                "flags": "i",
+                "lineCount": 5,
+            },
+            reporter=self.reporter,
+        )
+        self.assertFalse(result.passed)
+
+    def test_flags_as_string_ignorecase(self):
+        """flags='i' string (repolint format) enables case-insensitive match."""
+        repo = self._make_repo({"README.md": "Licensed under Apache"})
+        result = run(
+            repo_path=repo,
+            rule_name="readme-references-license",
+            level="error",
+            options={
+                "globsAll": ["README*"],
+                "content": "license",
+                "flags": "i",
+            },
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
+    def test_succeed_on_non_existent_passes_when_no_files(self):
+        """succeed-on-non-existent=True passes when no files match the glob."""
+        repo = self._make_repo({})
+        result = run(
+            repo_path=repo,
+            rule_name="source-license-headers-exist",
+            level="error",
+            options={
+                "globsAll": ["**/*.py"],
+                "content": "Copyright",
+                "succeed-on-non-existent": True,
+            },
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
+    def test_skip_paths_matching_as_dict(self):
+        """skip-paths-matching as a dict with 'patterns' key is handled."""
+        repo = self._make_repo(
+            {
+                "src/main.py": "# Copyright Qualcomm",
+                "build/generated.py": "no copyright here",
+            }
+        )
+        result = run(
+            repo_path=repo,
+            rule_name="source-qualcomm-license-headers-exist",
+            level="warning",
+            options={
+                "globsAll": ["**/*.py"],
+                "content": "Qualcomm",
+                "skip-paths-matching": {"patterns": ["build/"]},
+            },
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
 
 if __name__ == "__main__":
     unittest.main()
