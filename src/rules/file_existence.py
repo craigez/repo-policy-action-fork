@@ -37,6 +37,10 @@ def run(
               must match.
             - ``"dirs"`` (list[str], optional): restrict search to
               these subdirectories relative to the repo root.
+            - ``"nocase"`` (bool, optional): case-insensitive filename
+              matching (default: False).
+            - ``"fail-message"`` (str, optional): custom message to
+              emit on failure instead of the default.
         reporter: Reporter instance.
 
     Returns:
@@ -44,6 +48,8 @@ def run(
     """
     globs: list[str] = options.get("globsAny", [])
     dirs: list[str] = options.get("dirs", [""])
+    nocase: bool = options.get("nocase", False)
+    fail_message: str | None = options.get("fail-message")
 
     if not globs:
         logger.warning(
@@ -59,7 +65,13 @@ def run(
         if not base.is_dir():
             continue
         for pattern in globs:
-            matches = list(base.glob(pattern))
+            if nocase:
+                matches = _glob_nocase(base, pattern)
+            else:
+                matches = [
+                    p for p in base.glob(pattern)
+                    if _is_accessible_file(p)
+                ]
             if matches:
                 logger.debug(
                     "Rule '%s' passed — found '%s'.",
@@ -74,10 +86,40 @@ def run(
     searched = ", ".join(
         (str(root / d) if d else str(root)) for d in dirs
     )
+    message = fail_message or (
+        f"No file matching {globs} found in: {searched}"
+    )
     return reporter.rule_failed(
         rule_name=rule_name,
         level=level,
-        message=(
-            f"No file matching {globs} found in: {searched}"
-        ),
+        message=message,
     )
+
+
+def _is_accessible_file(path: Path) -> bool:
+    """Return True for regular files and resolvable symlinks to files."""
+    return path.is_file() and (not path.is_symlink() or path.exists())
+
+
+def _glob_nocase(base: Path, pattern: str) -> list[Path]:
+    """Case-insensitive glob by walking the tree and comparing lowercased.
+
+    Args:
+        base: Directory to search under.
+        pattern: Glob pattern (e.g. ``"LICENSE"`` or ``"README*"``).
+
+    Returns:
+        List of matching file paths.
+    """
+    pattern_lower = pattern.lower()
+    results: list[Path] = []
+    for candidate in base.rglob("*"):
+        if not _is_accessible_file(candidate):
+            continue
+        try:
+            rel = candidate.relative_to(base)
+        except ValueError:
+            continue
+        if str(rel).lower() == pattern_lower:
+            results.append(candidate)
+    return results
