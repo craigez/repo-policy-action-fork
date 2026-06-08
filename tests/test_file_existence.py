@@ -91,5 +91,62 @@ class TestFileExistenceRule(unittest.TestCase):
         self.assertTrue(result.passed)
 
 
+    def test_passes_case_insensitive_with_nocase(self):
+        """nocase=True finds a file regardless of case."""
+        repo = self._make_repo(["license"])  # lowercase filename
+        result = run(
+            repo_path=repo,
+            rule_name="license-file-exists",
+            level="error",
+            options={"globsAny": ["LICENSE"], "nocase": True},
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
+    def test_fails_case_sensitive_without_nocase(self):
+        """Without nocase, mismatched case is not found."""
+        repo = self._make_repo(["license"])  # lowercase, pattern is upper
+        result = run(
+            repo_path=repo,
+            rule_name="license-file-exists",
+            level="error",
+            options={"globsAny": ["LICENSE"], "nocase": False},
+            reporter=self.reporter,
+        )
+        self.assertFalse(result.passed)
+
+    def test_custom_fail_message_used_on_failure(self):
+        """fail-message overrides the default failure message."""
+        repo = self._make_repo([])
+        result = run(
+            repo_path=repo,
+            rule_name="license-file-exists",
+            level="error",
+            options={
+                "globsAny": ["LICENSE"],
+                "fail-message": "Add a LICENSE file.",
+            },
+            reporter=self.reporter,
+        )
+        self.assertFalse(result.passed)
+        self.assertEqual(result.message, "Add a LICENSE file.")
+
+    def test_broken_symlink_not_counted_as_match(self):
+        """A broken symlink does not satisfy file-existence."""
+        import os
+
+        repo = self._make_repo([])
+        symlink = Path(repo) / "LICENSE"
+        symlink.symlink_to("/nonexistent/target")
+        result = run(
+            repo_path=repo,
+            rule_name="license-file-exists",
+            level="error",
+            options={"globsAny": ["LICENSE"]},
+            reporter=self.reporter,
+        )
+        self.assertFalse(result.passed)
+
+
 if __name__ == "__main__":
     unittest.main()
