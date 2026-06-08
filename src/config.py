@@ -35,6 +35,7 @@ SUPPORTED_RULE_TYPES = frozenset(
         "file-starts-with",
         "file-contents",
         "no-file-type-exists",
+        "file-type-exclusion",
         "directory-existence",
     }
 )

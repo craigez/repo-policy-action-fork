@@ -215,5 +215,48 @@ class TestAxiomEdgeCases(unittest.TestCase):
         self.assertEqual(len(results), 1)
 
 
+_FILE_TYPE_EXCLUSION_CONFIG = {
+    "version": 2,
+    "rules": {
+        "binaries-not-present": {
+            "level": "warning",
+            "rule": {
+                "type": "file-type-exclusion",
+                "options": {
+                    "type": ["**/*.exe", "**/*.dll", "!node_modules/**"]
+                },
+            },
+        },
+    },
+}
+
+
+class TestFileTypeExclusionAlias(unittest.TestCase):
+    def setUp(self):
+        self.reporter = Reporter()
+
+    def _make_repo(self, files: list[str]) -> str:
+        tmp = tempfile.mkdtemp()
+        for rel_path in files:
+            path = Path(tmp) / rel_path
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("", encoding="utf-8")
+        return tmp
+
+    def test_file_type_exclusion_type_is_dispatched(self):
+        """file-type-exclusion rule type is routed to the binary checker."""
+        repo = self._make_repo(["src/main.py", "README.md"])
+        languages = detect_languages(repo)
+        results = run_all_rules(
+            repo_path=repo,
+            config=_FILE_TYPE_EXCLUSION_CONFIG,
+            languages=languages,
+            reporter=self.reporter,
+        )
+        # No actual binaries → rule passes.
+        self.assertEqual(len(results), 1)
+        self.assertTrue(results[0].passed)
+
+
 if __name__ == "__main__":
     unittest.main()

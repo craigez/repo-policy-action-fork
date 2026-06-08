@@ -26,6 +26,7 @@ _RULE_HANDLERS = {
     "file-starts-with": run_file_contents,
     "file-contents": run_file_contents,
     "no-file-type-exists": run_file_type,
+    "file-type-exclusion": run_file_type,
     "directory-existence": run_directory_existence,
 }
 
