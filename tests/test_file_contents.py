@@ -147,5 +147,121 @@ class TestFileContentsRule(unittest.TestCase):
         self.assertTrue(result.passed)
 
 
+    def test_skip_paths_matching_extension(self):
+        """Files with a skipped extension are not checked."""
+        repo = self._make_repo(
+            {
+                "src/main.py": "# Copyright Qualcomm",
+                "src/data.bin": "no copyright here",
+            }
+        )
+        result = run(
+            repo_path=repo,
+            rule_name="source-qualcomm-license-headers-exist",
+            level="warning",
+            options={
+                "globsAll": ["src/*"],
+                "content": "Qualcomm",
+                "skip-paths-matching": [".bin"],
+            },
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
+    def test_skip_paths_matching_regex(self):
+        """Files whose path matches a skip regex are not checked."""
+        repo = self._make_repo(
+            {
+                "src/main.py": "# Copyright Qualcomm",
+                "src/generated/auto.py": "no copyright here",
+            }
+        )
+        result = run(
+            repo_path=repo,
+            rule_name="source-qualcomm-license-headers-exist",
+            level="warning",
+            options={
+                "globsAll": ["**/*.py"],
+                "content": "Qualcomm",
+                "skip-paths-matching": ["generated/"],
+            },
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
+    def test_skip_binary_files_option(self):
+        """skip-binary-files skips files detected as binary by magic."""
+        repo = self._make_repo({})
+        # Write a minimal ELF header — libmagic identifies this as binary
+        (Path(repo) / "tool").write_bytes(b"\x7fELF" + b"\x00" * 12)
+        result = run(
+            repo_path=repo,
+            rule_name="source-qualcomm-license-headers-exist",
+            level="warning",
+            options={
+                "globsAll": ["*"],
+                "content": "Qualcomm",
+                "skip-binary-files": True,
+            },
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
+    def test_broken_symlink_skipped_gracefully(self):
+        """A broken symlink in the glob results is skipped, not raised."""
+        repo = self._make_repo({"README.md": "license"})
+        broken = Path(repo) / "EXTRA.md"
+        broken.symlink_to("/nonexistent/path")
+        result = run(
+            repo_path=repo,
+            rule_name="readme-references-license",
+            level="error",
+            options={
+                "globsAll": ["*.md"],
+                "content": "license",
+            },
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
+    def test_custom_fail_message_used_on_failure(self):
+        """fail-message overrides the default failure message."""
+        repo = self._make_repo({"README.md": "Hello world."})
+        result = run(
+            repo_path=repo,
+            rule_name="readme-references-license",
+            level="error",
+            options={
+                "globsAll": ["README*"],
+                "content": "license",
+                "fail-message": "README must reference the license.",
+            },
+            reporter=self.reporter,
+        )
+        self.assertFalse(result.passed)
+        self.assertEqual(result.message, "README must reference the license.")
+
+    def test_globsall_all_files_must_match(self):
+        """globsAll requires every matched file to contain the pattern."""
+        repo = self._make_repo(
+            {
+                "src/good.py": "# Copyright Qualcomm",
+                "src/bad.py": "print('hello')",
+            }
+        )
+        result = run(
+            repo_path=repo,
+            rule_name="source-qualcomm-license-headers-exist",
+            level="warning",
+            options={
+                "globsAll": ["src/*.py"],
+                "content": "Qualcomm",
+            },
+            reporter=self.reporter,
+        )
+        self.assertFalse(result.passed)
+        self.assertIn("bad.py", result.file_path or "")
+
+
 if __name__ == "__main__":
     unittest.main()
