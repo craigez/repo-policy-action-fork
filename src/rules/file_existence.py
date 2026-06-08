@@ -10,8 +10,10 @@ restricted to specific subdirectories).
 
 from __future__ import annotations
 
+import fnmatch
 import logging
 import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -61,11 +63,13 @@ def run(
         )
 
     root = Path(repo_path)
+    # Expand brace expressions once before iterating dirs.
+    expanded_globs = [e for g in globs for e in _expand_braces(g)]
     for search_dir in dirs:
         base = root / search_dir if search_dir else root
         if not base.is_dir():
             continue
-        for pattern in globs:
+        for pattern in expanded_globs:
             if nocase:
                 matches = _glob_nocase(base, pattern)
             else:
@@ -92,6 +96,28 @@ def run(
         level=level,
         message=message,
     )
+
+
+def _expand_braces(pattern: str) -> list[str]:
+    """Expand a single-level brace expression into a list of patterns.
+
+    Handles simple ``{a,b,c}stem`` syntax as used in repolint.json, e.g.
+    ``"{docs/,.github/,}CONTRIB*"`` → ``["docs/CONTRIB*", ".github/CONTRIB*",
+    "CONTRIB*"]``.  Nested braces are not supported.
+
+    Args:
+        pattern: A glob pattern string, possibly containing ``{a,b}`` syntax.
+
+    Returns:
+        List of expanded patterns (length 1 when no braces are present).
+    """
+    match = re.search(r"\{([^{}]*)\}", pattern)
+    if not match:
+        return [pattern]
+    before = pattern[: match.start()]
+    after = pattern[match.end() :]
+    alternatives = match.group(1).split(",")
+    return [f"{before}{alt}{after}" for alt in alternatives]
 
 
 def _case_matches(path: Path, pattern: str) -> bool:
@@ -128,6 +154,9 @@ def _is_accessible_file(path: Path) -> bool:
 def _glob_nocase(base: Path, pattern: str) -> list[Path]:
     """Case-insensitive glob by walking the tree and comparing lowercased.
 
+    Uses fnmatch so wildcard patterns like ``"README*"`` and
+    ``"CONTRIB*"`` are resolved correctly.
+
     Args:
         base: Directory to search under.
         pattern: Glob pattern (e.g. ``"LICENSE"`` or ``"README*"``).
@@ -144,6 +173,6 @@ def _glob_nocase(base: Path, pattern: str) -> list[Path]:
             rel = candidate.relative_to(base)
         except ValueError:
             continue
-        if str(rel).lower() == pattern_lower:
+        if fnmatch.fnmatch(str(rel).lower(), pattern_lower):
             results.append(candidate)
     return results

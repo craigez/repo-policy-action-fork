@@ -146,6 +146,62 @@ class TestFileExistenceRule(unittest.TestCase):
         )
         self.assertFalse(result.passed)
 
+    def test_nocase_wildcard_pattern_finds_file(self):
+        """nocase=True with a wildcard pattern (e.g. README*) finds files."""
+        repo = self._make_repo(["README.md"])
+        result = run(
+            repo_path=repo,
+            rule_name="readme-file-exists",
+            level="error",
+            options={"globsAny": ["README*"], "nocase": True},
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
+    def test_nocase_wildcard_finds_lowercase_readme(self):
+        """nocase=True with README* pattern finds readme.rst (lowercase)."""
+        repo = self._make_repo(["readme.rst"])
+        result = run(
+            repo_path=repo,
+            rule_name="readme-file-exists",
+            level="error",
+            options={"globsAny": ["README*"], "nocase": True},
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
+    def test_brace_expansion_single_pattern(self):
+        """Brace expression in glob is expanded before searching."""
+        repo = self._make_repo([".github/CONTRIBUTING.md"])
+        result = run(
+            repo_path=repo,
+            rule_name="contributing-file-exists",
+            level="warning",
+            options={
+                "globsAny": ["{docs/,.github/,}CONTRIBUTING*"],
+                "nocase": True,
+            },
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
+    def test_brace_expansion_root_alternative(self):
+        """The empty alternative in a brace expression matches the repo root."""
+        repo = self._make_repo(["CODE_OF_CONDUCT.md"])
+        result = run(
+            repo_path=repo,
+            rule_name="code-of-conduct-file-exists",
+            level="warning",
+            options={
+                "globsAny": [
+                    "{docs/,.github/,}CODE_OF_CONDUCT*",
+                ],
+                "nocase": True,
+            },
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
 
 if __name__ == "__main__":
     unittest.main()
