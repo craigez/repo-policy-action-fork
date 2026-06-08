@@ -114,9 +114,7 @@ def detect_languages(repo_path: str) -> dict[str, set[str]]:
         if item.is_file():
             ext = item.suffix.lower()
             if ext in _EXT_TO_LANGUAGE:
-                extension_counts[ext] = (
-                    extension_counts.get(ext, 0) + 1
-                )
+                extension_counts[ext] = extension_counts.get(ext, 0) + 1
             if item.name in _PACKAGER_FILES:
                 detected_packagers.add(_PACKAGER_FILES[item.name])
             if ext == ".podspec":

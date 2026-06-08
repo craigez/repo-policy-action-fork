@@ -22,8 +22,7 @@ from rules import run_all_rules
 logger = logging.getLogger(__name__)
 
 _DEFAULT_CONFIG_URL = (
-    "https://raw.githubusercontent.com/"
-    "qualcomm/.github/main/repolint.json"
+    "https://raw.githubusercontent.com/" "qualcomm/.github/main/repolint.json"
 )
 
 
@@ -96,9 +95,7 @@ def main(
     )
 
     errors = [r for r in results if r.level == "error" and not r.passed]
-    warnings = [
-        r for r in results if r.level == "warning" and not r.passed
-    ]
+    warnings = [r for r in results if r.level == "warning" and not r.passed]
 
     reporter.summary(results)
 

@@ -87,9 +87,7 @@ def _resolve_config(
     return _fetch_json_url(config_url, reporter)
 
 
-def _load_json_file(
-    path: Path, reporter: Reporter
-) -> dict[str, Any] | None:
+def _load_json_file(path: Path, reporter: Reporter) -> dict[str, Any] | None:
     """Parse a JSON file and return its contents.
 
     Args:
@@ -110,9 +108,7 @@ def _load_json_file(
         return None
 
 
-def _fetch_json_url(
-    url: str, reporter: Reporter
-) -> dict[str, Any] | None:
+def _fetch_json_url(url: str, reporter: Reporter) -> dict[str, Any] | None:
     """Fetch and parse a JSON config from a URL.
 
     Args:
@@ -130,9 +126,7 @@ def _fetch_json_url(
         reporter.error(f"Failed to fetch config from {url}: {exc}")
         return None
     except json.JSONDecodeError as exc:
-        reporter.error(
-            f"Config fetched from {url} is not valid JSON: {exc}"
-        )
+        reporter.error(f"Config fetched from {url} is not valid JSON: {exc}")
         return None
 
 

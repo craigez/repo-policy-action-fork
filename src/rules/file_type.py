@@ -44,9 +44,9 @@ _BINARY_MIME_PREFIXES = (
     "application/x-executable",
     "application/x-sharedlib",
     "application/x-pie-executable",
-    "application/x-dosexec",       # .exe / .dll (PE format)
-    "application/x-object",        # .o object files
-    "application/x-mach-binary",   # macOS Mach-O binaries
+    "application/x-dosexec",  # .exe / .dll (PE format)
+    "application/x-object",  # .o object files
+    "application/x-mach-binary",  # macOS Mach-O binaries
 )
 
 # Extension allow-list: even if magic returns a binary MIME type, these
