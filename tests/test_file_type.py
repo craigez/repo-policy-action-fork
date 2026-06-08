@@ -113,5 +113,20 @@ class TestFileTypeRule(unittest.TestCase):
         self.assertTrue(result.passed)
 
 
+    def test_passes_explicitly_when_no_binaries(self):
+        """Pass result is explicitly returned (not just no failure) for
+        a clean repo — ensures the rule always produces a RuleResult."""
+        repo = self._make_repo({"src/main.py": "print('hello')"})
+        result = run(
+            repo_path=repo,
+            rule_name="binaries-not-present",
+            level="warning",
+            options={},
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+        self.assertIsNotNone(result.message)
+
+
 if __name__ == "__main__":
     unittest.main()
