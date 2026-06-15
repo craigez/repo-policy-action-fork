@@ -296,8 +296,59 @@ class TestLanguageAxiomAlias(unittest.TestCase):
         self.assertEqual(len(results), 1)
         self.assertFalse(results[0].passed)
 
+    def test_language_axiom_case_insensitive(self):
+        """language= value is matched case-insensitively against detected names.
+
+        The canonical repolint.json uses lowercase ('language=javascript')
+        while the language detector emits title-case ('JavaScript').  Both
+        must resolve to the same outcome.
+        """
+        # Config uses lower-case; detector will emit 'JavaScript'.
+        repo = self._make_repo(["src/index.js", "src/utils.js", "package.json"])
+        languages = detect_languages(repo)
+        # Confirm detector emits title-case so the test is meaningful.
+        self.assertIn("JavaScript", languages["languages"])
+
+        results = run_all_rules(
+            repo_path=repo,
+            config=_LANGUAGE_AXIOM_CONFIG,
+            languages=languages,
+            reporter=self.reporter,
+        )
+        # Rule should run (lowercase axiom matched title-case detection) and pass.
+        self.assertEqual(len(results), 1)
+        self.assertTrue(results[0].passed)
+
+    def test_linguist_axiom_case_insensitive(self):
+        """linguist= value is also matched case-insensitively."""
+        config = {
+            "version": 2,
+            "rules": {
+                "rust-check": {
+                    "level": "warning",
+                    "where": ["linguist=rust"],  # lowercase, detector emits 'Rust'
+                    "rule": {
+                        "type": "file-existence",
+                        "options": {"globsAny": ["Cargo.toml"]},
+                    },
+                },
+            },
+        }
+        repo = self._make_repo(["src/main.rs", "src/lib.rs", "Cargo.toml"])
+        languages = detect_languages(repo)
+        self.assertIn("Rust", languages["languages"])
+
+        results = run_all_rules(
+            repo_path=repo,
+            config=config,
+            languages=languages,
+            reporter=self.reporter,
+        )
+        self.assertEqual(len(results), 1)
+        self.assertTrue(results[0].passed)
 
 
+class TestFileTypeExclusionAlias(unittest.TestCase):
     def setUp(self):
         self.reporter = Reporter()
 
