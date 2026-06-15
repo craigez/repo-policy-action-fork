@@ -269,10 +269,18 @@ class TestFileContentsRule(unittest.TestCase):
         self.assertFalse(result.passed)
         self.assertIn("bad.py", result.file_path or "")
 
-    def test_patterns_list_any_must_match(self):
-        """repolint 'patterns' list: a file matches if ANY pattern is found."""
+    def test_patterns_list_all_must_match_passes(self):
+        """repolint 'patterns' list uses AND semantics: all patterns must match.
+
+        A file containing both Copyright and SPDX should pass.
+        """
         repo = self._make_repo(
-            {"src/main.py": "# SPDX-License-Identifier: Apache-2.0"}
+            {
+                "src/main.py": (
+                    "# Copyright (c) Qualcomm Technologies, Inc.\n"
+                    "# SPDX-License-Identifier: BSD-3-Clause\n"
+                )
+            }
         )
         result = run(
             repo_path=repo,
@@ -291,6 +299,32 @@ class TestFileContentsRule(unittest.TestCase):
             reporter=self.reporter,
         )
         self.assertTrue(result.passed)
+
+    def test_patterns_list_and_semantics_fails_when_one_missing(self):
+        """'patterns' AND semantics: file with only one pattern fails.
+
+        This is the key regression: a file that contains only the SPDX line
+        but not the Copyright notice must FAIL (not pass under OR semantics).
+        """
+        repo = self._make_repo(
+            {"src/main.py": "# SPDX-License-Identifier: Apache-2.0\n"}
+        )
+        result = run(
+            repo_path=repo,
+            rule_name="source-license-headers-exist",
+            level="error",
+            options={
+                "globsAll": ["src/*.py"],
+                "patterns": [
+                    "Copyright(\\s)*(\\(c\\)|©)?",
+                    "SPDX-License-Identifier",
+                ],
+                "flags": "i",
+                "lineCount": 5,
+            },
+            reporter=self.reporter,
+        )
+        self.assertFalse(result.passed)
 
     def test_patterns_list_fails_when_none_match(self):
         """'patterns' list fails when no pattern is found in any file."""

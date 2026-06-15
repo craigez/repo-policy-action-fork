@@ -42,7 +42,7 @@ def _parse_options(
     options: dict[str, Any],
 ) -> tuple[
     list[str],
-    str,
+    list[str],
     list[str],
     int | None,
     bool,
@@ -59,18 +59,24 @@ def _parse_options(
       ``succeed-on-non-existent``, ``skip-paths-matching`` as object).
 
     Returns a tuple:
-        (globs, content_pattern, flag_names, line_count,
+        (globs, content_patterns, flag_names, line_count,
          fail_on_missing, skip_paths, skip_binary, fail_message)
+
+    ``content_patterns`` is a list of pattern strings — all must match
+    (AND semantics), matching repolinter's behaviour.
     """
     globs: list[str] = options.get("globsAll", [])
 
-    content_pattern: str = options.get("content", "")
-    if not content_pattern:
+    content_patterns: list[str] = []
+    single = options.get("content", "")
+    if single:
+        content_patterns = [single]
+    else:
         raw_patterns = options.get("patterns", [])
-        if isinstance(raw_patterns, list) and raw_patterns:
-            content_pattern = "|".join(f"(?:{p})" for p in raw_patterns)
-        elif isinstance(raw_patterns, str):
-            content_pattern = raw_patterns
+        if isinstance(raw_patterns, list):
+            content_patterns = [p for p in raw_patterns if p]
+        elif isinstance(raw_patterns, str) and raw_patterns:
+            content_patterns = [raw_patterns]
 
     raw_flags = options.get("flags", [])
     if isinstance(raw_flags, str):
@@ -95,7 +101,7 @@ def _parse_options(
 
     return (
         globs,
-        content_pattern,
+        content_patterns,
         flag_names,
         line_count,
         fail_on_missing,
@@ -130,7 +136,7 @@ def run(
     """
     (
         globs,
-        content_pattern,
+        content_patterns,
         flag_names,
         line_count,
         fail_on_missing,
@@ -139,7 +145,7 @@ def run(
         fail_message,
     ) = _parse_options(options)
 
-    if not content_pattern:
+    if not content_patterns:
         logger.warning(
             "Rule '%s' has no content pattern — skipping.", rule_name
         )
@@ -147,13 +153,16 @@ def run(
             rule_name, "No content pattern configured — skipped."
         )
 
-    compiled = _compile_pattern(content_pattern, flag_names, rule_name)
-    if compiled is None:
-        return reporter.rule_failed(
-            rule_name=rule_name,
-            level=level,
-            message=f"Invalid regex pattern: {content_pattern!r}",
-        )
+    compiled_patterns: list[tuple[str, re.Pattern]] = []
+    for raw in content_patterns:
+        compiled = _compile_pattern(raw, flag_names, rule_name)
+        if compiled is None:
+            return reporter.rule_failed(
+                rule_name=rule_name,
+                level=level,
+                message=f"Invalid regex pattern: {raw!r}",
+            )
+        compiled_patterns.append((raw, compiled))
 
     skip_patterns = _compile_skip_patterns(skip_paths, rule_name)
     root = Path(repo_path)
@@ -203,18 +212,20 @@ def run(
             )
             continue
 
-        if not _file_contains(file_path, compiled, line_count):
-            return reporter.rule_failed(
-                rule_name=rule_name,
-                level=level,
-                message=fail_message
-                or (f"Pattern {content_pattern!r} not found in {rel}"),
-                file_path=rel,
-            )
+        # All patterns must match (AND semantics — repolinter-compatible).
+        for raw, compiled in compiled_patterns:
+            if not _file_contains(file_path, compiled, line_count):
+                return reporter.rule_failed(
+                    rule_name=rule_name,
+                    level=level,
+                    message=fail_message
+                    or (f"Pattern {raw!r} not found in {rel}"),
+                    file_path=rel,
+                )
 
     return reporter.rule_passed(
         rule_name,
-        f"Pattern found in all {len(matched_files)} matched file(s).",
+        f"All patterns found in all {len(matched_files)} matched file(s).",
     )
 
 
