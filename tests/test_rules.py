@@ -215,6 +215,21 @@ class TestAxiomEdgeCases(unittest.TestCase):
         self.assertEqual(len(results), 1)
 
 
+_LANGUAGE_AXIOM_CONFIG = {
+    "version": 2,
+    "rules": {
+        "js-package-metadata": {
+            "level": "warning",
+            "where": ["language=javascript"],
+            "rule": {
+                "type": "file-existence",
+                "options": {"globsAny": ["package.json"]},
+            },
+        },
+    },
+}
+
+
 _FILE_TYPE_EXCLUSION_CONFIG = {
     "version": 2,
     "rules": {
@@ -231,7 +246,58 @@ _FILE_TYPE_EXCLUSION_CONFIG = {
 }
 
 
-class TestFileTypeExclusionAlias(unittest.TestCase):
+class TestLanguageAxiomAlias(unittest.TestCase):
+    def setUp(self):
+        self.reporter = Reporter()
+
+    def _make_repo(self, files: list[str]) -> str:
+        tmp = tempfile.mkdtemp()
+        for rel_path in files:
+            path = Path(tmp) / rel_path
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("", encoding="utf-8")
+        return tmp
+
+    def test_language_axiom_skips_when_language_not_detected(self):
+        """language=javascript skips the rule when no JS files are present."""
+        repo = self._make_repo(["src/main.py", "README.md"])
+        languages = detect_languages(repo)
+        results = run_all_rules(
+            repo_path=repo,
+            config=_LANGUAGE_AXIOM_CONFIG,
+            languages=languages,
+            reporter=self.reporter,
+        )
+        self.assertEqual(len(results), 0)
+
+    def test_language_axiom_runs_when_language_detected(self):
+        """language=javascript runs the rule when JS files are present."""
+        repo = self._make_repo(["src/index.js", "src/utils.js", "package.json"])
+        languages = detect_languages(repo)
+        results = run_all_rules(
+            repo_path=repo,
+            config=_LANGUAGE_AXIOM_CONFIG,
+            languages=languages,
+            reporter=self.reporter,
+        )
+        self.assertEqual(len(results), 1)
+        self.assertTrue(results[0].passed)
+
+    def test_language_axiom_fails_when_file_missing(self):
+        """language=javascript + JS detected + package.json absent → fails."""
+        repo = self._make_repo(["src/index.js", "src/utils.js"])
+        languages = detect_languages(repo)
+        results = run_all_rules(
+            repo_path=repo,
+            config=_LANGUAGE_AXIOM_CONFIG,
+            languages=languages,
+            reporter=self.reporter,
+        )
+        self.assertEqual(len(results), 1)
+        self.assertFalse(results[0].passed)
+
+
+
     def setUp(self):
         self.reporter = Reporter()
 

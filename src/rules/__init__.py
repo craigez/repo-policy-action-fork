@@ -117,6 +117,9 @@ def _rule_applies(
             logger.warning("Unrecognised where condition: '%s'", condition)
             continue
         axiom, value = condition.split("=", 1)
+        # "language=" is the repolinter-native alias for "linguist=".
+        if axiom == "language":
+            axiom = "linguist"
         # Wildcard "*" matches any detected value for this axiom.
         if value == "*":
             if axiom == "linguist" and not detected_languages:
@@ -124,9 +127,16 @@ def _rule_applies(
             if axiom == "packagers" and not detected_packagers:
                 return False
             continue
-        if axiom == "linguist" and value not in detected_languages:
+        # Case-insensitive comparison: config values like "javascript" must
+        # match detected names like "JavaScript".
+        value_lower = value.lower()
+        if axiom == "linguist" and value_lower not in {
+            lang.lower() for lang in detected_languages
+        }:
             return False
-        if axiom == "packagers" and value not in detected_packagers:
+        if axiom == "packagers" and value_lower not in {
+            pkg.lower() for pkg in detected_packagers
+        }:
             return False
 
     return True
