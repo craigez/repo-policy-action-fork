@@ -10,22 +10,6 @@ Qualcomm's reusable workflow suite (`qualcomm/reusable-workflows`) previously us
 
 Rather than forking and maintaining the original Node.js codebase, we implemented the subset of checks Qualcomm actually uses in Python — a language already familiar to the majority of contributors on the team. We also took the opportunity to drop checks that are already covered by other actions in the Qualcomm reusable workflow suite (see [Rule Coverage](#rule-coverage) below).
 
-For the full decision analysis, see [`repolinter-replacement.md`](https://github.com/qualcomm/reusable-workflows/blob/main/repolinter-replacement.md) in the `reusable-workflows` repository.
-
-### How it fits into the broader workflow suite
-
-This action is one component of the `qualcomm/reusable-workflows` preflight check orchestrator. The full suite is:
-
-| Action / Workflow | What it checks |
-|---|---|
-| **repo-policy-action** (this) | Repo structure: LICENSE, README, CONTRIBUTING, copyright headers (whole-repo), binaries, etc. |
-| `copyright-license-checker-action` | Copyright/license headers on **changed files** in a PR diff |
-| `commit-msg-check-action` | Commit message format |
-| `commit-emails-check-action` | Commit author email addresses |
-| `semgrep` | Static analysis / SAST |
-| `dependency-review-action` | Dependency vulnerability scanning |
-| `ossf/scorecard-action` | Weekly security posture dashboard (Branch-Protection, Pinned-Dependencies, etc.) |
-
 This action is deliberately scoped to **structural repository policy** — it does not duplicate the per-PR copyright diff check, SAST, or dependency scanning that other tools in the suite handle.
 
 ### Design decisions
