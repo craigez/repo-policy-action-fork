@@ -399,6 +399,38 @@ class TestFileContentsRule(unittest.TestCase):
         )
         self.assertTrue(result.passed)
 
+    def test_empty_files_are_skipped(self):
+        """Zero-byte files are skipped, matching repolinter behaviour.
+
+        An empty __init__.py cannot contain a copyright header but should
+        not cause the rule to fail — repolinter skips them silently.
+        """
+        repo = self._make_repo(
+            {
+                "src/__init__.py": "",
+                "src/main.py": (
+                    "# Copyright (c) Qualcomm Technologies, Inc.\n"
+                    "# SPDX-License-Identifier: BSD-3-Clause\n"
+                ),
+            }
+        )
+        result = run(
+            repo_path=repo,
+            rule_name="source-license-headers-exist",
+            level="error",
+            options={
+                "globsAll": ["src/*.py"],
+                "patterns": [
+                    "Copyright(\\s)*(\\(c\\)|©)?",
+                    "SPDX-License-Identifier",
+                ],
+                "flags": "i",
+                "lineCount": 5,
+            },
+            reporter=self.reporter,
+        )
+        self.assertTrue(result.passed)
+
 
 if __name__ == "__main__":
     unittest.main()

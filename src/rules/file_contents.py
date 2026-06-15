@@ -341,6 +341,9 @@ def _find_files(root: Path, globs: list[str]) -> list[Path]:
     for pattern in globs:
         for match in root.glob(pattern):
             if match.is_file() and not _in_skip_dir(match, root):
+                if match.stat().st_size == 0:
+                    logger.debug("Skipping empty file %s.", match)
+                    continue
                 found.add(match)
             # Include broken symlinks so we can handle them explicitly.
             elif match.is_symlink() and not _in_skip_dir(match, root):
