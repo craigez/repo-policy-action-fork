@@ -148,10 +148,6 @@ The action parses a subset of the [repolinter v2 JSON schema](https://github.com
 
 This action follows semantic versioning. The major version tag (`v1`) is kept pointing to the latest `v1.x.x` release, consistent with the convention used by other Qualcomm reusable actions.
 
-## Migration from repolinter-action
-
-See [`repolinter-replacement.md`](https://github.com/qualcomm/reusable-workflows/blob/main/repolinter-replacement.md) in the `reusable-workflows` repository for the full migration plan, including the shadow-run rollout strategy and consumer impact summary.
-
 ## License
 
 repo-policy-action is licensed under the [BSD-3-clause License](https://spdx.org/licenses/BSD-3-Clause.html). See [LICENSE.txt](LICENSE.txt) for the full license text.
