@@ -29,7 +29,8 @@ _BINARY_MIME_PREFIXES = (
     "application/x-executable",
     "application/x-sharedlib",
     "application/x-pie-executable",
-    "application/x-dosexec",  # .exe / .dll (PE format)
+    "application/x-dosexec",  # .exe / .dll (PE format, older libmagic dbs)
+    "application/vnd.microsoft.portable-executable",  # .exe / .dll, newer dbs
     "application/x-object",  # .o object files
     "application/x-mach-binary",  # macOS Mach-O binaries
 )
