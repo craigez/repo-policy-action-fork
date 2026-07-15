@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from reporter import Reporter, RuleResult
+from rules._common import globs_any_or_skip
 
 logger = logging.getLogger(__name__)
 
@@ -41,13 +42,9 @@ def run(
     """
     globs: list[str] = options.get("globsAny", [])
 
-    if not globs:
-        logger.warning(
-            "Rule '%s' has no globsAny patterns — skipping.", rule_name
-        )
-        return reporter.rule_passed(
-            rule_name, "No patterns configured — skipped."
-        )
+    skip_result = globs_any_or_skip(globs, rule_name, reporter)
+    if skip_result is not None:
+        return skip_result
 
     root = Path(repo_path)
     for pattern in globs:

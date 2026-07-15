@@ -17,25 +17,10 @@ from typing import Any
 
 import magic
 
+from fs_utils import walk_files
 from reporter import Reporter, RuleResult
 
 logger = logging.getLogger(__name__)
-
-# Directories to skip during the binary scan.
-_SKIP_DIRS = frozenset(
-    {
-        ".git",
-        "node_modules",
-        "vendor",
-        ".tox",
-        ".venv",
-        "ENV",
-        "venv",
-        "__pycache__",
-        "dist",
-        "build",
-    }
-)
 
 # MIME type prefixes that indicate compiled/binary executables and
 # shared libraries. Text-based formats (PDF, SVG, etc.) are excluded
@@ -95,7 +80,7 @@ def run(
     root = Path(repo_path)
     mime_detector = magic.Magic(mime=True)
 
-    for file_path in _walk(root):
+    for file_path in walk_files(root):
         if file_path.suffix.lower() in _ALLOWED_EXTENSIONS:
             continue
 
@@ -131,20 +116,3 @@ def run(
             )
 
     return reporter.rule_passed(rule_name, "No binary files detected.")
-
-
-def _walk(root: Path):
-    """Yield all files under root, skipping ignored directories.
-
-    Args:
-        root: Repository root path.
-
-    Yields:
-        Path objects for each non-skipped file.
-    """
-    for item in root.iterdir():
-        if item.is_dir():
-            if item.name not in _SKIP_DIRS:
-                yield from _walk(item)
-        else:
-            yield item

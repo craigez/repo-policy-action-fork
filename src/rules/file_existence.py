@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from reporter import Reporter, RuleResult
+from rules._common import globs_any_or_skip
 
 logger = logging.getLogger(__name__)
 
@@ -54,17 +55,43 @@ def run(
     nocase: bool = options.get("nocase", False)
     fail_message: str | None = options.get("fail-message")
 
-    if not globs:
-        logger.warning(
-            "Rule '%s' has no globsAny patterns — skipping.", rule_name
-        )
-        return reporter.rule_passed(
-            rule_name, "No patterns configured — skipped."
-        )
+    skip_result = globs_any_or_skip(globs, rule_name, reporter)
+    if skip_result is not None:
+        return skip_result
 
     root = Path(repo_path)
     # Expand brace expressions once before iterating dirs.
     expanded_globs = [e for g in globs for e in _expand_braces(g)]
+    match = _find_first_match(root, dirs, expanded_globs, nocase)
+    if match is not None:
+        logger.debug("Rule '%s' passed — found '%s'.", rule_name, match)
+        return reporter.rule_passed(
+            rule_name, f"Found: {match.relative_to(root)}"
+        )
+
+    searched = ", ".join((str(root / d) if d else str(root)) for d in dirs)
+    message = fail_message or (f"No file matching {globs} found in: {searched}")
+    return reporter.rule_failed(
+        rule_name=rule_name,
+        level=level,
+        message=message,
+    )
+
+
+def _find_first_match(
+    root: Path, dirs: list[str], expanded_globs: list[str], nocase: bool
+) -> Path | None:
+    """Return the first file matching any glob in any dir, or None.
+
+    Args:
+        root: Repository root path.
+        dirs: Subdirectories (relative to root) to search; "" for root.
+        expanded_globs: Brace-expanded glob patterns to try.
+        nocase: Whether to match filenames case-insensitively.
+
+    Returns:
+        The first matching Path, or None if nothing matched.
+    """
     for search_dir in dirs:
         base = root / search_dir if search_dir else root
         if not base.is_dir():
@@ -79,23 +106,8 @@ def run(
                     if _is_accessible_file(p) and _case_matches(p, pattern)
                 ]
             if matches:
-                logger.debug(
-                    "Rule '%s' passed — found '%s'.",
-                    rule_name,
-                    matches[0],
-                )
-                return reporter.rule_passed(
-                    rule_name,
-                    f"Found: {matches[0].relative_to(root)}",
-                )
-
-    searched = ", ".join((str(root / d) if d else str(root)) for d in dirs)
-    message = fail_message or (f"No file matching {globs} found in: {searched}")
-    return reporter.rule_failed(
-        rule_name=rule_name,
-        level=level,
-        message=message,
-    )
+                return matches[0]
+    return None
 
 
 def _expand_braces(pattern: str) -> list[str]:

@@ -326,7 +326,9 @@ class TestLanguageAxiomAlias(unittest.TestCase):
             "rules": {
                 "rust-check": {
                     "level": "warning",
-                    "where": ["linguist=rust"],  # lowercase, detector emits 'Rust'
+                    "where": [
+                        "linguist=rust"
+                    ],  # lowercase, detector emits 'Rust'
                     "rule": {
                         "type": "file-existence",
                         "options": {"globsAny": ["Cargo.toml"]},
