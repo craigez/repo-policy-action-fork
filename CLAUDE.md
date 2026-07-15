@@ -21,19 +21,23 @@ This file provides guidance for Claude when working in this repository.
 
 ## Development Commands
 
-Run from repository root. Use an isolated environment — [uv](https://docs.astral.sh/uv/) (recommended) or the standard library `venv`.
+Run from repository root. Dependencies are declared in `pyproject.toml` and
+locked in `uv.lock`; [uv](https://docs.astral.sh/uv/) is the recommended tool.
 
 Set up the environment:
 
-- With uv: `uv venv && uv pip install -r requirements-dev.txt`
+- With uv (installs project + dev group from the lock): `uv sync`
 - With venv: `python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements-dev.txt`
 
 Common tasks (prefix with `uv run` when using uv, or activate the venv first):
 
-- Install runtime dependencies only: `uv pip install -r requirements.txt`
 - Run tests: `pytest`
 - Run tests with coverage: `pytest --cov=src --cov-report=term-missing`
-- Run full local checks (if configured): `tox`
+- Run full local checks: `tox` (provisioned via tox-uv)
+
+`requirements.txt` and `requirements-dev.txt` are generated from `pyproject.toml`
++ `uv.lock` via `uv export`; edit dependencies in `pyproject.toml` and re-run
+`uv lock` + `uv export`, never by hand.
 
 ## Coding Guidelines
 
