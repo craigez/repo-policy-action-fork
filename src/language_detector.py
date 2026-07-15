@@ -21,23 +21,9 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
-logger = logging.getLogger(__name__)
+from fs_utils import walk_files
 
-# Directories to skip during the walk.
-_SKIP_DIRS = frozenset(
-    {
-        ".git",
-        "node_modules",
-        "vendor",
-        ".tox",
-        ".venv",
-        "ENV",
-        "venv",
-        "__pycache__",
-        "dist",
-        "build",
-    }
-)
+logger = logging.getLogger(__name__)
 
 # Extension → canonical language name matching repolint.json axiom values.
 _EXT_TO_LANGUAGE: dict[str, str] = {
@@ -110,7 +96,7 @@ def detect_languages(repo_path: str) -> dict[str, set[str]]:
     extension_counts: dict[str, int] = {}
     detected_packagers: set[str] = set()
 
-    for item in _walk(root):
+    for item in walk_files(root):
         if item.is_file():
             ext = item.suffix.lower()
             if ext in _EXT_TO_LANGUAGE:
@@ -135,20 +121,3 @@ def detect_languages(repo_path: str) -> dict[str, set[str]]:
         "languages": detected_languages,
         "packagers": detected_packagers,
     }
-
-
-def _walk(root: Path):
-    """Yield all files under root, skipping ignored directories.
-
-    Args:
-        root: Repository root path.
-
-    Yields:
-        Path objects for each non-skipped file.
-    """
-    for item in root.iterdir():
-        if item.is_dir():
-            if item.name not in _SKIP_DIRS:
-                yield from _walk(item)
-        else:
-            yield item

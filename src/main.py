@@ -22,7 +22,7 @@ from rules import run_all_rules
 logger = logging.getLogger(__name__)
 
 _DEFAULT_CONFIG_URL = (
-    "https://raw.githubusercontent.com/" "qualcomm/.github/main/repolint.json"
+    "https://raw.githubusercontent.com/qualcomm/.github/main/repolint.json"
 )
 
 
@@ -106,4 +106,4 @@ def main(
 
 
 if __name__ == "__main__":
-    main()
+    main()  # pylint: disable=no-value-for-parameter

@@ -12,44 +12,33 @@ from __future__ import annotations
 
 import logging
 import re
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 import magic
 
+from fs_utils import SKIP_DIRS
 from reporter import Reporter, RuleResult
 
 logger = logging.getLogger(__name__)
 
-# Directories to skip when scanning all source files.
-_SKIP_DIRS = frozenset(
-    {
-        ".git",
-        "node_modules",
-        "vendor",
-        ".tox",
-        ".venv",
-        "ENV",
-        "venv",
-        "__pycache__",
-        "dist",
-        "build",
-    }
-)
+
+@dataclass
+class _Options:  # pylint: disable=too-many-instance-attributes
+    """Normalised file-contents/file-starts-with rule options."""
+
+    globs: list[str]
+    content_patterns: list[str]
+    flag_names: list[str]
+    line_count: int | None
+    fail_on_missing: bool
+    skip_paths: list[str]
+    skip_binary: bool
+    fail_message: str | None
 
 
-def _parse_options(
-    options: dict[str, Any],
-) -> tuple[
-    list[str],
-    list[str],
-    list[str],
-    int | None,
-    bool,
-    list[str],
-    bool,
-    str | None,
-]:
+def _parse_options(options: dict[str, Any]) -> _Options:
     """Normalise rule options into canonical types.
 
     Handles two schemas:
@@ -57,10 +46,6 @@ def _parse_options(
       ``skip-paths-matching`` as list).
     - repolint.json v2 (``patterns`` list, ``flags`` as string ``"i"``,
       ``succeed-on-non-existent``, ``skip-paths-matching`` as object).
-
-    Returns a tuple:
-        (globs, content_patterns, flag_names, line_count,
-         fail_on_missing, skip_paths, skip_binary, fail_message)
 
     ``content_patterns`` is a list of pattern strings — all must match
     (AND semantics), matching repolinter's behaviour.
@@ -99,15 +84,15 @@ def _parse_options(
     skip_binary: bool = options.get("skip-binary-files", False)
     fail_message: str | None = options.get("fail-message")
 
-    return (
-        globs,
-        content_patterns,
-        flag_names,
-        line_count,
-        fail_on_missing,
-        skip_paths,
-        skip_binary,
-        fail_message,
+    return _Options(
+        globs=globs,
+        content_patterns=content_patterns,
+        flag_names=flag_names,
+        line_count=line_count,
+        fail_on_missing=fail_on_missing,
+        skip_paths=skip_paths,
+        skip_binary=skip_binary,
+        fail_message=fail_message,
     )
 
 
@@ -134,18 +119,9 @@ def run(
     Returns:
         A RuleResult indicating pass or failure.
     """
-    (
-        globs,
-        content_patterns,
-        flag_names,
-        line_count,
-        fail_on_missing,
-        skip_paths,
-        skip_binary,
-        fail_message,
-    ) = _parse_options(options)
+    opts = _parse_options(options)
 
-    if not content_patterns:
+    if not opts.content_patterns:
         logger.warning(
             "Rule '%s' has no content pattern — skipping.", rule_name
         )
@@ -153,80 +129,157 @@ def run(
             rule_name, "No content pattern configured — skipped."
         )
 
-    compiled_patterns: list[tuple[str, re.Pattern]] = []
-    for raw in content_patterns:
-        compiled = _compile_pattern(raw, flag_names, rule_name)
-        if compiled is None:
-            return reporter.rule_failed(
-                rule_name=rule_name,
-                level=level,
-                message=f"Invalid regex pattern: {raw!r}",
-            )
-        compiled_patterns.append((raw, compiled))
+    compiled_patterns = _compile_all_patterns(
+        opts.content_patterns, opts.flag_names, rule_name, level
+    )
+    if isinstance(compiled_patterns, dict):
+        return reporter.rule_failed(**compiled_patterns)
 
-    skip_patterns = _compile_skip_patterns(skip_paths, rule_name)
     root = Path(repo_path)
-    matched_files = _find_files(root, globs)
+    matched_files = _find_files(root, opts.globs)
 
     if not matched_files:
-        if fail_on_missing:
+        if opts.fail_on_missing:
             return reporter.rule_failed(
                 rule_name=rule_name,
                 level=level,
-                message=fail_message or f"No files matched patterns {globs}",
+                message=opts.fail_message
+                or f"No files matched patterns {opts.globs}",
             )
         return reporter.rule_passed(
-            rule_name, f"No files matched {globs} — skipped."
+            rule_name, f"No files matched {opts.globs} — skipped."
         )
 
-    mime_detector = magic.Magic(mime=True) if skip_binary else None
-
-    for file_path in matched_files:
-        # Broken symlinks: skip rather than raise.
-        if file_path.is_symlink() and not file_path.exists():
-            logger.debug(
-                "Rule '%s': skipping broken symlink %s.",
-                rule_name,
-                file_path,
-            )
-            continue
-
-        rel = str(file_path.relative_to(root))
-        if _should_skip_path(rel, skip_patterns):
-            logger.debug(
-                "Rule '%s': skipping %s (skip-paths-matching).",
-                rule_name,
-                rel,
-            )
-            continue
-
-        if (
-            skip_binary
-            and mime_detector
-            and _is_binary(file_path, mime_detector)
-        ):
-            logger.debug(
-                "Rule '%s': skipping binary file %s.",
-                rule_name,
-                rel,
-            )
-            continue
-
-        # All patterns must match (AND semantics — repolinter-compatible).
-        for raw, compiled in compiled_patterns:
-            if not _file_contains(file_path, compiled, line_count):
-                return reporter.rule_failed(
-                    rule_name=rule_name,
-                    level=level,
-                    message=fail_message
-                    or (f"Pattern {raw!r} not found in {rel}"),
-                    file_path=rel,
-                )
+    failure = _scan_files(
+        matched_files, root, compiled_patterns, opts, rule_name
+    )
+    if failure is not None:
+        return reporter.rule_failed(level=level, **failure)
 
     return reporter.rule_passed(
         rule_name,
         f"All patterns found in all {len(matched_files)} matched file(s).",
     )
+
+
+def _scan_files(
+    matched_files: list[Path],
+    root: Path,
+    compiled_patterns: list[tuple[str, re.Pattern]],
+    opts: _Options,
+    rule_name: str,
+) -> dict[str, Any] | None:
+    """Scan matched files against the compiled patterns.
+
+    Returns kwargs (minus ``level``) for ``reporter.rule_failed`` on the
+    first offending file, or ``None`` if every file passed.
+    """
+    skip_patterns = _compile_skip_patterns(opts.skip_paths, rule_name)
+    mime_detector = magic.Magic(mime=True) if opts.skip_binary else None
+
+    for file_path in matched_files:
+        rel = str(file_path.relative_to(root))
+        if _should_skip_file(
+            file_path,
+            rel,
+            skip_patterns,
+            opts.skip_binary,
+            mime_detector,
+            rule_name,
+        ):
+            continue
+
+        failure = _check_patterns(
+            file_path,
+            rel,
+            compiled_patterns,
+            opts.line_count,
+            rule_name,
+            opts.fail_message,
+        )
+        if failure is not None:
+            return failure
+    return None
+
+
+def _compile_all_patterns(
+    content_patterns: list[str],
+    flag_names: list[str],
+    rule_name: str,
+    level: str,
+) -> list[tuple[str, re.Pattern]] | dict[str, Any]:
+    """Compile every content pattern, or return failure kwargs on error.
+
+    Returns:
+        A list of ``(raw, compiled)`` pairs, or a dict of kwargs for
+        ``reporter.rule_failed`` if a pattern fails to compile.
+    """
+    compiled_patterns: list[tuple[str, re.Pattern]] = []
+    for raw in content_patterns:
+        compiled = _compile_pattern(raw, flag_names, rule_name)
+        if compiled is None:
+            return {
+                "rule_name": rule_name,
+                "level": level,
+                "message": f"Invalid regex pattern: {raw!r}",
+            }
+        compiled_patterns.append((raw, compiled))
+    return compiled_patterns
+
+
+# pylint: disable-next=too-many-arguments,too-many-positional-arguments
+def _should_skip_file(
+    file_path: Path,
+    rel: str,
+    skip_patterns: list[re.Pattern],
+    skip_binary: bool,
+    mime_detector: "magic.Magic | None",
+    rule_name: str,
+) -> bool:
+    """Decide whether a matched file should be skipped for content checks."""
+    # Broken symlinks: skip rather than raise.
+    if file_path.is_symlink() and not file_path.exists():
+        logger.debug(
+            "Rule '%s': skipping broken symlink %s.", rule_name, file_path
+        )
+        return True
+
+    if _should_skip_path(rel, skip_patterns):
+        logger.debug(
+            "Rule '%s': skipping %s (skip-paths-matching).", rule_name, rel
+        )
+        return True
+
+    if skip_binary and mime_detector and _is_binary(file_path, mime_detector):
+        logger.debug("Rule '%s': skipping binary file %s.", rule_name, rel)
+        return True
+
+    return False
+
+
+# pylint: disable-next=too-many-arguments,too-many-positional-arguments
+def _check_patterns(
+    file_path: Path,
+    rel: str,
+    compiled_patterns: list[tuple[str, re.Pattern]],
+    line_count: int | None,
+    rule_name: str,
+    fail_message: str | None,
+) -> dict[str, Any] | None:
+    """Check all patterns against a file (AND semantics).
+
+    Returns kwargs (minus ``level``) for ``reporter.rule_failed`` on the
+    first missing pattern, or ``None`` if every pattern matched.
+    """
+    for raw, compiled in compiled_patterns:
+        if not _file_contains(file_path, compiled, line_count):
+            return {
+                "rule_name": rule_name,
+                "message": fail_message
+                or (f"Pattern {raw!r} not found in {rel}"),
+                "file_path": rel,
+            }
+    return None
 
 
 def _compile_pattern(
@@ -359,13 +412,13 @@ def _in_skip_dir(path: Path, root: Path) -> bool:
         root: Repository root.
 
     Returns:
-        True if any ancestor directory name is in ``_SKIP_DIRS``.
+        True if any ancestor directory name is in ``SKIP_DIRS``.
     """
     try:
         relative = path.relative_to(root)
     except ValueError:
         return False
-    return any(part in _SKIP_DIRS for part in relative.parts[:-1])
+    return any(part in SKIP_DIRS for part in relative.parts[:-1])
 
 
 def _file_contains(

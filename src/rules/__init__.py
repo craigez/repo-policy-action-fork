@@ -60,7 +60,7 @@ def run_all_rules(
 
         if not _rule_applies(rule_def, languages):
             logger.debug(
-                "Rule '%s' skipped — language/packager condition " "not met.",
+                "Rule '%s' skipped — language/packager condition not met.",
                 rule_name,
             )
             continue
