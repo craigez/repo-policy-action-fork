@@ -179,7 +179,7 @@ For information on how to contribute to repo-policy-action, please see [CONTRIBU
 
 ## Getting in Contact
 
-How to contact maintainers. E.g. GitHub Issues, GitHub Discussions could be indicated for many cases. However a mail list or list of Maintainer e-mails could be shared for other types of discussions. E.g.
+Please contact us via GitHub if you have questions, suggestions, or issues:
 
 * [Report an Issue on GitHub](../../issues)
 * [Open a Discussion on GitHub](../../discussions)
