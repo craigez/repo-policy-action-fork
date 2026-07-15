@@ -29,8 +29,22 @@ def _write_elf_header(path: Path) -> None:
 
 
 def _write_pe_header(path: Path) -> None:
-    """Write a minimal MZ/PE header to simulate a Windows binary."""
-    path.write_bytes(b"MZ" + b"\x00" * 14)
+    """Write a minimal but valid MZ/PE header to simulate a Windows binary.
+
+    A bare "MZ" stub (no e_lfanew pointer or PE signature) is classified
+    inconsistently across libmagic database versions — it's ambiguous with
+    plain MS-DOS executables and can even fall through as text/plain. Include
+    the DOS stub's e_lfanew field plus a real "PE\0\0" + COFF header so this
+    is unambiguously recognized as a PE binary everywhere.
+    """
+    dos_header = bytearray(64)
+    dos_header[0:2] = b"MZ"
+    struct.pack_into("<I", dos_header, 0x3C, len(dos_header))  # e_lfanew
+    pe_signature = b"PE\x00\x00"
+    coff_header = struct.pack(
+        "<HHIIIHH", 0x8664, 0, 0, 0, 0, 0, 0x0102
+    )  # machine=x86_64, characteristics=EXECUTABLE_IMAGE|LARGE_ADDRESS_AWARE
+    path.write_bytes(bytes(dos_header) + pe_signature + coff_header)
 
 
 class TestFileTypeRule(unittest.TestCase):
