@@ -13,8 +13,9 @@ This file provides guidance for Claude when working in this repository.
   - `config.py`: configuration loading and validation
   - `language_detector.py`: language detection helpers
   - `reporter.py`: output/report formatting
-  - `rules/`: individual policy rule implementations
+  - `rules/`: individual policy rule implementations (`file_existence.py`, `file_contents.py`, `file_type.py`, `directory_existence.py`)
 - `tests/`: pytest test suite aligned with modules under `src/`
+- `scripts/`: developer utilities (e.g. `compare_tools.py` for RPA vs repolinter comparison)
 - `action.yml`: GitHub Action definition
 - `README.md`: user-facing action documentation
 
