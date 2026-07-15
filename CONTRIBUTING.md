@@ -1,4 +1,4 @@
-# Contributing to <REPLACE-ME>
+# Contributing to repo-policy-action
 
 Hi there!
 We’re thrilled that you’d like to contribute to this project.
@@ -68,7 +68,7 @@ By submitting a PR, you agree to participate in this process and help us keep th
 
 Here are a few things you can do that will increase the likelihood of your pull request to be accepted:
 
-- Follow the existing style where possible. This project enforces black formatting and flake8 linting. You can run these locally with `make format` and `make lint`.
+- Follow the existing style where possible. This project enforces black formatting and flake8/pylint linting via [tox](https://tox.wiki/). Auto-format with `tox -e autoformat` and run the lint checks with `tox -e black,isort,flake8,pylint`.
 - Write tests.
 - Keep your change as focused as possible.
   If you want to make multiple independent changes, please consider submitting them as separate pull requests.
