@@ -1,12 +1,36 @@
-[build-system]
-requires = ["setuptools>=68"]
-build-backend = "setuptools.backends.legacy:build"
-
 [project]
 name = "repo-policy-action"
 version = "0.1.0"
 description = "GitHub Action to enforce repository policy standards for Qualcomm open-source projects"
 requires-python = ">=3.13"
+dependencies = [
+    # requests: fetches the default config from config_url.
+    "requests==2.32.3",
+    # click: CLI argument parsing.
+    "click==8.1.8",
+    # python-magic: magic-byte detection for the binary prohibition rule.
+    #   Requires libmagic on the runner (pre-installed on ubuntu-latest).
+    "python-magic==0.4.27",
+]
+
+[dependency-groups]
+dev = [
+    # Testing
+    "pytest==8.3.5",
+    "pytest-cov==5.0.0",
+    "coverage==7.6.10",
+    # Linting / formatting
+    "black==24.10.0",
+    "flake8==7.1.1",
+    "isort==5.13.2",
+    "pylint==3.3.3",
+]
+
+[tool.uv]
+# This project ships as a GitHub Action that runs src/main.py directly via
+# PYTHONPATH — it is never installed as a package, so uv should manage only
+# the environment/dependencies and not attempt to build the project.
+package = false
 
 [tool.black]
 line-length = 80

@@ -22,15 +22,18 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Install uv
+      uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990 # v8.3.2
+
     - name: Install Python dependencies
       shell: bash
       run: |
-        pip install --quiet -r "${{ github.action_path }}/requirements.txt"
+        uv sync --project "${{ github.action_path }}" --no-dev --frozen
 
     - name: Run repository policy checks
       shell: bash
       run: |
-        python3 "${{ github.action_path }}/src/main.py" \
+        uv run --project "${{ github.action_path }}" --no-dev python "${{ github.action_path }}/src/main.py" \
           --repo-path "${{ github.workspace }}" \
           --config-url "${{ inputs.config_url }}" \
           ${{ inputs.config_file && format('--config-file "{0}"', inputs.config_file) || '' }} \

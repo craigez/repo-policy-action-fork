@@ -90,16 +90,16 @@ This action is typically called via the `reusable-repolinter-check.yml` reusable
 
 ### Set up a development environment
 
-Use an isolated environment so dependencies don't leak into your system Python.
-
-With [uv](https://docs.astral.sh/uv/) (recommended — fast, no manual activation needed):
+Dependencies are declared in `pyproject.toml` and locked in `uv.lock`.
+With [uv](https://docs.astral.sh/uv/) (recommended), install the project plus
+its dev tools into a managed environment:
 
 ```bash
-uv venv
-uv pip install -r requirements-dev.txt
+uv sync
 ```
 
-Or with the standard library `venv` + `pip`:
+Or with the standard library `venv` + `pip`, using the generated
+`requirements-dev.txt` (regenerated from the lock via `uv export`):
 
 ```bash
 python3 -m venv .venv
@@ -120,6 +120,11 @@ python3 src/main.py --repo-path /path/to/your/repo  # with an activated venv
 uv run pytest tests/   # with uv
 pytest tests/          # with an activated venv
 ```
+
+> `requirements.txt` and `requirements-dev.txt` are generated from
+> `pyproject.toml` + `uv.lock` via `uv export`. To change dependencies, edit
+> `pyproject.toml`, then run `uv lock` and regenerate the exports — don't edit
+> the requirements files by hand.
 
 ---
 
