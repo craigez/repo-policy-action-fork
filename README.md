@@ -45,7 +45,7 @@ This action is typically called via the `reusable-repolinter-check.yml` reusable
 
 ### Config resolution order
 
-1. `repo-policy.json` at repo root (new format, future v2)
+1. `repo-policy.json` at repo root (reserved for the forthcoming native format)
 2. `repolint.json` at repo root (backwards-compatible override)
 3. URL from `config_url` input (the Qualcomm org default config)
 
