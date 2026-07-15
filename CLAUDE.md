@@ -20,10 +20,16 @@ This file provides guidance for Claude when working in this repository.
 
 ## Development Commands
 
-Run from repository root:
+Run from repository root. Use an isolated environment — [uv](https://docs.astral.sh/uv/) (recommended) or the standard library `venv`.
 
-- Install runtime dependencies: `pip install -r requirements.txt`
-- Install development dependencies: `pip install -r requirements-dev.txt`
+Set up the environment:
+
+- With uv: `uv venv && uv pip install -r requirements-dev.txt`
+- With venv: `python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements-dev.txt`
+
+Common tasks (prefix with `uv run` when using uv, or activate the venv first):
+
+- Install runtime dependencies only: `uv pip install -r requirements.txt`
 - Run tests: `pytest`
 - Run tests with coverage: `pytest --cov=src --cov-report=term-missing`
 - Run full local checks (if configured): `tox`

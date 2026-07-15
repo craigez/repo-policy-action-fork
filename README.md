@@ -85,19 +85,40 @@ This action is typically called via the `reusable-repolinter-check.yml` reusable
 
 ### Prerequisites
 
-- Python 3.9+
-- `pip install -r requirements-dev.txt`
+- Python 3.13+
+- [libmagic](https://github.com/ahupp/python-magic#installation) (required by `python-magic`; pre-installed on `ubuntu-latest` runners, `brew install libmagic` on macOS)
+
+### Set up a development environment
+
+Use an isolated environment so dependencies don't leak into your system Python.
+
+With [uv](https://docs.astral.sh/uv/) (recommended — fast, no manual activation needed):
+
+```bash
+uv venv
+uv pip install -r requirements-dev.txt
+```
+
+Or with the standard library `venv` + `pip`:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+```
 
 ### Run checks locally
 
 ```bash
-python3 src/main.py --repo-path /path/to/your/repo
+uv run src/main.py --repo-path /path/to/your/repo   # with uv
+python3 src/main.py --repo-path /path/to/your/repo  # with an activated venv
 ```
 
 ### Run tests
 
 ```bash
-pytest tests/
+uv run pytest tests/   # with uv
+pytest tests/          # with an activated venv
 ```
 
 ---
