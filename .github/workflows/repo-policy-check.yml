@@ -1,0 +1,23 @@
+name: Repository Policy Check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  policy:
+    name: Run repository policy checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run repository policy checks
+        uses: qualcomm/repo-policy-action@d5daf4f9b44a503043e447c2e227b45fdeca2167
+        with:
+          fail-on-error: 'true'
+          fail-on-warning: 'false'
