@@ -317,7 +317,7 @@ wheels = [
 [[package]]
 name = "repo-policy-action"
 version = "0.1.0"
-source = { editable = "." }
+source = { virtual = "." }
 dependencies = [
     { name = "click" },
     { name = "python-magic" },
