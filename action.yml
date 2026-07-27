@@ -33,11 +33,25 @@ runs:
     - name: Run repository policy checks
       shell: bash
       run: |
-        uv run --project "${{ github.action_path }}" --no-dev python "${{ github.action_path }}/src/main.py" \
-          --repo-path "${{ github.workspace }}" \
-          --config-url "${{ inputs.config_url }}" \
-          ${{ inputs.config_file && format('--config-file "{0}"', inputs.config_file) || '' }} \
-          ${{ inputs.fail-on-error == 'true' && '--fail-on-error' || '--no-fail-on-error' }} \
-          ${{ inputs.fail-on-warning == 'true' && '--fail-on-warning' || '--no-fail-on-warning' }}
+        args=(--repo-path "$GITHUB_WORKSPACE" --config-url "$CONFIG_URL")
+        if [[ -n "$CONFIG_FILE" ]]; then
+          args+=(--config-file "$CONFIG_FILE")
+        fi
+        if [[ "$FAIL_ON_ERROR" == "true" ]]; then
+          args+=(--fail-on-error)
+        else
+          args+=(--no-fail-on-error)
+        fi
+        if [[ "$FAIL_ON_WARNING" == "true" ]]; then
+          args+=(--fail-on-warning)
+        else
+          args+=(--no-fail-on-warning)
+        fi
+        uv run --project "$ACTION_PATH" --no-dev python "$ACTION_PATH/src/main.py" "${args[@]}"
       env:
+        ACTION_PATH: ${{ github.action_path }}
         PYTHONPATH: ${{ github.action_path }}/src
+        CONFIG_URL: ${{ inputs.config_url }}
+        CONFIG_FILE: ${{ inputs.config_file }}
+        FAIL_ON_ERROR: ${{ inputs.fail-on-error }}
+        FAIL_ON_WARNING: ${{ inputs.fail-on-warning }}
