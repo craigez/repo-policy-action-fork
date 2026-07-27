@@ -18,6 +18,10 @@ inputs:
     description: Exit non-zero when any warning-level rule fails.
     default: 'false'
     required: false
+  respect-gitignore:
+    description: Skip files and directories matched by the repository's .gitignore files when evaluating rules.
+    default: 'true'
+    required: false
 
 runs:
   using: composite
@@ -47,6 +51,11 @@ runs:
         else
           args+=(--no-fail-on-warning)
         fi
+        if [[ "$RESPECT_GITIGNORE" == "true" ]]; then
+          args+=(--respect-gitignore)
+        else
+          args+=(--no-respect-gitignore)
+        fi
         uv run --project "$ACTION_PATH" --no-dev python "$ACTION_PATH/src/main.py" "${args[@]}"
       env:
         ACTION_PATH: ${{ github.action_path }}
@@ -55,3 +64,4 @@ runs:
         CONFIG_FILE: ${{ inputs.config_file }}
         FAIL_ON_ERROR: ${{ inputs.fail-on-error }}
         FAIL_ON_WARNING: ${{ inputs.fail-on-warning }}
+        RESPECT_GITIGNORE: ${{ inputs.respect-gitignore }}
