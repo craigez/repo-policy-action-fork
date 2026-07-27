@@ -12,7 +12,7 @@ idna==3.18
     # via requests
 python-magic==0.4.27
     # via repo-policy-action
-requests==2.32.3
+requests==2.33.0
     # via repo-policy-action
 urllib3==2.7.0
     # via requests

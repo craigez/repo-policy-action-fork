@@ -2,7 +2,7 @@
 #    uv export --frozen --no-hashes --no-emit-project -o requirements-dev.txt
 astroid==3.3.11
     # via pylint
-black==24.10.0
+black==26.3.1
 certifi==2026.6.17
     # via requests
 charset-normalizer==3.4.9
@@ -49,13 +49,17 @@ pycodestyle==2.12.1
     # via flake8
 pyflakes==3.2.0
     # via flake8
+pygments==2.20.0
+    # via pytest
 pylint==3.3.3
-pytest==8.3.5
+pytest==9.0.3
     # via pytest-cov
 pytest-cov==5.0.0
 python-magic==0.4.27
     # via repo-policy-action
-requests==2.32.3
+pytokens==0.4.1
+    # via black
+requests==2.33.0
     # via repo-policy-action
 tomlkit==0.15.0
     # via pylint
