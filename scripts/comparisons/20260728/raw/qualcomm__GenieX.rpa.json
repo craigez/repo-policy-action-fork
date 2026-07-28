@@ -1,0 +1,85 @@
+{
+  "repo": "qualcomm/GenieX",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: LICENSE"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: README_zh-CN.md"
+    },
+    "contributing-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CONTRIBUTING.md"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CODE-OF-CONDUCT.md"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp_pb0_6cf/GenieX"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 2 matched file(s)."
+    },
+    "binaries-not-present": {
+      "passed": false,
+      "level": "warning",
+      "message": "Binary file found (MIME: application/x-sharedlib): bindings/android/app/extLibs/arm64-v8a/libomp.so"
+    },
+    "test-directory-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found directory: tests"
+    },
+    "integrates-with-ci": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/workflows/release.yml"
+    },
+    "source-license-headers-exist": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'Copyright(\\\\s)*(\\\\(c\\\\)|\u00a9)?' not found in cli/server/docs/ui/swagger-initializer.js"
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": false,
+      "level": "warning",
+      "message": "Pattern '(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\\\(c\\\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\\\s)*)+ The Linux Foundation' not found in cli/server/docs/ui/swagger-initializer.js"
+    },
+    "github-issue-template-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    "github-pull-request-template-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/PULL_REQUEST_TEMPLATE/pr_template.md"
+    },
+    "javascript-package-metadata-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['package.json'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp_pb0_6cf/GenieX"
+    },
+    "python-package-metadata-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['setup.py', 'requirements.txt'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp_pb0_6cf/GenieX"
+    },
+    "rust-package-metadata-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: sdk/model-manager/Cargo.toml"
+    }
+  }
+}

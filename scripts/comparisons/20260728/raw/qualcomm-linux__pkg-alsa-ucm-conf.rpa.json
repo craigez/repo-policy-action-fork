@@ -1,0 +1,70 @@
+{
+  "repo": "qualcomm-linux/pkg-alsa-ucm-conf",
+  "results": {
+    "license-file-exists": {
+      "passed": false,
+      "level": "error",
+      "message": "No file matching ['LICENSE*', 'COPYING*', 'NOTICE*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpj3pxhwac/pkg-alsa-ucm-conf"
+    },
+    "readme-file-exists": {
+      "passed": false,
+      "level": "error",
+      "message": "No file matching ['README*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpj3pxhwac/pkg-alsa-ucm-conf"
+    },
+    "contributing-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CONTRIB*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpj3pxhwac/pkg-alsa-ucm-conf"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CODEOFCONDUCT*', '{docs/,.github/,}CODE-OF-CONDUCT*', '{docs/,.github/,}CODE_OF_CONDUCT*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpj3pxhwac/pkg-alsa-ucm-conf"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpj3pxhwac/pkg-alsa-ucm-conf"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['README*'] \u2014 skipped."
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No directory matching ['**/test*', '**/specs', '**/*test*'] found under /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpj3pxhwac/pkg-alsa-ucm-conf"
+    },
+    "integrates-with-ci": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/workflows/debusine-pr-hook.yml"
+    },
+    "source-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['**/*.py', '**/*.js', '**/*.c', '**/*.cc', '**/*.cpp', '**/*.h', '**/*.ts', '**/*.rs', '**/*.java', '**/*.go', '**/*.bbclass', '**/*.S', '**/*.hpp'] \u2014 skipped."
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['**/*.py', '**/*.js', '**/*.c', '**/*.cc', '**/*.cpp', '**/*.h', '**/*.ts', '**/*.sh', '**/*.rs', '**/*.java', '**/*.go', '**/*.bbclass', '**/*.S', '**/*.hpp'] \u2014 skipped."
+    },
+    "github-issue-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['ISSUE_TEMPLATE*', 'ISSUE_TEMPLATE/**', '.github/ISSUE_TEMPLATE*', '.github/ISSUE_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpj3pxhwac/pkg-alsa-ucm-conf"
+    },
+    "github-pull-request-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['PULL_REQUEST_TEMPLATE*', 'PULL_REQUEST_TEMPLATE/**', '.github/PULL_REQUEST_TEMPLATE*', '.github/PULL_REQUEST_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpj3pxhwac/pkg-alsa-ucm-conf"
+    }
+  }
+}

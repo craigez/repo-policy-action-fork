@@ -1,0 +1,1317 @@
+{
+  "params": {
+    "targetDir": "/var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpkzuyrkof/dragonwing-iot-samples",
+    "filterPaths": [],
+    "rulesetPath": "https://raw.githubusercontent.com/qualcomm/.github/main/repolint.json",
+    "ruleset": {
+      "$schema": "https://raw.githubusercontent.com/todogroup/repolinter/master/rulesets/schema.json",
+      "version": 2,
+      "axioms": {
+        "linguist": "language",
+        "licensee": "license",
+        "packagers": "packager"
+      },
+      "rules": {
+        "license-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "LICENSE*",
+                "COPYING*",
+                "NOTICE*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "README*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "contributing-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CONTRIB*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "code-of-conduct-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CODEOFCONDUCT*",
+                "{docs/,.github/,}CODE-OF-CONDUCT*",
+                "{docs/,.github/,}CODE_OF_CONDUCT*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "changelog-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "CHANGELOG*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-references-license": {
+          "level": "error",
+          "rule": {
+            "type": "file-contents",
+            "options": {
+              "globsAll": [
+                "README*"
+              ],
+              "content": "license|notice",
+              "flags": "i"
+            }
+          }
+        },
+        "binaries-not-present": {
+          "level": "warning",
+          "rule": {
+            "type": "file-type-exclusion",
+            "options": {
+              "type": [
+                "**/*.exe",
+                "**/*.dll",
+                "**/*.o",
+                "**/*.so",
+                "!node_modules/**"
+              ]
+            }
+          }
+        },
+        "test-directory-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "directory-existence",
+            "options": {
+              "globsAny": [
+                "**/test*",
+                "**/specs",
+                "**/*test*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "integrates-with-ci": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                ".gitlab-ci.yml",
+                ".travis.yml",
+                "appveyor.yml",
+                ".appveyor.yml",
+                "circle.yml",
+                ".circleci/config.yml",
+                "Jenkinsfile",
+                ".drone.yml",
+                ".github/workflows/*",
+                "azure-pipelines.yml"
+              ]
+            }
+          }
+        },
+        "source-license-headers-exist": {
+          "level": "error",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+                "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+              ],
+              "flags": "i",
+              "succeed-on-non-existent": true
+            }
+          }
+        },
+        "source-qualcomm-license-headers-exist": {
+          "level": "warning",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.sh",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+              ],
+              "flags": "i"
+            }
+          }
+        },
+        "github-issue-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "ISSUE_TEMPLATE*",
+                "ISSUE_TEMPLATE/**",
+                ".github/ISSUE_TEMPLATE*",
+                ".github/ISSUE_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "github-pull-request-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "PULL_REQUEST_TEMPLATE*",
+                "PULL_REQUEST_TEMPLATE/**",
+                ".github/PULL_REQUEST_TEMPLATE*",
+                ".github/PULL_REQUEST_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "javascript-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=javascript"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "package.json"
+              ]
+            }
+          }
+        },
+        "ruby-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=ruby"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Gemfile"
+              ]
+            }
+          }
+        },
+        "java-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=java"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "pom.xml",
+                "build.xml",
+                "build.gradle"
+              ]
+            }
+          }
+        },
+        "python-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=python"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "setup.py",
+                "requirements.txt"
+              ]
+            }
+          }
+        },
+        "rust-package-metadata-exists": {
+          "level": "error",
+          "where": [
+            "language=rust"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "**/Cargo.toml",
+                "**/Cargo.lock"
+              ]
+            }
+          }
+        },
+        "objective-c-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=objective-c"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Cartfile",
+                "Podfile",
+                "**/*.podspec"
+              ]
+            }
+          }
+        },
+        "swift-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=swift"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Package.swift"
+              ]
+            }
+          }
+        },
+        "erlang-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=erlang"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "rebar.config"
+              ]
+            }
+          }
+        },
+        "elixir-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=elixir"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "mix.exs"
+              ]
+            }
+          }
+        },
+        "license-detectable-by-licensee": {
+          "level": "off",
+          "where": [
+            "license=*"
+          ],
+          "rule": {
+            "type": "license-detectable-by-licensee",
+            "options": {}
+          }
+        }
+      }
+    }
+  },
+  "passed": false,
+  "errored": false,
+  "results": [
+    {
+      "ruleInfo": {
+        "name": "license-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "LICENSE*",
+            "COPYING*",
+            "NOTICE*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "LICENSE.txt",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "README*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "contributing-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CONTRIB*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "CONTRIBUTING.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "code-of-conduct-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CODEOFCONDUCT*",
+            "{docs/,.github/,}CODE-OF-CONDUCT*",
+            "{docs/,.github/,}CODE_OF_CONDUCT*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "CODE-OF-CONDUCT.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "changelog-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "CHANGELOG*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "CHANGELOG*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-references-license",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-contents",
+        "ruleConfig": {
+          "globsAll": [
+            "README*"
+          ],
+          "content": "license|notice",
+          "flags": "i"
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Contains license|notice"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "binaries-not-present",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-type-exclusion",
+        "ruleConfig": {
+          "type": [
+            "**/*.exe",
+            "**/*.dll",
+            "**/*.o",
+            "**/*.so",
+            "!node_modules/**"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "message": "Excluded file type doesn't exist",
+        "targets": [
+          {
+            "passed": true,
+            "pattern": [
+              "**/*.exe",
+              "**/*.dll",
+              "**/*.o",
+              "**/*.so",
+              "!node_modules/**"
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "test-directory-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "directory-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/test*",
+            "**/specs",
+            "**/*test*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/test",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "integrates-with-ci",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            ".gitlab-ci.yml",
+            ".travis.yml",
+            "appveyor.yml",
+            ".appveyor.yml",
+            "circle.yml",
+            ".circleci/config.yml",
+            "Jenkinsfile",
+            ".drone.yml",
+            ".github/workflows/*",
+            "azure-pipelines.yml"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": ".github/workflows/preflight-checker-workflow.yml",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-license-headers-exist",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+            "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          ],
+          "flags": "i",
+          "succeed-on-non-existent": true
+        }
+      },
+      "status": "NOT_PASSED_ERROR",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-ppe-detection/frontend/eslint.config.js",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-ppe-detection/frontend/vite.config.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-ppe-detection/frontend/src/vite-env.d.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "litert-pygui-classification/main.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "litert-pygui-classification/qliFunctions.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-asl-classification/run_model_delegate.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-ppe-detection/runner.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-asl-classification/average-workflow/neural-network-arch.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-asl-classification/expert-workflow/convert_keras_tflite.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-asl-classification/expert-workflow/train_expert_model.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-ppe-detection/backend/main.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/setup.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/setup.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/setup.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/launch/mbot_launch.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/makeblock/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/makeblock/mbot.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/makeblock/megapi.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/test/test_copyright.py",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/test/test_flake8.py",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/test/test_pep257.py",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/icm20948/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/icm20948/icm20948.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/test/test_flake8.py",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/test/test_copyright.py",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/test/test_pep257.py",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/launch/keyboard.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/mbot_bringup/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/test/test_copyright.py",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/test/test_flake8.py",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/test/test_pep257.py",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-qualcomm-license-headers-exist",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.sh",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          ],
+          "flags": "i"
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-ppe-detection/frontend/eslint.config.js",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-ppe-detection/frontend/vite.config.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-ppe-detection/frontend/src/vite-env.d.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "litert-pygui-classification/main.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "litert-pygui-classification/qliFunctions.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-asl-classification/run_model_delegate.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-ppe-detection/runner.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-asl-classification/average-workflow/neural-network-arch.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-asl-classification/expert-workflow/convert_keras_tflite.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-asl-classification/expert-workflow/train_expert_model.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "rpi3-edge-impulse-ppe-detection/backend/main.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/setup.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/setup.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/setup.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/launch/mbot_launch.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/makeblock/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/makeblock/mbot.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/makeblock/megapi.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/test/test_copyright.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/test/test_flake8.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/makeblock/test/test_pep257.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/icm20948/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/icm20948/icm20948.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/test/test_flake8.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/test/test_copyright.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/icm20948/test/test_pep257.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/launch/keyboard.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/mbot_bringup/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/test/test_copyright.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/test/test_flake8.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "ros2-mbot/ros2_ws/src/mbot_bringup/test/test_pep257.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-issue-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "ISSUE_TEMPLATE*",
+            "ISSUE_TEMPLATE/**",
+            ".github/ISSUE_TEMPLATE*",
+            ".github/ISSUE_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "ISSUE_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": "ISSUE_TEMPLATE/**"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/ISSUE_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/ISSUE_TEMPLATE/**"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-pull-request-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "PULL_REQUEST_TEMPLATE*",
+            "PULL_REQUEST_TEMPLATE/**",
+            ".github/PULL_REQUEST_TEMPLATE*",
+            ".github/PULL_REQUEST_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "PULL_REQUEST_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": "PULL_REQUEST_TEMPLATE/**"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/PULL_REQUEST_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/PULL_REQUEST_TEMPLATE/**"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "javascript-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=javascript"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "package.json"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=javascript\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "ruby-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=ruby"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Gemfile"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=ruby\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "java-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=java"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "pom.xml",
+            "build.xml",
+            "build.gradle"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=java\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "python-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=python"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "setup.py",
+            "requirements.txt"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=python\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "rust-package-metadata-exists",
+        "level": "error",
+        "where": [
+          "language=rust"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/Cargo.toml",
+            "**/Cargo.lock"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=rust\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "objective-c-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=objective-c"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Cartfile",
+            "Podfile",
+            "**/*.podspec"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=objective-c\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "swift-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=swift"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Package.swift"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=swift\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "erlang-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=erlang"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "rebar.config"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=erlang\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "elixir-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=elixir"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "mix.exs"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=elixir\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "license-detectable-by-licensee",
+        "level": "off",
+        "where": [
+          "license=*"
+        ],
+        "ruleType": "license-detectable-by-licensee",
+        "ruleConfig": {}
+      },
+      "runMessage": "ignored because level is \"off\"",
+      "status": "IGNORED"
+    }
+  ],
+  "targets": {
+    "language": {
+      "message": "Linguist not installed",
+      "targets": [],
+      "passed": false
+    },
+    "license": {
+      "message": "Licensee not installed",
+      "targets": [],
+      "passed": false
+    },
+    "packager": {
+      "targets": [],
+      "passed": true
+    }
+  }
+}

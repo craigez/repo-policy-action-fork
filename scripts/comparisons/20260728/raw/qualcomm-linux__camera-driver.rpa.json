@@ -1,0 +1,70 @@
+{
+  "repo": "qualcomm-linux/camera-driver",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: LICENSE.txt"
+    },
+    "readme-file-exists": {
+      "passed": false,
+      "level": "error",
+      "message": "No file matching ['README*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpdup4l9o_/camera-driver"
+    },
+    "contributing-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CONTRIB*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpdup4l9o_/camera-driver"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CODEOFCONDUCT*', '{docs/,.github/,}CODE-OF-CONDUCT*', '{docs/,.github/,}CODE_OF_CONDUCT*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpdup4l9o_/camera-driver"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpdup4l9o_/camera-driver"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['README*'] \u2014 skipped."
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No directory matching ['**/test*', '**/specs', '**/*test*'] found under /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpdup4l9o_/camera-driver"
+    },
+    "integrates-with-ci": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/workflows/qcom-preflight-checks.yml"
+    },
+    "source-license-headers-exist": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without' not found in camera_kt/drivers/cam_sensor_module/cam_ir_led/cam_ir_led_core.c"
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": false,
+      "level": "warning",
+      "message": "Pattern '(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\\\(c\\\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\\\s)*)+ The Linux Foundation' not found in common/cam_io_util.h"
+    },
+    "github-issue-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['ISSUE_TEMPLATE*', 'ISSUE_TEMPLATE/**', '.github/ISSUE_TEMPLATE*', '.github/ISSUE_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpdup4l9o_/camera-driver"
+    },
+    "github-pull-request-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['PULL_REQUEST_TEMPLATE*', 'PULL_REQUEST_TEMPLATE/**', '.github/PULL_REQUEST_TEMPLATE*', '.github/PULL_REQUEST_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpdup4l9o_/camera-driver"
+    }
+  }
+}

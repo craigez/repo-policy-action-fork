@@ -1,0 +1,75 @@
+{
+  "repo": "qualcomm-linux/edk2",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: License-History.txt"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: ReadMe.rst"
+    },
+    "contributing-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CONTRIBUTING.md"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CODEOFCONDUCT*', '{docs/,.github/,}CODE-OF-CONDUCT*', '{docs/,.github/,}CODE_OF_CONDUCT*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpr9ofd6pe/edk2"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpr9ofd6pe/edk2"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['README*'] \u2014 skipped."
+    },
+    "binaries-not-present": {
+      "passed": false,
+      "level": "warning",
+      "message": "Binary file found (MIME: application/x-object): BaseTools/Bin/GccLto/liblto-arm.a"
+    },
+    "test-directory-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found directory: BaseTools/Plugin/DebugMacroCheck/tests"
+    },
+    "integrates-with-ci": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/workflows/codeql.yml"
+    },
+    "source-license-headers-exist": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'Copyright(\\\\s)*(\\\\(c\\\\)|\u00a9)?' not found in BaseTools/Plugin/CodeQL/analyze/analyze_filter.py"
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": false,
+      "level": "warning",
+      "message": "Pattern '(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\\\(c\\\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\\\s)*)+ The Linux Foundation' not found in .github/scripts/GitHub.py"
+    },
+    "github-issue-template-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/ISSUE_TEMPLATE/feature_request.yml"
+    },
+    "github-pull-request-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['PULL_REQUEST_TEMPLATE*', 'PULL_REQUEST_TEMPLATE/**', '.github/PULL_REQUEST_TEMPLATE*', '.github/PULL_REQUEST_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpr9ofd6pe/edk2"
+    },
+    "python-package-metadata-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['setup.py', 'requirements.txt'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpr9ofd6pe/edk2"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "repo": "qualcomm/copyright-license-checker-action",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: LICENSE"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: README.md"
+    },
+    "contributing-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CONTRIBUTING.md"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CODE-OF-CONDUCT.md"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmppkevshjy/copyright-license-checker-action"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 1 matched file(s)."
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No directory matching ['**/test*', '**/specs', '**/*test*'] found under /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmppkevshjy/copyright-license-checker-action"
+    },
+    "integrates-with-ci": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/workflows/preflight-checker-workflow.yml"
+    },
+    "source-license-headers-exist": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without' not found in main.py"
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": false,
+      "level": "warning",
+      "message": "Pattern '(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\\\(c\\\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\\\s)*)+ The Linux Foundation' not found in main.py"
+    },
+    "github-issue-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['ISSUE_TEMPLATE*', 'ISSUE_TEMPLATE/**', '.github/ISSUE_TEMPLATE*', '.github/ISSUE_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmppkevshjy/copyright-license-checker-action"
+    },
+    "github-pull-request-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['PULL_REQUEST_TEMPLATE*', 'PULL_REQUEST_TEMPLATE/**', '.github/PULL_REQUEST_TEMPLATE*', '.github/PULL_REQUEST_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmppkevshjy/copyright-license-checker-action"
+    },
+    "python-package-metadata-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: requirements.txt"
+    }
+  }
+}

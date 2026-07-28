@@ -1,0 +1,2265 @@
+{
+  "params": {
+    "targetDir": "/var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpdwtvxego/sample-apps-for-qualcomm-linux",
+    "filterPaths": [],
+    "rulesetPath": "https://raw.githubusercontent.com/qualcomm/.github/main/repolint.json",
+    "ruleset": {
+      "$schema": "https://raw.githubusercontent.com/todogroup/repolinter/master/rulesets/schema.json",
+      "version": 2,
+      "axioms": {
+        "linguist": "language",
+        "licensee": "license",
+        "packagers": "packager"
+      },
+      "rules": {
+        "license-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "LICENSE*",
+                "COPYING*",
+                "NOTICE*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "README*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "contributing-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CONTRIB*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "code-of-conduct-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CODEOFCONDUCT*",
+                "{docs/,.github/,}CODE-OF-CONDUCT*",
+                "{docs/,.github/,}CODE_OF_CONDUCT*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "changelog-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "CHANGELOG*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-references-license": {
+          "level": "error",
+          "rule": {
+            "type": "file-contents",
+            "options": {
+              "globsAll": [
+                "README*"
+              ],
+              "content": "license|notice",
+              "flags": "i"
+            }
+          }
+        },
+        "binaries-not-present": {
+          "level": "warning",
+          "rule": {
+            "type": "file-type-exclusion",
+            "options": {
+              "type": [
+                "**/*.exe",
+                "**/*.dll",
+                "**/*.o",
+                "**/*.so",
+                "!node_modules/**"
+              ]
+            }
+          }
+        },
+        "test-directory-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "directory-existence",
+            "options": {
+              "globsAny": [
+                "**/test*",
+                "**/specs",
+                "**/*test*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "integrates-with-ci": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                ".gitlab-ci.yml",
+                ".travis.yml",
+                "appveyor.yml",
+                ".appveyor.yml",
+                "circle.yml",
+                ".circleci/config.yml",
+                "Jenkinsfile",
+                ".drone.yml",
+                ".github/workflows/*",
+                "azure-pipelines.yml"
+              ]
+            }
+          }
+        },
+        "source-license-headers-exist": {
+          "level": "error",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+                "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+              ],
+              "flags": "i",
+              "succeed-on-non-existent": true
+            }
+          }
+        },
+        "source-qualcomm-license-headers-exist": {
+          "level": "warning",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.sh",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+              ],
+              "flags": "i"
+            }
+          }
+        },
+        "github-issue-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "ISSUE_TEMPLATE*",
+                "ISSUE_TEMPLATE/**",
+                ".github/ISSUE_TEMPLATE*",
+                ".github/ISSUE_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "github-pull-request-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "PULL_REQUEST_TEMPLATE*",
+                "PULL_REQUEST_TEMPLATE/**",
+                ".github/PULL_REQUEST_TEMPLATE*",
+                ".github/PULL_REQUEST_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "javascript-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=javascript"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "package.json"
+              ]
+            }
+          }
+        },
+        "ruby-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=ruby"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Gemfile"
+              ]
+            }
+          }
+        },
+        "java-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=java"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "pom.xml",
+                "build.xml",
+                "build.gradle"
+              ]
+            }
+          }
+        },
+        "python-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=python"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "setup.py",
+                "requirements.txt"
+              ]
+            }
+          }
+        },
+        "rust-package-metadata-exists": {
+          "level": "error",
+          "where": [
+            "language=rust"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "**/Cargo.toml",
+                "**/Cargo.lock"
+              ]
+            }
+          }
+        },
+        "objective-c-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=objective-c"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Cartfile",
+                "Podfile",
+                "**/*.podspec"
+              ]
+            }
+          }
+        },
+        "swift-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=swift"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Package.swift"
+              ]
+            }
+          }
+        },
+        "erlang-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=erlang"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "rebar.config"
+              ]
+            }
+          }
+        },
+        "elixir-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=elixir"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "mix.exs"
+              ]
+            }
+          }
+        },
+        "license-detectable-by-licensee": {
+          "level": "off",
+          "where": [
+            "license=*"
+          ],
+          "rule": {
+            "type": "license-detectable-by-licensee",
+            "options": {}
+          }
+        }
+      }
+    }
+  },
+  "passed": false,
+  "errored": false,
+  "results": [
+    {
+      "ruleInfo": {
+        "name": "license-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "LICENSE*",
+            "COPYING*",
+            "NOTICE*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "LICENSE",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "README*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "contributing-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CONTRIB*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CONTRIB*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "code-of-conduct-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CODEOFCONDUCT*",
+            "{docs/,.github/,}CODE-OF-CONDUCT*",
+            "{docs/,.github/,}CODE_OF_CONDUCT*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CODEOFCONDUCT*"
+          },
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CODE-OF-CONDUCT*"
+          },
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CODE_OF_CONDUCT*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "changelog-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "CHANGELOG*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "CHANGELOG*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-references-license",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-contents",
+        "ruleConfig": {
+          "globsAll": [
+            "README*"
+          ],
+          "content": "license|notice",
+          "flags": "i"
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Contains license|notice"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "binaries-not-present",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-type-exclusion",
+        "ruleConfig": {
+          "type": [
+            "**/*.exe",
+            "**/*.dll",
+            "**/*.o",
+            "**/*.so",
+            "!node_modules/**"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "message": "Excluded file type doesn't exist",
+        "targets": [
+          {
+            "passed": true,
+            "pattern": [
+              "**/*.exe",
+              "**/*.dll",
+              "**/*.o",
+              "**/*.so",
+              "!node_modules/**"
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "test-directory-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "directory-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/test*",
+            "**/specs",
+            "**/*test*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/tests",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "integrates-with-ci",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            ".gitlab-ci.yml",
+            ".travis.yml",
+            "appveyor.yml",
+            ".appveyor.yml",
+            "circle.yml",
+            ".circleci/config.yml",
+            "Jenkinsfile",
+            ".drone.yml",
+            ".github/workflows/*",
+            "azure-pipelines.yml"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": ".github/workflows/qcom-preflight-checks.yml",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-license-headers-exist",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+            "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          ],
+          "flags": "i",
+          "succeed-on-non-existent": true
+        }
+      },
+      "status": "NOT_PASSED_ERROR",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "scripts/facedb.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "scripts/preprocess.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/scripts/facedb.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/scripts/preprocess.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/applications/LiteRT/object_detection.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/device_app.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/tests/unified/check_case_counts.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/tests/unified/openai_i2t_responses_multiturn.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/tests/unified/run_http_suite.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/tests/unified/run_manifest.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/preprocess.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/common.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/imagegen.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/context.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/npu_arbiter.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/i2t.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/openai.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/stt.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/system.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/tg.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/tools/i2t_orchestrator_additional_68_suite.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/tools/i2t_orchestrator_extensive_suite.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/applications/ort_example/main.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Hello-QIM/main.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/Hello-QIM/main.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/server_sse.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/ErrorResponder.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/AsrService.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/AsrConfig.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/HttpPolicies.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/ModelCatalog.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/LegacyRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/OpenAiRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/RealtimeRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/RealtimeSessionHandlers.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/RealtimeSessionStore.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/TranscriptionExecutor.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/WhisperEngine.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/ChatApp.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/Genie.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/Logger.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/Main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/PromptHandler.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/ClipTokenizer.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/DpmScheduler.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/ImageGenService.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/StableDiffusionEngine.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/GeniePipelineRunner/GeniePipelineRunner.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/ImagePreprocessor/ImagePreprocessor.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/LutEncoder/LutEncoderNode.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/ImageEncoder/ImageEncoderNode.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/TextGenerator/TextGeneratorNode.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/VlmService/GenieWorker.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/VlmService/VlmService.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/CompletionRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/CompletionRuntime.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/CompletionService.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ModelCatalog.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ModelRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/LegacyRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ServerUtils.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/deps/cpp_sd21_qnn/main_direct_qnn.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsApp.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsEngine.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsService.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Hello-QIM/include/gst_sample_apps_utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/Hello-QIM/include/gst_sample_apps_utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/StreamChannel.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/GeniePipelineRunner/GeniePipelineRunner.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/ImagePreprocessor/ImagePreprocessor.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/LutEncoder/LutEncoderNode.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/ImageEncoder/ImageEncoderNode.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/TextGenerator/TextGeneratorNode.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/Utils/GenieCheck.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/Utils/GenieUtils.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/VlmService/GenieWorker.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/VlmService/VlmService.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/third_party/httplib.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/AsrConfig.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/AsrService.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/ErrorResponder.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/ModelCatalog.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/OpenAiAudioContract.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/TranscriptionExecutor.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/WhisperEngine.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/RealtimeSessionStore.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/ChatApp.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/Genie.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/Logger.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/PromptHandler.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/DpmScheduler.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/ImageGenService.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/ClipTokenizer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/StableDiffusionEngine.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/CompletionRuntime.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/CompletionService.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/HttpServer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ModelAccessPolicy.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ModelCatalog.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ServerUtils.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsApp.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsEngine.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsService.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-qualcomm-license-headers-exist",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.sh",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          ],
+          "flags": "i"
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "scripts/facedb.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "scripts/preprocess.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/scripts/facedb.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/scripts/preprocess.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/applications/LiteRT/object_detection.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/device_app.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/tests/unified/check_case_counts.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/tests/unified/openai_i2t_responses_multiturn.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/tests/unified/run_http_suite.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/tests/unified/run_manifest.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/preprocess.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/common.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/imagegen.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/context.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/npu_arbiter.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/i2t.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/openai.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/stt.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/system.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/app/tg.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/tools/i2t_orchestrator_additional_68_suite.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/orchestrator/tools/i2t_orchestrator_extensive_suite.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/applications/ort_example/main.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Hello-QIM/main.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/Hello-QIM/main.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/server_sse.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/ErrorResponder.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/AsrService.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/AsrConfig.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/HttpPolicies.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/ModelCatalog.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/LegacyRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/OpenAiRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/RealtimeRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/RealtimeSessionHandlers.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/RealtimeSessionStore.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/TranscriptionExecutor.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/WhisperEngine.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/ChatApp.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/Genie.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/Logger.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/Main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/PromptHandler.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/ClipTokenizer.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/DpmScheduler.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/ImageGenService.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/StableDiffusionEngine.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/GeniePipelineRunner/GeniePipelineRunner.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/ImagePreprocessor/ImagePreprocessor.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/LutEncoder/LutEncoderNode.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/ImageEncoder/ImageEncoderNode.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/TextGenerator/TextGeneratorNode.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/VlmService/GenieWorker.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/VlmService/VlmService.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/CompletionRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/CompletionRuntime.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/CompletionService.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ModelCatalog.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ModelRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/LegacyRoutes.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ServerUtils.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/deps/cpp_sd21_qnn/main_direct_qnn.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsApp.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsEngine.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsService.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Hello-QIM/include/gst_sample_apps_utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/Hello-QIM/include/gst_sample_apps_utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/StreamChannel.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/GeniePipelineRunner/GeniePipelineRunner.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/ImagePreprocessor/ImagePreprocessor.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/LutEncoder/LutEncoderNode.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/ImageEncoder/ImageEncoderNode.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/TextGenerator/TextGeneratorNode.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/Utils/GenieCheck.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/Utils/GenieUtils.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/VlmService/GenieWorker.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/src/VlmService/VlmService.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/third_party/httplib.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "download_artifacts.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "scripts/download_artifacts.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "scripts/build.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "scripts/export_model.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "scripts/setup_hw_benchmarking_app.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/scripts/download_artifacts.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/scripts/download_artifacts_2.x.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "qualcomm-linux/scripts/export_model.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "qualcomm-linux/scripts/setup_hw_benchmarking_app.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/ci/build_and_test.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/bootstrap-base.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/bootstrap-runtime.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/build-all.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/capture-golden-fingerprint.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/check-i2t-complexity.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/compose-doctor.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/create-runtime-base.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/download-qairt-sdk.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/pull-ubuntu-arm64.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/validate-i2t-release-gate.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/validate-stack.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/build.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/image-to-text/run.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/build.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/run.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/build.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/run.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/build.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/run.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/lib/common.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/repro/capture_golden_fingerprint.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/repro/run_full_stack_smoke.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/scripts/repro/compose_doctor.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/build.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/target_service_smoke.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/run.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/AsrConfig.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/AsrService.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/ErrorResponder.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/ModelCatalog.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/OpenAiAudioContract.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/TranscriptionExecutor.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/WhisperEngine.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/speech-to-text/src/RealtimeSessionStore.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/ChatApp.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/Genie.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/Logger.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/PromptHandler.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/DpmScheduler.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/ImageGenService.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/ClipTokenizer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-image/src/StableDiffusionEngine.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/CompletionRuntime.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/CompletionService.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/HttpServer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ModelAccessPolicy.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ModelCatalog.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-text/src/server/ServerUtils.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsApp.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsEngine.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/GenAI-Studio/core-services/text-to-speech/meloTTS/src/TtsService.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-issue-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "ISSUE_TEMPLATE*",
+            "ISSUE_TEMPLATE/**",
+            ".github/ISSUE_TEMPLATE*",
+            ".github/ISSUE_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "ISSUE_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": "ISSUE_TEMPLATE/**"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/ISSUE_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/ISSUE_TEMPLATE/**"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-pull-request-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "PULL_REQUEST_TEMPLATE*",
+            "PULL_REQUEST_TEMPLATE/**",
+            ".github/PULL_REQUEST_TEMPLATE*",
+            ".github/PULL_REQUEST_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "PULL_REQUEST_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": "PULL_REQUEST_TEMPLATE/**"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/PULL_REQUEST_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/PULL_REQUEST_TEMPLATE/**"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "javascript-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=javascript"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "package.json"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=javascript\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "ruby-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=ruby"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Gemfile"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=ruby\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "java-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=java"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "pom.xml",
+            "build.xml",
+            "build.gradle"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=java\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "python-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=python"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "setup.py",
+            "requirements.txt"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=python\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "rust-package-metadata-exists",
+        "level": "error",
+        "where": [
+          "language=rust"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/Cargo.toml",
+            "**/Cargo.lock"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=rust\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "objective-c-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=objective-c"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Cartfile",
+            "Podfile",
+            "**/*.podspec"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=objective-c\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "swift-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=swift"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Package.swift"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=swift\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "erlang-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=erlang"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "rebar.config"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=erlang\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "elixir-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=elixir"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "mix.exs"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=elixir\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "license-detectable-by-licensee",
+        "level": "off",
+        "where": [
+          "license=*"
+        ],
+        "ruleType": "license-detectable-by-licensee",
+        "ruleConfig": {}
+      },
+      "runMessage": "ignored because level is \"off\"",
+      "status": "IGNORED"
+    }
+  ],
+  "targets": {
+    "language": {
+      "message": "Linguist not installed",
+      "targets": [],
+      "passed": false
+    },
+    "license": {
+      "message": "Licensee not installed",
+      "targets": [],
+      "passed": false
+    },
+    "packager": {
+      "targets": [],
+      "passed": true
+    }
+  }
+}

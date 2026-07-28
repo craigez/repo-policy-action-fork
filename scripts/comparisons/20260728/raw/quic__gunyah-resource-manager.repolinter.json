@@ -1,0 +1,2840 @@
+{
+  "params": {
+    "targetDir": "/var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpy3am1rts/gunyah-resource-manager",
+    "filterPaths": [],
+    "rulesetPath": "https://raw.githubusercontent.com/qualcomm/.github/main/repolint.json",
+    "ruleset": {
+      "$schema": "https://raw.githubusercontent.com/todogroup/repolinter/master/rulesets/schema.json",
+      "version": 2,
+      "axioms": {
+        "linguist": "language",
+        "licensee": "license",
+        "packagers": "packager"
+      },
+      "rules": {
+        "license-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "LICENSE*",
+                "COPYING*",
+                "NOTICE*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "README*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "contributing-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CONTRIB*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "code-of-conduct-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CODEOFCONDUCT*",
+                "{docs/,.github/,}CODE-OF-CONDUCT*",
+                "{docs/,.github/,}CODE_OF_CONDUCT*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "changelog-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "CHANGELOG*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-references-license": {
+          "level": "error",
+          "rule": {
+            "type": "file-contents",
+            "options": {
+              "globsAll": [
+                "README*"
+              ],
+              "content": "license|notice",
+              "flags": "i"
+            }
+          }
+        },
+        "binaries-not-present": {
+          "level": "warning",
+          "rule": {
+            "type": "file-type-exclusion",
+            "options": {
+              "type": [
+                "**/*.exe",
+                "**/*.dll",
+                "**/*.o",
+                "**/*.so",
+                "!node_modules/**"
+              ]
+            }
+          }
+        },
+        "test-directory-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "directory-existence",
+            "options": {
+              "globsAny": [
+                "**/test*",
+                "**/specs",
+                "**/*test*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "integrates-with-ci": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                ".gitlab-ci.yml",
+                ".travis.yml",
+                "appveyor.yml",
+                ".appveyor.yml",
+                "circle.yml",
+                ".circleci/config.yml",
+                "Jenkinsfile",
+                ".drone.yml",
+                ".github/workflows/*",
+                "azure-pipelines.yml"
+              ]
+            }
+          }
+        },
+        "source-license-headers-exist": {
+          "level": "error",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+                "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+              ],
+              "flags": "i",
+              "succeed-on-non-existent": true
+            }
+          }
+        },
+        "source-qualcomm-license-headers-exist": {
+          "level": "warning",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.sh",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+              ],
+              "flags": "i"
+            }
+          }
+        },
+        "github-issue-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "ISSUE_TEMPLATE*",
+                "ISSUE_TEMPLATE/**",
+                ".github/ISSUE_TEMPLATE*",
+                ".github/ISSUE_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "github-pull-request-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "PULL_REQUEST_TEMPLATE*",
+                "PULL_REQUEST_TEMPLATE/**",
+                ".github/PULL_REQUEST_TEMPLATE*",
+                ".github/PULL_REQUEST_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "javascript-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=javascript"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "package.json"
+              ]
+            }
+          }
+        },
+        "ruby-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=ruby"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Gemfile"
+              ]
+            }
+          }
+        },
+        "java-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=java"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "pom.xml",
+                "build.xml",
+                "build.gradle"
+              ]
+            }
+          }
+        },
+        "python-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=python"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "setup.py",
+                "requirements.txt"
+              ]
+            }
+          }
+        },
+        "rust-package-metadata-exists": {
+          "level": "error",
+          "where": [
+            "language=rust"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "**/Cargo.toml",
+                "**/Cargo.lock"
+              ]
+            }
+          }
+        },
+        "objective-c-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=objective-c"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Cartfile",
+                "Podfile",
+                "**/*.podspec"
+              ]
+            }
+          }
+        },
+        "swift-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=swift"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Package.swift"
+              ]
+            }
+          }
+        },
+        "erlang-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=erlang"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "rebar.config"
+              ]
+            }
+          }
+        },
+        "elixir-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=elixir"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "mix.exs"
+              ]
+            }
+          }
+        },
+        "license-detectable-by-licensee": {
+          "level": "off",
+          "where": [
+            "license=*"
+          ],
+          "rule": {
+            "type": "license-detectable-by-licensee",
+            "options": {}
+          }
+        }
+      }
+    }
+  },
+  "passed": false,
+  "errored": false,
+  "results": [
+    {
+      "ruleInfo": {
+        "name": "license-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "LICENSE*",
+            "COPYING*",
+            "NOTICE*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "LICENSE",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "README*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "contributing-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CONTRIB*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CONTRIB*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "code-of-conduct-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CODEOFCONDUCT*",
+            "{docs/,.github/,}CODE-OF-CONDUCT*",
+            "{docs/,.github/,}CODE_OF_CONDUCT*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CODEOFCONDUCT*"
+          },
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CODE-OF-CONDUCT*"
+          },
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CODE_OF_CONDUCT*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "changelog-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "CHANGELOG*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "CHANGELOG*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-references-license",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-contents",
+        "ruleConfig": {
+          "globsAll": [
+            "README*"
+          ],
+          "content": "license|notice",
+          "flags": "i"
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Contains license|notice"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "binaries-not-present",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-type-exclusion",
+        "ruleConfig": {
+          "type": [
+            "**/*.exe",
+            "**/*.dll",
+            "**/*.o",
+            "**/*.so",
+            "!node_modules/**"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "message": "Excluded file type doesn't exist",
+        "targets": [
+          {
+            "passed": true,
+            "pattern": [
+              "**/*.exe",
+              "**/*.dll",
+              "**/*.o",
+              "**/*.so",
+              "!node_modules/**"
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "test-directory-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "directory-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/test*",
+            "**/specs",
+            "**/*test*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "tools/cpptest",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "integrates-with-ci",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            ".gitlab-ci.yml",
+            ".travis.yml",
+            "appveyor.yml",
+            ".appveyor.yml",
+            "circle.yml",
+            ".circleci/config.yml",
+            "Jenkinsfile",
+            ".drone.yml",
+            ".github/workflows/*",
+            "azure-pipelines.yml"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": ".github/workflows/quic-organization-repolinter.yml",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-license-headers-exist",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+            "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          ],
+          "flags": "i",
+          "succeed-on-non-existent": true
+        }
+      },
+      "status": "NOT_PASSED_ERROR",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "configure.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "tools/cpptest/cyclomatic_xml_to_json.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "tools/cpptest/misra_xml_to_json.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "tools/cpptest/get_unreachable_functions.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "tools/misc/get_genfiles.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/assert.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/compiler.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/device_manager.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/cpio.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/dt_overlay.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/dt_linux.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/dtb_parser.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/dtb_parser_listener.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/event.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/exit_dev.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/elf.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/guest_hypresult.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/guest_interface.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/guest_rights.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/heap_mgnt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/irq_manager.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/guest_types.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/irq_message.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/mem_region.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/log.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/memparcel.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/memextent.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/memparcel_msg.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/panic.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/platform.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/platform_env.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/platform_devices.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/platform_msi.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/preempt.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/platform_iommu.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/resource-manager.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/rm-rpc-fifo.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/random.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/rm-rpc.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/rm_env_data.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/rm_types.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/virq.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/vm_config.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/uart.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/vm_config_parser.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_config_struct.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_console.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/vm_console_message.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/util.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_creation_addrspace.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_creation.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_creation_dt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_dt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/vm_creation_message.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/vm_elf.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/vm_firmware.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_firmware_struct.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_firmware_message.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/vm_ipa_message.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/vm_memory.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/vm_ipa.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/vm_mgnt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/vm_mgnt_message.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/vm_passthrough_config.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/vm_resources.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/vm_vcpu.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_resource_msg.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/uapi/exit_dev.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/uapi/console.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/uapi/interrupt.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/uapi/mem.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/utils/address_range_allocator.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/utils/bitmap.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "include/utils/circular_buf.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/utils/dict.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/utils/guid_parser.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/utils/list.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "include/utils/range_list.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "include/utils/vector.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/device_manager/device_manager-internal.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/device_manager/pcie-internal.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/rpc/rm-rpc-internal.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "src/vm_config/vm_config_rtc.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "src/vm_config/vm_parser_rtc.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/dto_construct.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/vm_firmware_arch.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/cache.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "arch/armv8/include/vm_mgnt_arch.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "arch/gicv3/include/vgic.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "arch/gicv3/include/irq_arch.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "platform/qemu/include/platform_dt_parser.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/qemu/include/platform_vm_firmware.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/fvp/include/platform_dt_parser.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/fvp/include/platform_vm_firmware.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/platform_dt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/platform_stubs.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/platform_vm_config.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/platform_vm_config_parser.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/platform_vm_memory.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/vm_client.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/asm/arm_smccc.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "arch/armv8/include/asm/interrupt.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/ffa/ffa.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/ffa/ffa_memory.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/assert.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "src/guest_accessors.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/guest_hypresult.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "src/guid_parser.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/interrupt.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "src/guest_interface.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "src/log.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/random.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "src/process_env.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/resource-manager.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/virq.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "src/util.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/arm_pl011/uart_arm_pl011.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/iommu/iommu.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/iommu/vpci.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/device_manager/device_manager.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/device_manager/pcie.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/dt/dt_overlay.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/dt/dto_construct.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/elf/elf.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "src/event/event-epoll.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/event/event-isr.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/exit/exit.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "src/irq_manager/irq_manager.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/hyp/memextent.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/heap_mgnt/heap_mgnt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/memparcel/mem_region.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/memparcel/memparcel.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/preempt/preempt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/uart/uart.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/rpc/rm-rpc-fifo.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/rpc/rm-rpc.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "src/rpc/rm-rpc-msgqueue.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "src/utils/address_range_allocator.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/utils/circular_buf.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/utils/dict.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "src/utils/range_list.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/utils/vector.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/utils/bitmap.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_console/vm_console_simple.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_config/dtb_parser.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_config/vm_config.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_config/vm_config_parser.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_config/vm_config_rtc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/vm_config/vm_get_resources.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/rm_vm.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/hlos_vm.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/second_vm.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/dto_construct.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/vm_addrspace.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/vm_creation/vm_creation_rtc.c",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/vm_elf.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/vm_creation.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_firmware/vm_firmware.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_dt/vm_dt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_memory/vm_memory.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_mgnt/vm_mgnt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/vm_ipa/vm_ipa.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "src/vm_passthrough_config/vm_passthrough_config.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "arch/armv8/src/cache.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "arch/armv8/src/smc.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": false,
+            "path": "arch/armv8/src/timestamp.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/src/vm_mgnt_arch.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "arch/gicv3/src/irq_gic.c",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?"
+          },
+          {
+            "passed": true,
+            "path": "arch/gicv3/src/vgic.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/platform_rtc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/platform_stubs.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/vm_client.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/vm_config.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/vm_config_parser.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/vm_dt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/vm_memory.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/src/ffa/ffa.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/exit/exit.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/fvp/target/fvp/src/platform_msi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/fvp/target/fvp/src/stream_id_ranges.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/qemu/target/qemu/src/platform_msi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-qualcomm-license-headers-exist",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.sh",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          ],
+          "flags": "i"
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "configure.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "tools/cpptest/cyclomatic_xml_to_json.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "tools/cpptest/misra_xml_to_json.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "tools/cpptest/get_unreachable_functions.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "tools/misc/get_genfiles.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/assert.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/compiler.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/device_manager.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/cpio.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/dt_overlay.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/dt_linux.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/dtb_parser.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/dtb_parser_listener.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/event.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/exit_dev.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/elf.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/guest_hypresult.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/guest_interface.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/guest_rights.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/heap_mgnt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/irq_manager.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/guest_types.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/irq_message.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/mem_region.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/log.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/memparcel.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/memextent.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/memparcel_msg.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/panic.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/platform.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/platform_env.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/platform_devices.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/platform_msi.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/preempt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/platform_iommu.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/resource-manager.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/rm-rpc-fifo.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/random.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/rm-rpc.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/rm_env_data.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/rm_types.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/virq.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_config.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/uart.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_config_parser.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_config_struct.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_console.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_console_message.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/util.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_creation_addrspace.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_creation.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_creation_dt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_dt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_creation_message.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_elf.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_firmware.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_firmware_struct.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_firmware_message.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_ipa_message.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_memory.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_ipa.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_mgnt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_mgnt_message.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_passthrough_config.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_resources.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_vcpu.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/vm_resource_msg.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/uapi/exit_dev.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/uapi/console.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/uapi/interrupt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/uapi/mem.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/utils/address_range_allocator.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/utils/bitmap.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/utils/circular_buf.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/utils/dict.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/utils/guid_parser.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/utils/list.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/utils/range_list.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "include/utils/vector.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/device_manager/device_manager-internal.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/device_manager/pcie-internal.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/rpc/rm-rpc-internal.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_config/vm_config_rtc.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_config/vm_parser_rtc.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/dto_construct.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/vm_firmware_arch.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/cache.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/vm_mgnt_arch.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/gicv3/include/vgic.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/gicv3/include/irq_arch.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/qemu/include/platform_dt_parser.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/qemu/include/platform_vm_firmware.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/fvp/include/platform_dt_parser.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/fvp/include/platform_vm_firmware.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/platform_dt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/platform_stubs.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/platform_vm_config.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/platform_vm_config_parser.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/platform_vm_memory.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/include/vm_client.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/asm/arm_smccc.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/asm/interrupt.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/ffa/ffa.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/include/ffa/ffa_memory.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "tools/misc/convert-utf-8.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "tools/misc/setversion.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "tools/misc/update_cscope.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/assert.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/guest_accessors.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/guest_hypresult.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/guid_parser.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/interrupt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "src/guest_interface.c",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "src/log.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/random.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/process_env.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/resource-manager.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/virq.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/util.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/arm_pl011/uart_arm_pl011.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/iommu/iommu.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/iommu/vpci.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/device_manager/device_manager.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/device_manager/pcie.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/dt/dt_overlay.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/dt/dto_construct.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/elf/elf.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/event/event-epoll.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/event/event-isr.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/exit/exit.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/irq_manager/irq_manager.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/hyp/memextent.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/heap_mgnt/heap_mgnt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/memparcel/mem_region.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/memparcel/memparcel.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/preempt/preempt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/uart/uart.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/rpc/rm-rpc-fifo.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/rpc/rm-rpc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/rpc/rm-rpc-msgqueue.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/utils/address_range_allocator.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/utils/circular_buf.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/utils/dict.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/utils/range_list.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/utils/vector.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/utils/bitmap.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_console/vm_console_simple.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_config/dtb_parser.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_config/vm_config.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_config/vm_config_parser.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_config/vm_config_rtc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_config/vm_get_resources.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/rm_vm.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/hlos_vm.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/second_vm.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/dto_construct.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/vm_addrspace.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/vm_creation_rtc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/vm_elf.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_creation/vm_creation.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_firmware/vm_firmware.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_dt/vm_dt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_memory/vm_memory.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_mgnt/vm_mgnt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_ipa/vm_ipa.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "src/vm_passthrough_config/vm_passthrough_config.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/src/cache.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/src/smc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/src/timestamp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/src/vm_mgnt_arch.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/gicv3/src/irq_gic.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/gicv3/src/vgic.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/platform_rtc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/platform_stubs.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/vm_client.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/vm_config.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/vm_config_parser.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/vm_dt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/vm_memory.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "arch/armv8/src/ffa/ffa.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/stubs/src/exit/exit.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/fvp/target/fvp/src/platform_msi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/fvp/target/fvp/src/stream_id_ranges.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "platform/qemu/target/qemu/src/platform_msi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-issue-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "ISSUE_TEMPLATE*",
+            "ISSUE_TEMPLATE/**",
+            ".github/ISSUE_TEMPLATE*",
+            ".github/ISSUE_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "ISSUE_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": "ISSUE_TEMPLATE/**"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/ISSUE_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/ISSUE_TEMPLATE/**"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-pull-request-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "PULL_REQUEST_TEMPLATE*",
+            "PULL_REQUEST_TEMPLATE/**",
+            ".github/PULL_REQUEST_TEMPLATE*",
+            ".github/PULL_REQUEST_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "PULL_REQUEST_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": "PULL_REQUEST_TEMPLATE/**"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/PULL_REQUEST_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/PULL_REQUEST_TEMPLATE/**"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "javascript-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=javascript"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "package.json"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=javascript\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "ruby-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=ruby"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Gemfile"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=ruby\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "java-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=java"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "pom.xml",
+            "build.xml",
+            "build.gradle"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=java\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "python-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=python"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "setup.py",
+            "requirements.txt"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=python\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "rust-package-metadata-exists",
+        "level": "error",
+        "where": [
+          "language=rust"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/Cargo.toml",
+            "**/Cargo.lock"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=rust\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "objective-c-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=objective-c"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Cartfile",
+            "Podfile",
+            "**/*.podspec"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=objective-c\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "swift-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=swift"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Package.swift"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=swift\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "erlang-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=erlang"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "rebar.config"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=erlang\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "elixir-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=elixir"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "mix.exs"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=elixir\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "license-detectable-by-licensee",
+        "level": "off",
+        "where": [
+          "license=*"
+        ],
+        "ruleType": "license-detectable-by-licensee",
+        "ruleConfig": {}
+      },
+      "runMessage": "ignored because level is \"off\"",
+      "status": "IGNORED"
+    }
+  ],
+  "targets": {
+    "language": {
+      "message": "Linguist not installed",
+      "targets": [],
+      "passed": false
+    },
+    "license": {
+      "message": "Licensee not installed",
+      "targets": [],
+      "passed": false
+    },
+    "packager": {
+      "targets": [],
+      "passed": true
+    }
+  }
+}

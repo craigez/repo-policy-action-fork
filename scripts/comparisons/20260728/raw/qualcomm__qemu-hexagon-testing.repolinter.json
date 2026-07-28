@@ -1,0 +1,2658 @@
+{
+  "params": {
+    "targetDir": "/var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpcyp3gzvz/qemu-hexagon-testing",
+    "filterPaths": [],
+    "rulesetPath": "https://raw.githubusercontent.com/qualcomm/.github/main/repolint.json",
+    "ruleset": {
+      "$schema": "https://raw.githubusercontent.com/todogroup/repolinter/master/rulesets/schema.json",
+      "version": 2,
+      "axioms": {
+        "linguist": "language",
+        "licensee": "license",
+        "packagers": "packager"
+      },
+      "rules": {
+        "license-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "LICENSE*",
+                "COPYING*",
+                "NOTICE*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "README*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "contributing-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CONTRIB*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "code-of-conduct-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CODEOFCONDUCT*",
+                "{docs/,.github/,}CODE-OF-CONDUCT*",
+                "{docs/,.github/,}CODE_OF_CONDUCT*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "changelog-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "CHANGELOG*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-references-license": {
+          "level": "error",
+          "rule": {
+            "type": "file-contents",
+            "options": {
+              "globsAll": [
+                "README*"
+              ],
+              "content": "license|notice",
+              "flags": "i"
+            }
+          }
+        },
+        "binaries-not-present": {
+          "level": "warning",
+          "rule": {
+            "type": "file-type-exclusion",
+            "options": {
+              "type": [
+                "**/*.exe",
+                "**/*.dll",
+                "**/*.o",
+                "**/*.so",
+                "!node_modules/**"
+              ]
+            }
+          }
+        },
+        "test-directory-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "directory-existence",
+            "options": {
+              "globsAny": [
+                "**/test*",
+                "**/specs",
+                "**/*test*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "integrates-with-ci": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                ".gitlab-ci.yml",
+                ".travis.yml",
+                "appveyor.yml",
+                ".appveyor.yml",
+                "circle.yml",
+                ".circleci/config.yml",
+                "Jenkinsfile",
+                ".drone.yml",
+                ".github/workflows/*",
+                "azure-pipelines.yml"
+              ]
+            }
+          }
+        },
+        "source-license-headers-exist": {
+          "level": "error",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+                "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+              ],
+              "flags": "i",
+              "succeed-on-non-existent": true
+            }
+          }
+        },
+        "source-qualcomm-license-headers-exist": {
+          "level": "warning",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.sh",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+              ],
+              "flags": "i"
+            }
+          }
+        },
+        "github-issue-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "ISSUE_TEMPLATE*",
+                "ISSUE_TEMPLATE/**",
+                ".github/ISSUE_TEMPLATE*",
+                ".github/ISSUE_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "github-pull-request-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "PULL_REQUEST_TEMPLATE*",
+                "PULL_REQUEST_TEMPLATE/**",
+                ".github/PULL_REQUEST_TEMPLATE*",
+                ".github/PULL_REQUEST_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "javascript-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=javascript"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "package.json"
+              ]
+            }
+          }
+        },
+        "ruby-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=ruby"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Gemfile"
+              ]
+            }
+          }
+        },
+        "java-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=java"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "pom.xml",
+                "build.xml",
+                "build.gradle"
+              ]
+            }
+          }
+        },
+        "python-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=python"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "setup.py",
+                "requirements.txt"
+              ]
+            }
+          }
+        },
+        "rust-package-metadata-exists": {
+          "level": "error",
+          "where": [
+            "language=rust"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "**/Cargo.toml",
+                "**/Cargo.lock"
+              ]
+            }
+          }
+        },
+        "objective-c-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=objective-c"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Cartfile",
+                "Podfile",
+                "**/*.podspec"
+              ]
+            }
+          }
+        },
+        "swift-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=swift"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Package.swift"
+              ]
+            }
+          }
+        },
+        "erlang-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=erlang"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "rebar.config"
+              ]
+            }
+          }
+        },
+        "elixir-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=elixir"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "mix.exs"
+              ]
+            }
+          }
+        },
+        "license-detectable-by-licensee": {
+          "level": "off",
+          "where": [
+            "license=*"
+          ],
+          "rule": {
+            "type": "license-detectable-by-licensee",
+            "options": {}
+          }
+        }
+      }
+    }
+  },
+  "passed": true,
+  "errored": false,
+  "results": [
+    {
+      "ruleInfo": {
+        "name": "license-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "LICENSE*",
+            "COPYING*",
+            "NOTICE*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "LICENSE.txt",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "README*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "contributing-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CONTRIB*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "CONTRIBUTING.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "code-of-conduct-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CODEOFCONDUCT*",
+            "{docs/,.github/,}CODE-OF-CONDUCT*",
+            "{docs/,.github/,}CODE_OF_CONDUCT*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "CODE-OF-CONDUCT.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "changelog-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "CHANGELOG*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "CHANGELOG*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-references-license",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-contents",
+        "ruleConfig": {
+          "globsAll": [
+            "README*"
+          ],
+          "content": "license|notice",
+          "flags": "i"
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Contains license|notice"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "binaries-not-present",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-type-exclusion",
+        "ruleConfig": {
+          "type": [
+            "**/*.exe",
+            "**/*.dll",
+            "**/*.o",
+            "**/*.so",
+            "!node_modules/**"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "message": "Excluded file type doesn't exist",
+        "targets": [
+          {
+            "passed": true,
+            "pattern": [
+              "**/*.exe",
+              "**/*.dll",
+              "**/*.o",
+              "**/*.so",
+              "!node_modules/**"
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "test-directory-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "directory-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/test*",
+            "**/specs",
+            "**/*test*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "verif-hexagon/etc/test_case.tmpl",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "integrates-with-ci",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            ".gitlab-ci.yml",
+            ".travis.yml",
+            "appveyor.yml",
+            ".appveyor.yml",
+            "circle.yml",
+            ".circleci/config.yml",
+            "Jenkinsfile",
+            ".drone.yml",
+            ".github/workflows/*",
+            "azure-pipelines.yml"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": ".github/workflows/Readme.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-license-headers-exist",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+            "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          ],
+          "flags": "i",
+          "succeed-on-non-existent": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/__main__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/adjust_output.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/gen_usr.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/initialization.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/gen_all.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/mut.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/regs.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/log.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/run_test.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/scripts/combine_stats.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/scripts/subst.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/build.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/lib.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_cache.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_hvx_context.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_guest_mode.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_exceptions.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_int_steering.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_interrupts.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_sys_regs.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_pmu.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_l2vic.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_threads.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_isr_stress.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_timer.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_tlb_mmu.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_user_mode.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/min_libc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/tlb.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/access.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/badva.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/bestwait.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/checkforpriv.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/ciad-siad.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/dirent.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/fastint.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/dtg_interrupt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/fastl2vic.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/float_excp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/fopen.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/framelimit.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/ftrunc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/getcwd.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/gregs.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hmx.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hsv39_tlb.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx-multi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx_64b.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx_misc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx_ext.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx_nocoproc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/ieee_fp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/inf-loop.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/int_range.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/invalid_hmx.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/invalid_insn_for_rev.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/invalid_opcode.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/k0lock-syscfg.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/double_ex.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/k0lock.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/k0locklock.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/levelint.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/lock_timer_test.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/lock_verify.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mcw.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/memcpy.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/min_libc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/llsc_on_excp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_cacheops.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_asids.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_multi_tlb.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_page_size.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_permissions.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/multiple_writes.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/nmi_cross_thread.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/pcycle.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_overlap.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/pend_wake_wait.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/pmu.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/pendalot.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/qfloat_test.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/qtimer.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/reg-reads.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/qtimer_test.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/reg-writes.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/rev.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/semihost.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/sa8797p_nsp_multicore.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/standalone_hw.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/standalone_vec.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/single_step.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/start.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/swi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/swi2.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/swi_wait.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/sys_atomics.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/swi_fs.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/sys_reg_mut.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/test-thread.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/thread_common.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/timer_reg.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/tlblock.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/tlb.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/thread_scheduling.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/tlblocklock.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/udma.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/unaligned.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/util.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/vm_test.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/vid-group.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/vid_reg.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/vwctrl.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/vtcm_error.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "sdk_examples/stubs/src/subsys_linux.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "sdk_examples/stubs/src/subsys_stub.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/min_libc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/tlb.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/reg_mut.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/hex_test.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/hexagon_standalone.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hmx_ref.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/cfgtable.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/dma.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/hex_test.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/hsv39.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/ieee_ref_output_dat.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/interrupts.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/hvx_misc.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/hvx-multi.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/invalid_opcode.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/mmu.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/mcw.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/qtimer.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/reg_fields_def.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/strutils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/single_step.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/thread_common.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/pmu.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/timer.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/util.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/v6mpy_ref.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/vtcm_common.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "sdk_examples/stubs/include/hexagon_standalone.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "sdk_examples/stubs/include/q6sim_timer.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "sdk_examples/stubs/include/hwio.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/hexagon_standalone.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/asm/pte.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/asm/crt0.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/crt0.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/crt0_standalone.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/pte.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/boot.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/crt0.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/dtg_interrupt_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/crt0_standalone.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/dummy_mutex.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/monitor_insts.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx-multi-asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/pte.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/simple-assign.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/single_step_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/tlb-miss-tlblock.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/crt0.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/crt0_standalone.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/pte.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-qualcomm-license-headers-exist",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.sh",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          ],
+          "flags": "i"
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/__main__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/adjust_output.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/gen_usr.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/initialization.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/gen_all.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/mut.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/regs.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/log.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/src/run_test.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/scripts/combine_stats.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/scripts/subst.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/run_tests.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "sdk_examples/scripts/create_package_readme.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "verif-hexagon/scripts/review.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/build.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/lib.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_cache.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_hvx_context.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_guest_mode.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_exceptions.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_int_steering.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_interrupts.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_sys_regs.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_pmu.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_l2vic.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_threads.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_isr_stress.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_timer.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_tlb_mmu.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/src/bin/test_user_mode.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/min_libc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/tlb.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/access.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/badva.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/bestwait.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/checkforpriv.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/ciad-siad.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/dirent.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/fastint.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/dtg_interrupt.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/fastl2vic.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/float_excp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/fopen.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/framelimit.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/ftrunc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/getcwd.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/gregs.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hmx.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hsv39_tlb.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx-multi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx_64b.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx_misc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx_ext.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx_nocoproc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/ieee_fp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/inf-loop.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/int_range.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/invalid_hmx.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/invalid_insn_for_rev.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/invalid_opcode.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/k0lock-syscfg.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/double_ex.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/k0lock.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/k0locklock.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/levelint.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/lock_timer_test.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/lock_verify.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mcw.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/memcpy.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/min_libc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/llsc_on_excp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_cacheops.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_asids.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_multi_tlb.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_page_size.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_permissions.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/multiple_writes.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/nmi_cross_thread.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/pcycle.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/mmu_overlap.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/pend_wake_wait.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/pmu.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/pendalot.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/qfloat_test.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/qtimer.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/reg-reads.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/qtimer_test.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/reg-writes.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/rev.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/semihost.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/sa8797p_nsp_multicore.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/standalone_hw.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/standalone_vec.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/single_step.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/start.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/swi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/swi2.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/swi_wait.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/sys_atomics.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/swi_fs.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/sys_reg_mut.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/test-thread.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/thread_common.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/timer_reg.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/tlblock.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/tlb.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/thread_scheduling.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/tlblocklock.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/udma.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/unaligned.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/util.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/vm_test.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/vid-group.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/vid_reg.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/vwctrl.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/vtcm_error.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "sdk_examples/stubs/src/subsys_linux.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "sdk_examples/stubs/src/subsys_stub.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/min_libc.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/tlb.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/reg_mut.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/hex_test.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/hexagon_standalone.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hmx_ref.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/cfgtable.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/dma.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/hex_test.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/hsv39.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/ieee_ref_output_dat.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/interrupts.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/hvx_misc.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/hvx-multi.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/invalid_opcode.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/mmu.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/mcw.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/qtimer.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/reg_fields_def.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/strutils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/single_step.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/thread_common.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/pmu.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/timer.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/util.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/v6mpy_ref.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/vtcm_common.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "sdk_examples/stubs/include/hexagon_standalone.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "sdk_examples/stubs/include/q6sim_timer.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "sdk_examples/stubs/include/hwio.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/hexagon_standalone.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/asm/pte.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "hexagon-arch-tests/asm/crt0.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/crt0.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/crt0_standalone.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/crt0/pte.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/boot.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/crt0.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/dtg_interrupt_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/crt0_standalone.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/dummy_mutex.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/monitor_insts.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/hvx-multi-asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/pte.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/simple-assign.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/single_step_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/src/tlb-miss-tlblock.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/crt0.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/crt0_standalone.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "standalone_systests/include/crt0/pte.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-issue-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "ISSUE_TEMPLATE*",
+            "ISSUE_TEMPLATE/**",
+            ".github/ISSUE_TEMPLATE*",
+            ".github/ISSUE_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-pull-request-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "PULL_REQUEST_TEMPLATE*",
+            "PULL_REQUEST_TEMPLATE/**",
+            ".github/PULL_REQUEST_TEMPLATE*",
+            ".github/PULL_REQUEST_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": ".github/PULL_REQUEST_TEMPLATE/pr_template.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "javascript-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=javascript"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "package.json"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=javascript\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "ruby-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=ruby"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Gemfile"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=ruby\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "java-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=java"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "pom.xml",
+            "build.xml",
+            "build.gradle"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=java\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "python-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=python"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "setup.py",
+            "requirements.txt"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=python\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "rust-package-metadata-exists",
+        "level": "error",
+        "where": [
+          "language=rust"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/Cargo.toml",
+            "**/Cargo.lock"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=rust\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "objective-c-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=objective-c"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Cartfile",
+            "Podfile",
+            "**/*.podspec"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=objective-c\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "swift-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=swift"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Package.swift"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=swift\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "erlang-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=erlang"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "rebar.config"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=erlang\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "elixir-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=elixir"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "mix.exs"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=elixir\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "license-detectable-by-licensee",
+        "level": "off",
+        "where": [
+          "license=*"
+        ],
+        "ruleType": "license-detectable-by-licensee",
+        "ruleConfig": {}
+      },
+      "runMessage": "ignored because level is \"off\"",
+      "status": "IGNORED"
+    }
+  ],
+  "targets": {
+    "language": {
+      "message": "Linguist not installed",
+      "targets": [],
+      "passed": false
+    },
+    "license": {
+      "message": "Licensee not installed",
+      "targets": [],
+      "passed": false
+    },
+    "packager": {
+      "targets": [],
+      "passed": true
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "repo": "qualcomm-linux/meta-qcom-robotics",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: LICENSE.txt"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: README.md"
+    },
+    "contributing-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CONTRIBUTING.md"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CODE-OF-CONDUCT.md"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpenygpgjv/meta-qcom-robotics"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 1 matched file(s)."
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No directory matching ['**/test*', '**/specs', '**/*test*'] found under /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpenygpgjv/meta-qcom-robotics"
+    },
+    "integrates-with-ci": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['.gitlab-ci.yml', '.travis.yml', 'appveyor.yml', '.appveyor.yml', 'circle.yml', '.circleci/config.yml', 'Jenkinsfile', '.drone.yml', '.github/workflows/*', 'azure-pipelines.yml'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpenygpgjv/meta-qcom-robotics"
+    },
+    "source-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 5 matched file(s)."
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 8 matched file(s)."
+    },
+    "github-issue-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['ISSUE_TEMPLATE*', 'ISSUE_TEMPLATE/**', '.github/ISSUE_TEMPLATE*', '.github/ISSUE_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpenygpgjv/meta-qcom-robotics"
+    },
+    "github-pull-request-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['PULL_REQUEST_TEMPLATE*', 'PULL_REQUEST_TEMPLATE/**', '.github/PULL_REQUEST_TEMPLATE*', '.github/PULL_REQUEST_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpenygpgjv/meta-qcom-robotics"
+    }
+  }
+}

@@ -1,0 +1,3995 @@
+{
+  "params": {
+    "targetDir": "/var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpcwbpxxwu/qidk",
+    "filterPaths": [],
+    "rulesetPath": "https://raw.githubusercontent.com/qualcomm/.github/main/repolint.json",
+    "ruleset": {
+      "$schema": "https://raw.githubusercontent.com/todogroup/repolinter/master/rulesets/schema.json",
+      "version": 2,
+      "axioms": {
+        "linguist": "language",
+        "licensee": "license",
+        "packagers": "packager"
+      },
+      "rules": {
+        "license-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "LICENSE*",
+                "COPYING*",
+                "NOTICE*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "README*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "contributing-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CONTRIB*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "code-of-conduct-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CODEOFCONDUCT*",
+                "{docs/,.github/,}CODE-OF-CONDUCT*",
+                "{docs/,.github/,}CODE_OF_CONDUCT*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "changelog-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "CHANGELOG*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-references-license": {
+          "level": "error",
+          "rule": {
+            "type": "file-contents",
+            "options": {
+              "globsAll": [
+                "README*"
+              ],
+              "content": "license|notice",
+              "flags": "i"
+            }
+          }
+        },
+        "binaries-not-present": {
+          "level": "warning",
+          "rule": {
+            "type": "file-type-exclusion",
+            "options": {
+              "type": [
+                "**/*.exe",
+                "**/*.dll",
+                "**/*.o",
+                "**/*.so",
+                "!node_modules/**"
+              ]
+            }
+          }
+        },
+        "test-directory-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "directory-existence",
+            "options": {
+              "globsAny": [
+                "**/test*",
+                "**/specs",
+                "**/*test*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "integrates-with-ci": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                ".gitlab-ci.yml",
+                ".travis.yml",
+                "appveyor.yml",
+                ".appveyor.yml",
+                "circle.yml",
+                ".circleci/config.yml",
+                "Jenkinsfile",
+                ".drone.yml",
+                ".github/workflows/*",
+                "azure-pipelines.yml"
+              ]
+            }
+          }
+        },
+        "source-license-headers-exist": {
+          "level": "error",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+                "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+              ],
+              "flags": "i",
+              "succeed-on-non-existent": true
+            }
+          }
+        },
+        "source-qualcomm-license-headers-exist": {
+          "level": "warning",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.sh",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+              ],
+              "flags": "i"
+            }
+          }
+        },
+        "github-issue-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "ISSUE_TEMPLATE*",
+                "ISSUE_TEMPLATE/**",
+                ".github/ISSUE_TEMPLATE*",
+                ".github/ISSUE_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "github-pull-request-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "PULL_REQUEST_TEMPLATE*",
+                "PULL_REQUEST_TEMPLATE/**",
+                ".github/PULL_REQUEST_TEMPLATE*",
+                ".github/PULL_REQUEST_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "javascript-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=javascript"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "package.json"
+              ]
+            }
+          }
+        },
+        "ruby-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=ruby"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Gemfile"
+              ]
+            }
+          }
+        },
+        "java-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=java"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "pom.xml",
+                "build.xml",
+                "build.gradle"
+              ]
+            }
+          }
+        },
+        "python-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=python"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "setup.py",
+                "requirements.txt"
+              ]
+            }
+          }
+        },
+        "rust-package-metadata-exists": {
+          "level": "error",
+          "where": [
+            "language=rust"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "**/Cargo.toml",
+                "**/Cargo.lock"
+              ]
+            }
+          }
+        },
+        "objective-c-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=objective-c"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Cartfile",
+                "Podfile",
+                "**/*.podspec"
+              ]
+            }
+          }
+        },
+        "swift-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=swift"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Package.swift"
+              ]
+            }
+          }
+        },
+        "erlang-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=erlang"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "rebar.config"
+              ]
+            }
+          }
+        },
+        "elixir-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=elixir"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "mix.exs"
+              ]
+            }
+          }
+        },
+        "license-detectable-by-licensee": {
+          "level": "off",
+          "where": [
+            "license=*"
+          ],
+          "rule": {
+            "type": "license-detectable-by-licensee",
+            "options": {}
+          }
+        }
+      }
+    }
+  },
+  "passed": false,
+  "errored": false,
+  "results": [
+    {
+      "ruleInfo": {
+        "name": "license-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "LICENSE*",
+            "COPYING*",
+            "NOTICE*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "LICENSE",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "README*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "contributing-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CONTRIB*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CONTRIB*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "code-of-conduct-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CODEOFCONDUCT*",
+            "{docs/,.github/,}CODE-OF-CONDUCT*",
+            "{docs/,.github/,}CODE_OF_CONDUCT*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CODEOFCONDUCT*"
+          },
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CODE-OF-CONDUCT*"
+          },
+          {
+            "passed": false,
+            "pattern": "{docs/,.github/,}CODE_OF_CONDUCT*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "changelog-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "CHANGELOG*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "CHANGELOG*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-references-license",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-contents",
+        "ruleConfig": {
+          "globsAll": [
+            "README*"
+          ],
+          "content": "license|notice",
+          "flags": "i"
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Contains license|notice"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "binaries-not-present",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-type-exclusion",
+        "ruleConfig": {
+          "type": [
+            "**/*.exe",
+            "**/*.dll",
+            "**/*.o",
+            "**/*.so",
+            "!node_modules/**"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "message": "Excluded file type doesn't exist",
+        "targets": [
+          {
+            "passed": true,
+            "pattern": [
+              "**/*.exe",
+              "**/*.dll",
+              "**/*.o",
+              "**/*.so",
+              "!node_modules/**"
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "test-directory-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "directory-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/test*",
+            "**/specs",
+            "**/*test*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tests",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "integrates-with-ci",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            ".gitlab-ci.yml",
+            ".travis.yml",
+            "appveyor.yml",
+            ".appveyor.yml",
+            "circle.yml",
+            ".circleci/config.yml",
+            "Jenkinsfile",
+            ".drone.yml",
+            ".github/workflows/*",
+            "azure-pipelines.yml"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": ".github/workflows/docs.yml",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-license-headers-exist",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+            "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          ],
+          "flags": "i",
+          "succeed-on-non-existent": true
+        }
+      },
+      "status": "NOT_PASSED_ERROR",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/setup.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/setup.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/qhci_api_generator.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "docs/source/conf.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/python_scripts/generate_t_emb_and_empty_tokens.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Model-Enablement/Model-Conversion-Layer-Replacement/generatedModels/getModel.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Model-Enablement/Model-Conversion-Layer-Replacement/class/CustomHardsigmoid.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Model-Enablement/Model-Conversion-Layer-Replacement/class/CustomHardswish.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/scripts/batch_tf_inf.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/scripts/generate_representative_dataset_squadv2.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/scripts/logits_to_F1_score.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/scripts/gen_raw_list.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/scripts/qa_model_gen.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/scripts/gen_raw_list.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/scripts/batch_tf_inf.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/scripts/get_accuracy_score.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/scripts/sa_model_gen.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/scripts/sst2_gen_dataset.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tests/test_pysnpe.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tests/test_targetdevice.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/asset_manager.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/dlc_generator.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/dlc_executor.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/env_setup_checker.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/logger_config.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/pysnpe.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/pysnpe_enums.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/exec_utils.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/bertLarge_tf_semanticSearch.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/detr_onnx_panopticSegmentation.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/esrgan_tflite_imageSuperResolution.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/midasV2_onnx_monocularDepthEstimation.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/multiHeadAttention_onnx_nnModule.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/squeezenet_torch_imagenetClassification.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/tinyBert_tf_sentimentAnalysis.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/resnet50_tf_imagenetClassifier.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/Tutorials/Detr_Object_Detection.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/Tutorials/Deeplabv3_Resnet101_Segmentation.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/Tutorials/Stable_Diffusion.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/Tutorials/snpehelper_manager.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/Tutorials/Sesr_Super_Resolution.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/InputPack/udo_generate.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/HrnetIO.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/MidasIO.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/MobilenetIO.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/ModelIO.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/composer.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/ModelIO_Tutorials/Midas.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/python/model.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/sampleApp/main.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/FFT16_16/dsp/FFT16_16_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/base/dsp/qhci_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/div16/dsp/div16_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/dummy/dsp/dummy_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/gaussian5x5/dsp/gaussian5x5_C_intrinsics.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/gaussian5x5/dsp/gaussian5x5_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/matmul/dsp/matmul_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/rgb2yuv/dsp/rgb2yuv_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Model-Enablement/Model-Conversion-UDO-SELU/selu_cpp_implementation/Selu.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/SNPERuntime.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/dllmain.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/snpehelper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/FFT16_16/cpu/FFT16_16.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/base/cpu/QhciBase.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/div16/cpu/div16.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/dummy/cpu/dummy.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/gaussian5x5/cpu/gaussian5x5.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/matmul/cpu/matmul.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/rgb2yuv/cpu/rgb2yuv.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/cpp/native-lib.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/DETR.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/objectdetectionYoloNas.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/posedetectionYoloNAS.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/InputPack/htpoppackage/qhci/src/qhciInterface.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/CpuCustomOpPackage.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/RandomNormalLikeInterface.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/htp/RandomNormalLike/src/RandomNormalLikeInterface.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/native-lib.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/cpp/native-lib.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/native-lib.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/native-lib.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/native-lib_pre_post.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/InputPack/htpoppackage/qhci/src/ops/InputPack.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/ops/RandomNormalLike.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/htp/RandomNormalLike/src/ops/RandomNormalLike.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/prepare/prepare-native.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/speech_to_image-native.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/src/SSDMobileNetV2_Model.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/src/YOLONAS_Model.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/src/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/src/QnnSampleApp.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/src/objectdetectionYoloNas.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/utils/CPU/CpuBackendUtils.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/QnnSpeechToImage.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/SpeechToImage.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/float16.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Log/AndroidLogger.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/DataUtil.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/IOTensor.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/QnnSpeechToImageUtils.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/DynamicLoadUtil.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/raw_image_to_png.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/LogMel/src/preprocess.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/snpehelper.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/SNPERuntime.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/Utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/include/dsp/HAP_clock_limit_user.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/include/dsp/q6cache.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/FFT16_16/dsp/RIFFT16x16_4_asm.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/FFT16_16/dsp/hexagon_hvx.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/cpp/genie/GenieCommon.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/cpp/genie/GenieDialog.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/dr_wav.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/input_features.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/whisper.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/Model.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/SSDMobileNetV2_Model.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/YOLONAS_Model.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/detokenizer/src/lib.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/tokenizer/src/lib.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/Assistant.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/CircularQueue.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/ChatActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/Message.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/MessageListAdapter.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/MessageType.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/JsonUtils.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/Summarizer.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/java/com/qc/DETR/CameraFragment.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/java/com/qc/DETR/RectangleBox.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/java/com/qc/DETR/FragmentRender.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/java/com/qc/DETR/MainActivity.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/java/com/qc/DETR/SNPEHelper.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qc/objectdetectionYoloNas/CameraFragment.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qc/objectdetectionYoloNas/FragmentRender.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qc/objectdetectionYoloNas/MainActivity.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qc/objectdetectionYoloNas/RectangleBox.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qc/objectdetectionYoloNas/SNPEHelper.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/ModelConstants.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/PrePostProcess.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/Result.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/SNPEActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/SuperResolutionResult.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/SuperResolution.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/BitmapUtility.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/CameraFragment.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/RectangleBox.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/MainActivity.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/SNPEHelper.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/FragmentRender.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/EnhancOps.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/EnhancedResults.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/PrePostProcess.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/Result.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/ModelConstants.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/SNPEActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/test/java/com/example/automatic_speech_recognition/ExampleUnitTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/androidTest/java/com/example/automatic_speech_recognition/ExampleInstrumentedTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/java/com/example/automatic_speech_recognition/ASRHelper.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/java/com/example/automatic_speech_recognition/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/androidTest/java/com/example/automatic_speech_recognition/ExampleInstrumentedTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/java/com/example/automatic_speech_recognition/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/java/com/example/automatic_speech_recognition/TFLiteInference.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/CameraFragment.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/FragmentRender.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/HomeScreenActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/RectangleBox.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/QNNHelper.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/test/java/com/example/automatic_speech_recognition/ExampleUnitTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/tts_manager/TTSManager.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/llm_assistant/Assistant.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/utils/JsonUtils.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/asr/Whisper_ASR.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/test/java/com/qualcomm/qti/sentimentanalysis/ExampleUnitTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/androidTest/java/com/qualcomm/qti/sentimentanalysis/ExampleInstrumentedTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/java/com/qualcomm/qti/sentimentanalysis/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/asr/utils/SimpleAudioRecord.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/asr/utils/TranscriptionListener.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/tokenization/BasicTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/tokenization/CharChecker.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/tokenization/FullTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/tokenization/WordpieceTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ml/FeatureConverter.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ml/Feature.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ml/QaAnswer.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ml/LoadDatasetClient.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ml/QaClient.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ui/DatasetListActivity.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ui/QaActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ui/QuestionAdapter.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/java/com/qualcomm/qti/sentimentanalysis/tokenization/BasicTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/java/com/qualcomm/qti/sentimentanalysis/tokenization/CharChecker.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/java/com/qualcomm/qti/sentimentanalysis/tokenization/WordpieceTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/java/com/qualcomm/qti/sentimentanalysis/tokenization/FullTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/FFT16_16/dsp/rfft16x16_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/div16/dsp/div_integer_denome0_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/div16/dsp/div_fractional_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/div16/dsp/div_integer_signed_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/base/cpu/QhciBase.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/utils/BackendUtils.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/utils/CustomOpUtils.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/QnnSampleApp.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/SampleApp.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/utils/CPU/CpuBackendUtils.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/QnnSpeechToImage.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/SpeechToImage.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/SpeechToImageApp.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/float16.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/whisper.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Log/AndroidLogger.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/DataUtil.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/IOTensor.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/QnnSpeechToImageUtils.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/raw_image_to_png.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/DynamicLoadUtil.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/LogMel/include/preprocess.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-qualcomm-license-headers-exist",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.sh",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          ],
+          "flags": "i"
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/setup.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/setup.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/qhci_api_generator.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "docs/source/conf.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/python_scripts/generate_t_emb_and_empty_tokens.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Model-Enablement/Model-Conversion-Layer-Replacement/generatedModels/getModel.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Model-Enablement/Model-Conversion-Layer-Replacement/class/CustomHardsigmoid.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Model-Enablement/Model-Conversion-Layer-Replacement/class/CustomHardswish.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/scripts/batch_tf_inf.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/scripts/generate_representative_dataset_squadv2.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/scripts/logits_to_F1_score.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/scripts/gen_raw_list.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/scripts/qa_model_gen.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/scripts/gen_raw_list.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/scripts/batch_tf_inf.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/scripts/get_accuracy_score.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/scripts/sa_model_gen.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/scripts/sst2_gen_dataset.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tests/test_pysnpe.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tests/test_targetdevice.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/asset_manager.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/dlc_generator.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/dlc_executor.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/env_setup_checker.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/logger_config.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/pysnpe.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/pysnpe_enums.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/exec_utils.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/bertLarge_tf_semanticSearch.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/detr_onnx_panopticSegmentation.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/esrgan_tflite_imageSuperResolution.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/midasV2_onnx_monocularDepthEstimation.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/multiHeadAttention_onnx_nnModule.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/squeezenet_torch_imagenetClassification.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/tinyBert_tf_sentimentAnalysis.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/resnet50_tf_imagenetClassifier.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/Tutorials/Detr_Object_Detection.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/Tutorials/Deeplabv3_Resnet101_Segmentation.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/Tutorials/Stable_Diffusion.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/Tutorials/snpehelper_manager.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/Tutorials/Sesr_Super_Resolution.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/InputPack/udo_generate.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/HrnetIO.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/MidasIO.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/MobilenetIO.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/ModelIO.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/__init__.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/pysnpe_utils/modelio/composer.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/pysnpe_utils/tutorials/ModelIO_Tutorials/Midas.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/python/model.py",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/sampleApp/main.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/FFT16_16/dsp/FFT16_16_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/base/dsp/qhci_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/div16/dsp/div16_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/dummy/dsp/dummy_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/gaussian5x5/dsp/gaussian5x5_C_intrinsics.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/gaussian5x5/dsp/gaussian5x5_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/matmul/dsp/matmul_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/rgb2yuv/dsp/rgb2yuv_imp.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Model-Enablement/Model-Conversion-UDO-SELU/selu_cpp_implementation/Selu.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/SNPERuntime.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/dllmain.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/snpehelper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/FFT16_16/cpu/FFT16_16.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/base/cpu/QhciBase.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/div16/cpu/div16.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/dummy/cpu/dummy.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/gaussian5x5/cpu/gaussian5x5.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/matmul/cpu/matmul.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/rgb2yuv/cpu/rgb2yuv.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/cpp/native-lib.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/DETR.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/objectdetectionYoloNas.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/posedetectionYoloNAS.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/InputPack/htpoppackage/qhci/src/qhciInterface.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/CpuCustomOpPackage.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/RandomNormalLikeInterface.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/htp/RandomNormalLike/src/RandomNormalLikeInterface.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/native-lib.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/cpp/native-lib.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/native-lib.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/native-lib.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inference_helper.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/native-lib_pre_post.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/InputPack/htpoppackage/qhci/src/ops/InputPack.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/ops/RandomNormalLike.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/htp/RandomNormalLike/src/ops/RandomNormalLike.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/prepare/prepare-native.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/speech_to_image-native.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/src/SSDMobileNetV2_Model.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/src/YOLONAS_Model.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/src/inference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/src/QnnSampleApp.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/src/objectdetectionYoloNas.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/utils/CPU/CpuBackendUtils.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/QnnSpeechToImage.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/SpeechToImage.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/float16.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Log/AndroidLogger.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/DataUtil.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/IOTensor.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/QnnSpeechToImageUtils.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/DynamicLoadUtil.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/raw_image_to_png.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/LogMel/src/preprocess.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/snpehelper.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/SNPERuntime.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/snpe-helper/snpehelper/Utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/include/dsp/HAP_clock_limit_user.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/include/dsp/q6cache.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/FFT16_16/dsp/RIFFT16x16_4_asm.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/FFT16_16/dsp/hexagon_hvx.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/cpp/genie/GenieCommon.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/cpp/genie/GenieDialog.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/dr_wav.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/input_features.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/whisper.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/Model.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/SSDMobileNetV2_Model.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/YOLONAS_Model.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/inference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/resolveDependencies.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/resolveDependencies.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/resolveDependencies.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/resolveDependencies.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/qairt_docker/run_qairt_docker.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Tools/qairt_docker/setup_env.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/build_android.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/build_hexagon.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/flash.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/scripts/resolveDependencies.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/scripts/resolveDependencies.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Model-Enablement/Model-Conversion-UDO-SELU/scripts/bash_fun_device.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/scripts/fetch_snpe_assets.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/scripts/fetch_snpe_assets.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/resolveDependencies.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/resolveDependencies.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/InputPack/run_qnn_2_12.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/setupenv.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/validation_set/dOut/snpe-bench_cmds.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/compile.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/htp/RandomNormalLike/compile.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/validation_set/dOut/results/latest_results/timing/DSP_ub_float/Run1/snpe-bench_cmds.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/detokenizer/src/lib.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/tokenizer/src/lib.rs",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/Assistant.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/CircularQueue.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/ChatActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/Message.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/MessageListAdapter.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/MessageType.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/JsonUtils.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/AI-Assistant/app/src/main/java/com/example/ai_assistant_v1/Summarizer.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/java/com/qc/DETR/CameraFragment.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/java/com/qc/DETR/RectangleBox.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/java/com/qc/DETR/FragmentRender.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/java/com/qc/DETR/MainActivity.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/java/com/qc/DETR/SNPEHelper.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qc/objectdetectionYoloNas/CameraFragment.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qc/objectdetectionYoloNas/FragmentRender.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qc/objectdetectionYoloNas/MainActivity.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qc/objectdetectionYoloNas/RectangleBox.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qc/objectdetectionYoloNas/SNPEHelper.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/ModelConstants.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/PrePostProcess.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/Result.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/SNPEActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/SuperResolutionResult.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution2-ImageSuperResolution/superresolution/src/main/java/com/qcom/imagesuperres/SuperResolution.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/BitmapUtility.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/CameraFragment.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/RectangleBox.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/MainActivity.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/SNPEHelper.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/java/com/qc/posedetectionYoloNAS/FragmentRender.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/EnhancOps.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/EnhancedResults.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/PrePostProcess.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/Result.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/ModelConstants.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution3-ImageEnhancement/enhancement/src/main/java/com/qcom/enhancement/SNPEActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/test/java/com/example/automatic_speech_recognition/ExampleUnitTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/androidTest/java/com/example/automatic_speech_recognition/ExampleInstrumentedTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/java/com/example/automatic_speech_recognition/ASRHelper.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/java/com/example/automatic_speech_recognition/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/androidTest/java/com/example/automatic_speech_recognition/ExampleInstrumentedTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/java/com/example/automatic_speech_recognition/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/java/com/example/automatic_speech_recognition/TFLiteInference.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/CameraFragment.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/FragmentRender.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/HomeScreenActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/RectangleBox.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/java/com/qcom/aistack_objdetect/QNNHelper.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/test/java/com/example/automatic_speech_recognition/ExampleUnitTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/tts_manager/TTSManager.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/llm_assistant/Assistant.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/utils/JsonUtils.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/asr/Whisper_ASR.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/test/java/com/qualcomm/qti/sentimentanalysis/ExampleUnitTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/androidTest/java/com/qualcomm/qti/sentimentanalysis/ExampleInstrumentedTest.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/java/com/qualcomm/qti/sentimentanalysis/MainActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/asr/utils/SimpleAudioRecord.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/ASR-LLM-TTS/sample_app/app/src/main/java/com/example/asr_llm_tts/asr/utils/TranscriptionListener.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/tokenization/BasicTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/tokenization/CharChecker.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/tokenization/FullTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/tokenization/WordpieceTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ml/FeatureConverter.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ml/Feature.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ml/QaAnswer.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ml/LoadDatasetClient.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ml/QaClient.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ui/DatasetListActivity.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ui/QaActivity.java",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/java/com/qualcomm/qti/qa/ui/QuestionAdapter.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/java/com/qualcomm/qti/sentimentanalysis/tokenization/BasicTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/java/com/qualcomm/qti/sentimentanalysis/tokenization/CharChecker.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/java/com/qualcomm/qti/sentimentanalysis/tokenization/WordpieceTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/java/com/qualcomm/qti/sentimentanalysis/tokenization/FullTokenizer.java",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/FFT16_16/dsp/rfft16x16_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/div16/dsp/div_integer_denome0_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/div16/dsp/div_fractional_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/div16/dsp/div_integer_signed_asm.S",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/hvx_cv/src/base/cpu/QhciBase.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/utils/BackendUtils.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/utils/CustomOpUtils.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/QnnSampleApp.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/QNN/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/include/SampleApp.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-DETR/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution1-ObjectDetection-YoloNas/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/VisionSolution4-PoseEstimation/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "QHCI/qnn_udo/RandomNormalLike/cpu/RandomNormalLike/src/utils/CPU/CpuBackendUtils.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Examples/Python-ASR-wav2vec2/automatic_speech_recognition_android_app/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution1-QuestionAnswering/QuestionAnswering/bert/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/QnnSpeechToImage.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/SpeechToImage.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/SpeechToImageApp.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/float16.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/whisper.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution2-SentimentAnalysis/SentimentAnalysis/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/CheckRuntime.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/CreateUserBuffer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/LoadInputTensor.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/LoadContainer.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/SetBuilderOptions.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "Solutions/NLPSolution3-AutomaticSpeechRecognition-Whisper/Android_App_Whisper/app/src/main/cpp/inc/hpp/Util.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Log/AndroidLogger.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/DataUtil.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/IOTensor.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/QnnSpeechToImageUtils.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/raw_image_to_png.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/Utils/DynamicLoadUtil.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "GenAI-Solutions/speech_to_image/speech_to_image/app/src/main/cpp/speech_to_image/src/LogMel/include/preprocess.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-issue-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "ISSUE_TEMPLATE*",
+            "ISSUE_TEMPLATE/**",
+            ".github/ISSUE_TEMPLATE*",
+            ".github/ISSUE_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "ISSUE_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": "ISSUE_TEMPLATE/**"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/ISSUE_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/ISSUE_TEMPLATE/**"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-pull-request-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "PULL_REQUEST_TEMPLATE*",
+            "PULL_REQUEST_TEMPLATE/**",
+            ".github/PULL_REQUEST_TEMPLATE*",
+            ".github/PULL_REQUEST_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "PULL_REQUEST_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": "PULL_REQUEST_TEMPLATE/**"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/PULL_REQUEST_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/PULL_REQUEST_TEMPLATE/**"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "javascript-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=javascript"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "package.json"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=javascript\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "ruby-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=ruby"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Gemfile"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=ruby\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "java-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=java"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "pom.xml",
+            "build.xml",
+            "build.gradle"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=java\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "python-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=python"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "setup.py",
+            "requirements.txt"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=python\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "rust-package-metadata-exists",
+        "level": "error",
+        "where": [
+          "language=rust"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/Cargo.toml",
+            "**/Cargo.lock"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=rust\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "objective-c-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=objective-c"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Cartfile",
+            "Podfile",
+            "**/*.podspec"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=objective-c\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "swift-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=swift"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Package.swift"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=swift\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "erlang-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=erlang"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "rebar.config"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=erlang\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "elixir-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=elixir"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "mix.exs"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=elixir\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "license-detectable-by-licensee",
+        "level": "off",
+        "where": [
+          "license=*"
+        ],
+        "ruleType": "license-detectable-by-licensee",
+        "ruleConfig": {}
+      },
+      "runMessage": "ignored because level is \"off\"",
+      "status": "IGNORED"
+    }
+  ],
+  "targets": {
+    "language": {
+      "message": "Linguist not installed",
+      "targets": [],
+      "passed": false
+    },
+    "license": {
+      "message": "Licensee not installed",
+      "targets": [],
+      "passed": false
+    },
+    "packager": {
+      "targets": [],
+      "passed": true
+    }
+  }
+}

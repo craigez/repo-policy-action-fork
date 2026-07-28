@@ -1,0 +1,80 @@
+{
+  "repo": "qualcomm-linux/trusted-firmware-a",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: license.rst"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: readme.rst"
+    },
+    "contributing-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CONTRIB*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpis26s2m9/trusted-firmware-a"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CODEOFCONDUCT*', '{docs/,.github/,}CODE-OF-CONDUCT*', '{docs/,.github/,}CODE_OF_CONDUCT*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpis26s2m9/trusted-firmware-a"
+    },
+    "changelog-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: changelog.yaml"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['README*'] \u2014 skipped."
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found directory: tools/cot_dt2c/tests"
+    },
+    "integrates-with-ci": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['.gitlab-ci.yml', '.travis.yml', 'appveyor.yml', '.appveyor.yml', 'circle.yml', '.circleci/config.yml', 'Jenkinsfile', '.drone.yml', '.github/workflows/*', 'azure-pipelines.yml'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpis26s2m9/trusted-firmware-a"
+    },
+    "source-license-headers-exist": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without' not found in include/lib/dice/dice.h"
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": false,
+      "level": "warning",
+      "message": "Pattern '(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\\\(c\\\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\\\s)*)+ The Linux Foundation' not found in .commitlintrc.js"
+    },
+    "github-issue-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['ISSUE_TEMPLATE*', 'ISSUE_TEMPLATE/**', '.github/ISSUE_TEMPLATE*', '.github/ISSUE_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpis26s2m9/trusted-firmware-a"
+    },
+    "github-pull-request-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['PULL_REQUEST_TEMPLATE*', 'PULL_REQUEST_TEMPLATE/**', '.github/PULL_REQUEST_TEMPLATE*', '.github/PULL_REQUEST_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpis26s2m9/trusted-firmware-a"
+    },
+    "javascript-package-metadata-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: package.json"
+    },
+    "python-package-metadata-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['setup.py', 'requirements.txt'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpis26s2m9/trusted-firmware-a"
+    }
+  }
+}

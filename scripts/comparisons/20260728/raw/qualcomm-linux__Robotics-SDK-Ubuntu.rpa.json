@@ -1,0 +1,70 @@
+{
+  "repo": "qualcomm-linux/Robotics-SDK-Ubuntu",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: LICENSE"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: README.md"
+    },
+    "contributing-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CONTRIBUTING.md"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CODE-OF-CONDUCT.md"
+    },
+    "changelog-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CHANGELOG.md"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 1 matched file(s)."
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No directory matching ['**/test*', '**/specs', '**/*test*'] found under /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp3ld28ft9/Robotics-SDK-Ubuntu"
+    },
+    "integrates-with-ci": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/workflows/qcom-preflight-checks.yml"
+    },
+    "source-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['**/*.py', '**/*.js', '**/*.c', '**/*.cc', '**/*.cpp', '**/*.h', '**/*.ts', '**/*.rs', '**/*.java', '**/*.go', '**/*.bbclass', '**/*.S', '**/*.hpp'] \u2014 skipped."
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 2 matched file(s)."
+    },
+    "github-issue-template-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    "github-pull-request-template-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/PULL_REQUEST_TEMPLATE/pr_template.md"
+    }
+  }
+}

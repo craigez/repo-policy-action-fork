@@ -1,0 +1,70 @@
+{
+  "repo": "qualcomm/qcom-memory-dump-collector",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: LICENSE.txt"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: README.md"
+    },
+    "contributing-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CONTRIBUTING.md"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CODE-OF-CONDUCT.md"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpx_gnws5v/qcom-memory-dump-collector"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 1 matched file(s)."
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No directory matching ['**/test*', '**/specs', '**/*test*'] found under /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpx_gnws5v/qcom-memory-dump-collector"
+    },
+    "integrates-with-ci": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/workflows/qcom-preflight-checks.yml"
+    },
+    "source-license-headers-exist": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'Copyright(\\\\s)*(\\\\(c\\\\)|\u00a9)?' not found in src/external/kLogger/Version.h"
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": false,
+      "level": "warning",
+      "message": "Pattern '(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\\\(c\\\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\\\s)*)+ The Linux Foundation' not found in src/external/kLogger/Version.h"
+    },
+    "github-issue-template-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    "github-pull-request-template-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/PULL_REQUEST_TEMPLATE/pr_template.md"
+    }
+  }
+}

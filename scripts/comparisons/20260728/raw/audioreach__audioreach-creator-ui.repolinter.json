@@ -1,0 +1,4113 @@
+{
+  "params": {
+    "targetDir": "/var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpazvc4m0q/audioreach-creator-ui",
+    "filterPaths": [],
+    "rulesetPath": "https://raw.githubusercontent.com/qualcomm/.github/main/repolint.json",
+    "ruleset": {
+      "$schema": "https://raw.githubusercontent.com/todogroup/repolinter/master/rulesets/schema.json",
+      "version": 2,
+      "axioms": {
+        "linguist": "language",
+        "licensee": "license",
+        "packagers": "packager"
+      },
+      "rules": {
+        "license-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "LICENSE*",
+                "COPYING*",
+                "NOTICE*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "README*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "contributing-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CONTRIB*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "code-of-conduct-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CODEOFCONDUCT*",
+                "{docs/,.github/,}CODE-OF-CONDUCT*",
+                "{docs/,.github/,}CODE_OF_CONDUCT*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "changelog-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "CHANGELOG*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-references-license": {
+          "level": "error",
+          "rule": {
+            "type": "file-contents",
+            "options": {
+              "globsAll": [
+                "README*"
+              ],
+              "content": "license|notice",
+              "flags": "i"
+            }
+          }
+        },
+        "binaries-not-present": {
+          "level": "warning",
+          "rule": {
+            "type": "file-type-exclusion",
+            "options": {
+              "type": [
+                "**/*.exe",
+                "**/*.dll",
+                "**/*.o",
+                "**/*.so",
+                "!node_modules/**"
+              ]
+            }
+          }
+        },
+        "test-directory-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "directory-existence",
+            "options": {
+              "globsAny": [
+                "**/test*",
+                "**/specs",
+                "**/*test*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "integrates-with-ci": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                ".gitlab-ci.yml",
+                ".travis.yml",
+                "appveyor.yml",
+                ".appveyor.yml",
+                "circle.yml",
+                ".circleci/config.yml",
+                "Jenkinsfile",
+                ".drone.yml",
+                ".github/workflows/*",
+                "azure-pipelines.yml"
+              ]
+            }
+          }
+        },
+        "source-license-headers-exist": {
+          "level": "error",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+                "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+              ],
+              "flags": "i",
+              "succeed-on-non-existent": true
+            }
+          }
+        },
+        "source-qualcomm-license-headers-exist": {
+          "level": "warning",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.sh",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+              ],
+              "flags": "i"
+            }
+          }
+        },
+        "github-issue-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "ISSUE_TEMPLATE*",
+                "ISSUE_TEMPLATE/**",
+                ".github/ISSUE_TEMPLATE*",
+                ".github/ISSUE_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "github-pull-request-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "PULL_REQUEST_TEMPLATE*",
+                "PULL_REQUEST_TEMPLATE/**",
+                ".github/PULL_REQUEST_TEMPLATE*",
+                ".github/PULL_REQUEST_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "javascript-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=javascript"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "package.json"
+              ]
+            }
+          }
+        },
+        "ruby-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=ruby"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Gemfile"
+              ]
+            }
+          }
+        },
+        "java-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=java"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "pom.xml",
+                "build.xml",
+                "build.gradle"
+              ]
+            }
+          }
+        },
+        "python-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=python"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "setup.py",
+                "requirements.txt"
+              ]
+            }
+          }
+        },
+        "rust-package-metadata-exists": {
+          "level": "error",
+          "where": [
+            "language=rust"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "**/Cargo.toml",
+                "**/Cargo.lock"
+              ]
+            }
+          }
+        },
+        "objective-c-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=objective-c"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Cartfile",
+                "Podfile",
+                "**/*.podspec"
+              ]
+            }
+          }
+        },
+        "swift-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=swift"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Package.swift"
+              ]
+            }
+          }
+        },
+        "erlang-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=erlang"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "rebar.config"
+              ]
+            }
+          }
+        },
+        "elixir-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=elixir"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "mix.exs"
+              ]
+            }
+          }
+        },
+        "license-detectable-by-licensee": {
+          "level": "off",
+          "where": [
+            "license=*"
+          ],
+          "rule": {
+            "type": "license-detectable-by-licensee",
+            "options": {}
+          }
+        }
+      }
+    }
+  },
+  "passed": false,
+  "errored": false,
+  "results": [
+    {
+      "ruleInfo": {
+        "name": "license-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "LICENSE*",
+            "COPYING*",
+            "NOTICE*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "LICENSE.txt",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "README*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "contributing-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CONTRIB*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "CONTRIBUTING.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "code-of-conduct-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CODEOFCONDUCT*",
+            "{docs/,.github/,}CODE-OF-CONDUCT*",
+            "{docs/,.github/,}CODE_OF_CONDUCT*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "CODE-OF-CONDUCT.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "changelog-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "CHANGELOG*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "CHANGELOG*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-references-license",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-contents",
+        "ruleConfig": {
+          "globsAll": [
+            "README*"
+          ],
+          "content": "license|notice",
+          "flags": "i"
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Contains license|notice"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "binaries-not-present",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-type-exclusion",
+        "ruleConfig": {
+          "type": [
+            "**/*.exe",
+            "**/*.dll",
+            "**/*.o",
+            "**/*.so",
+            "!node_modules/**"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "message": "Excluded file type doesn't exist",
+        "targets": [
+          {
+            "passed": true,
+            "pattern": [
+              "**/*.exe",
+              "**/*.dll",
+              "**/*.o",
+              "**/*.so",
+              "!node_modules/**"
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "test-directory-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "directory-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/test*",
+            "**/specs",
+            "**/*test*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "packages/electron-app/test-results",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "integrates-with-ci",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            ".gitlab-ci.yml",
+            ".travis.yml",
+            "appveyor.yml",
+            ".appveyor.yml",
+            "circle.yml",
+            ".circleci/config.yml",
+            "Jenkinsfile",
+            ".drone.yml",
+            ".github/workflows/*",
+            "azure-pipelines.yml"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "Jenkinsfile",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-license-headers-exist",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+            "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          ],
+          "flags": "i",
+          "succeed-on-non-existent": true
+        }
+      },
+      "status": "NOT_PASSED_ERROR",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": false,
+            "path": "eslint.config.js",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "prettier.config.js",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/postcss.config.js",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tailwind.config.js",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/electron-app/electron-builder.config.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/playwright.config.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/api-utils/vite.config.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/vite.config.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/electron-app/scripts/build.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/scripts/remove-binaries.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/scripts/start-electron.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/src/main.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/src/preload.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/src/project-file-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/api-utils/src/api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/api-utils/src/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/api-utils/src/project-file-api.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/test-setup.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/vite-env.d.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/tests/tests/home.spec.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/tests/utils/electron.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/electron-app/tests/utils/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/data/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/api-issues/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/key-configurator/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/graph/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/key-definitions/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/module-definitions/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/project/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/project-edit-session/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/usecases/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/subgraph-definitions/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/device-list/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/device-operations/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/log-view/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/module-list/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/open-file/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/panel-collapse/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/project-operations/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/recent-projects/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/search-component/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/subgraph-list/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/subsystem-browser/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/usecase-selection/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/api-response.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/electron-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/http-client.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/api/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/logging-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/logging.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/register-client.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/config/config-manager.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/config/user-preferences-types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/config/utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/tree-view-ui-state.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/filter-utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/store/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/panel-types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-layout.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-context.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-registry.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-entities.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/use-project-layout-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-registry.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/utils/color-utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/utils/converter-utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/utils/deep-equality.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/utils/search-utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/editor-shell/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/configurator-panel/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/key-configurator-panel/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/use-index-switch-dialog.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/session-workspace/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/start-page/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/project-layout/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/properties-panel/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/graph-designer/graph-data-slice.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/graph-designer/module-data-slice.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/search-component/graph-search.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/public-api.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/shared/config/config-manager.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/shared/api/http-client.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/shared/store/application-store.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/api-issues/model/api-issue.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-configurator/api/module-instance-config-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/graph/model/graph.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-configurator/model/module-instance-config.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-configurator/model/subgraph-config.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-configurator/model/subsystem-config.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-definitions/api/key-definition-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-definitions/model/key-definition.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/module-definitions/api/module-definition-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/api/projects-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/module-definitions/model/module-definition.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/model/project-info.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/model/project.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/model/session.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/project/services/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/services/project-image-service.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/api/spf-module-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/services/project-service.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/model/spf-module-cal-data.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/model/spf-module-tag-data.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/model/spf-module-common.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/model/spf-module.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project-edit-session/model/commit-changes.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project-edit-session/model/create-usecases.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project-edit-session/model/discard-changes.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project-edit-session/model/stage-changes.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/api/usecases-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/lib/usecase-format.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/model/usecase-component.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/model/usecase.mapper.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/model/usecase.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/model/usecase.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/model/usecase-utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/subgraph-definitions/api/subgraph-definition-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/subgraph-definitions/model/subgraph-definition.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/device-list/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/device-operations/hooks/use-device-manager.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/model/tree-view-data.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/model/types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/build-dirty-items.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/build-length-formula-map.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/build-match-sets.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/compute-bitfield-parent-value.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/element-key.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/find-element-by-key.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/find-option-name.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/is-bit-field.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/is-boolean-switch.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/is-policy-visible.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/item-ids-from-paths.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/messages.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/patch-elements.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/parse-q-format-n.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/seed-from-data.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/parse-hex-or-dec.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/to-hex-string.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-graph-designer.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-key-configurator.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-module-list.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-subgraph-list.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-subsystem-browser.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-validation-results.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/lib/subsystem-tree.utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/lib/to-user-friendly-error.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/edit-session-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/graph-data-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/graph-designer-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/graph-designer-store-context.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/key-config-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/module-data-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/module-list-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/subgraph-list-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/visualizer-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/calibration-keys-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/configurator-item.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/model/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/key-configurator-store-manager.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/module-instance-coordinator.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/module-tag-keys-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/key-configurator-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/subgraph-config-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/subsystem-config-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/subgraph-configurator-view/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/subsystem-configurator-view/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/log-view/hooks/use-log-view.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/log-view/lib/filter-logs.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/log-view/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/log-view/model/log-view.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/module-list/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/module-list/model/module-list-types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/open-file/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/panel-collapse/model/panel-collapse-manager.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/panel-collapse/model/panel-collapse.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/panel-collapse/model/use-panel-collapse-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/project-operations/hooks/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/project-operations/hooks/use-project-lifecycle.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/project-operations/hooks/use-project-saver.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/project-operations/model/types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/recent-projects/hooks/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/recent-projects/hooks/use-recent-projects.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/recent-projects/model/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/recent-projects/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/search-component/model/search-component.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/search-component/ui/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/subgraph-list/model/subgraph-list-types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-selection/hooks/use-usecase-search.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-selection/hooks/use-workflow-usecase-data.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/subsystem-browser/model/subsystem-browser.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-selection/lib/search-filter.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/subsystem-browser/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-selection/model/usecase-selection-control-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/model/use-node-highlight.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/model/usecase-visualizer-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/model/visualizer.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/capture-screenshot.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/edge-stroke.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/node-dimensions.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/port-anchors.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/to-reactflow.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/recalculate-parent-sizes.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/port-geometry.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/validation-result-view/lib/filter-validation-results.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/validation-result-view/lib/format-validation-result.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/validation-result-view/model/validation-result.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/config/hooks/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/config/hooks/use-user-preferences.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/logger/logger-events.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/logger/logger.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/lib/logger/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/lib/side-nav/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/side-nav/use-keyboard-shortcuts.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/side-nav/use-register-side-nav.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/side-nav/use-side-nav.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store-slices/app-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store-slices/project-group-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store-slices/recent-projects-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store-slices/backend-connection-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store-slices/session-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-slices/exclusive-lock-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-slices/logs-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-slices/project-metadata-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-slices/user-preferences-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-slices/tabs-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/panel-layout-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/properties-view-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/panel-tab-registry-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/validation-result-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/usecase-selection-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/search-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/subsystem-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/editor-shell/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/configurator-panel/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/apply-collapses.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/apply-port-visibility.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/apply-position-overrides.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/graph-search.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/level-view-adapter.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/level-view-layout.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/node-id.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/key-configurator-panel/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/lib/cal-data-adapter.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/lib/key-value-label.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/lib/param-tree-view-adapter.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/lib/tag-data-adapter.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/lib/sort-by-key-value.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/session-workspace/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/start-page/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/properties-panel/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/entities/project/api/projects-api.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/build-dirty-items.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/compute-bitfield-parent-value.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/element-key.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/is-boolean-switch.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/item-ids-from-paths.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/parse-hex-or-dec.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/is-policy-visible.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/patch-elements.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/graph-designer/lib/to-user-friendly-error.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/key-configurator/store/key-configurator-store-manager.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/key-configurator/store/key-configurator-store.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/panel-collapse/model/panel-collapse-manager.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/panel-collapse/model/use-panel-collapse-store.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/project-operations/hooks/use-project-saver.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-selection/hooks/use-workflow-usecase-data.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-selection/lib/search-filter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-selection/model/usecase-selection-control-store.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/model/store.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/model/types.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/capture-screenshot.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/level-view-adapter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/node-dimensions.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/port-anchors.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/recalculate-parent-sizes.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/to-reactflow.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/module-data-tab/lib/param-tree-view-adapter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/module-data-tab/lib/sort-by-key-value.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/module-data-tab/lib/tag-data-adapter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/module-data-tab/lib/cal-data-adapter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/graph-designer/lib/apply-collapses.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/graph-designer/lib/apply-port-visibility.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/graph-designer/lib/level-view-adapter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/graph-designer/lib/level-view-layout.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/shared/store/global-store-slices/project-group-slice.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/subgraph-configurator-view/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/subgraph-configurator-view/ui/sgkv.mapper.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/subgraph-configurator-view/ui/subgraph-config.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/subsystem-configurator-view/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/subsystem-configurator-view/ui/subsystem-config.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/calibration-keys/calibration-keys-config.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/calibration-keys/ckv.mapper.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/calibration-keys/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/module-tag-keys/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/module-tag-keys/module-tag-keys-config.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/module-tag-keys/tag-info.mapper.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-qualcomm-license-headers-exist",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.sh",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          ],
+          "flags": "i"
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": false,
+            "path": "eslint.config.js",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "prettier.config.js",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/postcss.config.js",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tailwind.config.js",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/electron-app/installer/install.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/electron-app/electron-builder.config.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/playwright.config.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/api-utils/vite.config.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/vite.config.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/electron-app/scripts/build.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/scripts/remove-binaries.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/scripts/start-electron.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/src/main.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/src/preload.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/src/project-file-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/api-utils/src/api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/api-utils/src/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/api-utils/src/project-file-api.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/test-setup.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/vite-env.d.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/tests/tests/home.spec.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/electron-app/tests/utils/electron.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/electron-app/tests/utils/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/data/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/api-issues/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/key-configurator/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/graph/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/key-definitions/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/module-definitions/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/project/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/project-edit-session/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/usecases/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/subgraph-definitions/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/device-list/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/device-operations/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/log-view/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/module-list/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/open-file/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/panel-collapse/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/project-operations/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/recent-projects/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/search-component/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/subgraph-list/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/subsystem-browser/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/usecase-selection/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/api-response.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/electron-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/http-client.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/api/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/logging-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/logging.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/register-client.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/api/utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/config/config-manager.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/config/user-preferences-types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/config/utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/tree-view-ui-state.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/filter-utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/store/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/panel-types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-layout.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-context.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-registry.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-entities.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/use-project-layout-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-registry.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/utils/color-utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/utils/converter-utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/utils/deep-equality.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/utils/search-utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/editor-shell/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/configurator-panel/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/key-configurator-panel/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/use-index-switch-dialog.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/session-workspace/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/start-page/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/project-layout/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/properties-panel/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/graph-designer/graph-data-slice.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/graph-designer/module-data-slice.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/search-component/graph-search.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/public-api.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/shared/config/config-manager.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/shared/api/http-client.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/shared/store/application-store.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/api-issues/model/api-issue.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-configurator/api/module-instance-config-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/graph/model/graph.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-configurator/model/module-instance-config.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-configurator/model/subgraph-config.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-configurator/model/subsystem-config.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-definitions/api/key-definition-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/key-definitions/model/key-definition.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/module-definitions/api/module-definition-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/api/projects-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/module-definitions/model/module-definition.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/model/project-info.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/model/project.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/model/session.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/entities/project/services/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/services/project-image-service.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/api/spf-module-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project/services/project-service.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/model/spf-module-cal-data.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/model/spf-module-tag-data.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/model/spf-module-common.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/spf-module-data/model/spf-module.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project-edit-session/model/commit-changes.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project-edit-session/model/create-usecases.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project-edit-session/model/discard-changes.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/project-edit-session/model/stage-changes.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/api/usecases-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/lib/usecase-format.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/model/usecase-component.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/model/usecase.mapper.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/model/usecase.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/model/usecase.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/usecases/model/usecase-utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/subgraph-definitions/api/subgraph-definition-api.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/entities/subgraph-definitions/model/subgraph-definition.dto.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/device-list/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/device-operations/hooks/use-device-manager.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/model/tree-view-data.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/model/types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/build-dirty-items.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/build-length-formula-map.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/build-match-sets.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/compute-bitfield-parent-value.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/element-key.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/find-element-by-key.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/find-option-name.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/is-bit-field.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/is-boolean-switch.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/is-policy-visible.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/item-ids-from-paths.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/messages.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/patch-elements.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/parse-q-format-n.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/seed-from-data.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/parse-hex-or-dec.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/generic-tree-view/lib/to-hex-string.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-graph-designer.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-key-configurator.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-module-list.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-subgraph-list.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-subsystem-browser.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/hooks/use-validation-results.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/lib/subsystem-tree.utils.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/lib/to-user-friendly-error.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/edit-session-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/graph-data-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/graph-designer-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/graph-designer-store-context.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/key-config-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/module-data-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/module-list-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/subgraph-list-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/graph-designer/model/visualizer-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/calibration-keys-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/configurator-item.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/model/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/key-configurator-store-manager.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/module-instance-coordinator.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/module-tag-keys-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/key-configurator-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/subgraph-config-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/model/subsystem-config-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/subgraph-configurator-view/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/subsystem-configurator-view/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/log-view/hooks/use-log-view.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/log-view/lib/filter-logs.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/log-view/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/log-view/model/log-view.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/module-list/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/module-list/model/module-list-types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/open-file/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/panel-collapse/model/panel-collapse-manager.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/panel-collapse/model/panel-collapse.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/panel-collapse/model/use-panel-collapse-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/project-operations/hooks/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/project-operations/hooks/use-project-lifecycle.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/project-operations/hooks/use-project-saver.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/project-operations/model/types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/recent-projects/hooks/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/recent-projects/hooks/use-recent-projects.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/recent-projects/model/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/recent-projects/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/search-component/model/search-component.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/search-component/ui/index.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/subgraph-list/model/subgraph-list-types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-selection/hooks/use-usecase-search.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-selection/hooks/use-workflow-usecase-data.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/subsystem-browser/model/subsystem-browser.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-selection/lib/search-filter.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/subsystem-browser/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-selection/model/usecase-selection-control-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/model/use-node-highlight.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/model/usecase-visualizer-store.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/model/visualizer.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/capture-screenshot.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/edge-stroke.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/node-dimensions.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/port-anchors.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/to-reactflow.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/recalculate-parent-sizes.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/usecase-visualizer/lib/port-geometry.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/validation-result-view/lib/filter-validation-results.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/validation-result-view/lib/format-validation-result.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/validation-result-view/model/validation-result.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/config/hooks/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/config/hooks/use-user-preferences.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/logger/logger-events.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/logger/logger.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/lib/logger/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/shared/lib/side-nav/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/side-nav/use-keyboard-shortcuts.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/side-nav/use-register-side-nav.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/lib/side-nav/use-side-nav.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store-slices/app-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store-slices/project-group-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store-slices/recent-projects-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store-slices/backend-connection-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/global-store-slices/session-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-slices/exclusive-lock-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-slices/logs-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-slices/project-metadata-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-slices/user-preferences-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/project-store-slices/tabs-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/panel-layout-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/properties-view-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/panel-tab-registry-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/validation-result-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/usecase-selection-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/search-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/shared/store/tab-store-slices/subsystem-slice.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/editor-shell/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/configurator-panel/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/apply-collapses.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/apply-port-visibility.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/apply-position-overrides.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/graph-search.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/level-view-adapter.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/level-view-layout.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/graph-designer/lib/node-id.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/key-configurator-panel/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/lib/cal-data-adapter.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/lib/key-value-label.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/lib/param-tree-view-adapter.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/lib/tag-data-adapter.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/widgets/module-data-tab/lib/sort-by-key-value.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/session-workspace/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/start-page/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/widgets/properties-panel/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/entities/project/api/projects-api.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/build-dirty-items.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/compute-bitfield-parent-value.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/element-key.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/is-boolean-switch.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/item-ids-from-paths.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/parse-hex-or-dec.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/is-policy-visible.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/generic-tree-view/lib/patch-elements.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/graph-designer/lib/to-user-friendly-error.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/key-configurator/store/key-configurator-store-manager.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/key-configurator/store/key-configurator-store.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/panel-collapse/model/panel-collapse-manager.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/panel-collapse/model/use-panel-collapse-store.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/project-operations/hooks/use-project-saver.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-selection/hooks/use-workflow-usecase-data.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-selection/lib/search-filter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-selection/model/usecase-selection-control-store.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/model/store.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/model/types.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/capture-screenshot.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/level-view-adapter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/node-dimensions.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/port-anchors.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/recalculate-parent-sizes.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/features/usecase-visualizer/lib/to-reactflow.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/module-data-tab/lib/param-tree-view-adapter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/module-data-tab/lib/sort-by-key-value.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/module-data-tab/lib/tag-data-adapter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/module-data-tab/lib/cal-data-adapter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/graph-designer/lib/apply-collapses.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/graph-designer/lib/apply-port-visibility.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/graph-designer/lib/level-view-adapter.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/widgets/graph-designer/lib/level-view-layout.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/tests/shared/store/global-store-slices/project-group-slice.test.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/subgraph-configurator-view/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/subgraph-configurator-view/ui/sgkv.mapper.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/subgraph-configurator-view/ui/subgraph-config.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/subsystem-configurator-view/ui/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/subsystem-configurator-view/ui/subsystem-config.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/calibration-keys/calibration-keys-config.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/calibration-keys/ckv.mapper.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/calibration-keys/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/module-tag-keys/index.ts",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/module-tag-keys/module-tag-keys-config.types.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "packages/react-app/src/features/key-configurator/module-configurator-view/ui/module-tag-keys/tag-info.mapper.ts",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-issue-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "ISSUE_TEMPLATE*",
+            "ISSUE_TEMPLATE/**",
+            ".github/ISSUE_TEMPLATE*",
+            ".github/ISSUE_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-pull-request-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "PULL_REQUEST_TEMPLATE*",
+            "PULL_REQUEST_TEMPLATE/**",
+            ".github/PULL_REQUEST_TEMPLATE*",
+            ".github/PULL_REQUEST_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": ".github/PULL_REQUEST_TEMPLATE/pr_template.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "javascript-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=javascript"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "package.json"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=javascript\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "ruby-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=ruby"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Gemfile"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=ruby\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "java-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=java"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "pom.xml",
+            "build.xml",
+            "build.gradle"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=java\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "python-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=python"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "setup.py",
+            "requirements.txt"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=python\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "rust-package-metadata-exists",
+        "level": "error",
+        "where": [
+          "language=rust"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/Cargo.toml",
+            "**/Cargo.lock"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=rust\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "objective-c-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=objective-c"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Cartfile",
+            "Podfile",
+            "**/*.podspec"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=objective-c\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "swift-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=swift"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Package.swift"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=swift\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "erlang-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=erlang"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "rebar.config"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=erlang\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "elixir-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=elixir"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "mix.exs"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=elixir\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "license-detectable-by-licensee",
+        "level": "off",
+        "where": [
+          "license=*"
+        ],
+        "ruleType": "license-detectable-by-licensee",
+        "ruleConfig": {}
+      },
+      "runMessage": "ignored because level is \"off\"",
+      "status": "IGNORED"
+    }
+  ],
+  "targets": {
+    "language": {
+      "message": "Linguist not installed",
+      "targets": [],
+      "passed": false
+    },
+    "license": {
+      "message": "Licensee not installed",
+      "targets": [],
+      "passed": false
+    },
+    "packager": {
+      "targets": [
+        {
+          "passed": true,
+          "path": "npm"
+        }
+      ],
+      "passed": true
+    }
+  }
+}

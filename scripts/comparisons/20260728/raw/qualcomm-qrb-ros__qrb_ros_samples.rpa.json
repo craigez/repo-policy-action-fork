@@ -1,0 +1,75 @@
+{
+  "repo": "qualcomm-qrb-ros/qrb_ros_samples",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: LICENSE"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: README.md"
+    },
+    "contributing-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CONTRIBUTING.md"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CODE-OF-CONDUCT.md"
+    },
+    "changelog-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CHANGELOG.md"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 1 matched file(s)."
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found directory: ai_vision/sample_face_detection/test"
+    },
+    "integrates-with-ci": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/workflows/commit-lint.yml"
+    },
+    "source-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 165 matched file(s)."
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": false,
+      "level": "warning",
+      "message": "Pattern '(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\\\(c\\\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\\\s)*)+ The Linux Foundation' not found in ai_vision/sample_face_detection/sample_face_detection/draw.py"
+    },
+    "github-issue-template-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/ISSUE_TEMPLATE/bug_report.yaml"
+    },
+    "github-pull-request-template-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/PULL_REQUEST_TEMPLATE/pull_request_template.md"
+    },
+    "python-package-metadata-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['setup.py', 'requirements.txt'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpe2pd1t3q/qrb_ros_samples"
+    }
+  }
+}

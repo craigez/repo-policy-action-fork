@@ -1,0 +1,75 @@
+{
+  "repo": "quic/Pose-Detection-with-HRPoseNet",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: LICENSE.txt"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: README.md"
+    },
+    "contributing-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CONTRIBUTING.md"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CODE_OF_CONDUCT.md"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpmi1ha0q4/Pose-Detection-with-HRPoseNet"
+    },
+    "readme-references-license": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'license|notice' not found in README.md"
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found directory: tests"
+    },
+    "integrates-with-ci": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['.gitlab-ci.yml', '.travis.yml', 'appveyor.yml', '.appveyor.yml', 'circle.yml', '.circleci/config.yml', 'Jenkinsfile', '.drone.yml', '.github/workflows/*', 'azure-pipelines.yml'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpmi1ha0q4/Pose-Detection-with-HRPoseNet"
+    },
+    "source-license-headers-exist": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'Copyright(\\\\s)*(\\\\(c\\\\)|\u00a9)?' not found in conftest.py"
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": false,
+      "level": "warning",
+      "message": "Pattern '(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\\\(c\\\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\\\s)*)+ The Linux Foundation' not found in conftest.py"
+    },
+    "github-issue-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['ISSUE_TEMPLATE*', 'ISSUE_TEMPLATE/**', '.github/ISSUE_TEMPLATE*', '.github/ISSUE_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpmi1ha0q4/Pose-Detection-with-HRPoseNet"
+    },
+    "github-pull-request-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['PULL_REQUEST_TEMPLATE*', 'PULL_REQUEST_TEMPLATE/**', '.github/PULL_REQUEST_TEMPLATE*', '.github/PULL_REQUEST_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpmi1ha0q4/Pose-Detection-with-HRPoseNet"
+    },
+    "python-package-metadata-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: setup.py"
+    }
+  }
+}

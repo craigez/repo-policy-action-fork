@@ -1,0 +1,70 @@
+{
+  "repo": "quic/wos-blender-plugin",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: LICENSE.md"
+    },
+    "readme-file-exists": {
+      "passed": false,
+      "level": "error",
+      "message": "No file matching ['README*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpm419xvb7/wos-blender-plugin"
+    },
+    "contributing-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CONTRIB*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpm419xvb7/wos-blender-plugin"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CODEOFCONDUCT*', '{docs/,.github/,}CODE-OF-CONDUCT*', '{docs/,.github/,}CODE_OF_CONDUCT*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpm419xvb7/wos-blender-plugin"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpm419xvb7/wos-blender-plugin"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['README*'] \u2014 skipped."
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No directory matching ['**/test*', '**/specs', '**/*test*'] found under /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpm419xvb7/wos-blender-plugin"
+    },
+    "integrates-with-ci": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['.gitlab-ci.yml', '.travis.yml', 'appveyor.yml', '.appveyor.yml', 'circle.yml', '.circleci/config.yml', 'Jenkinsfile', '.drone.yml', '.github/workflows/*', 'azure-pipelines.yml'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpm419xvb7/wos-blender-plugin"
+    },
+    "source-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['**/*.py', '**/*.js', '**/*.c', '**/*.cc', '**/*.cpp', '**/*.h', '**/*.ts', '**/*.rs', '**/*.java', '**/*.go', '**/*.bbclass', '**/*.S', '**/*.hpp'] \u2014 skipped."
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['**/*.py', '**/*.js', '**/*.c', '**/*.cc', '**/*.cpp', '**/*.h', '**/*.ts', '**/*.sh', '**/*.rs', '**/*.java', '**/*.go', '**/*.bbclass', '**/*.S', '**/*.hpp'] \u2014 skipped."
+    },
+    "github-issue-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['ISSUE_TEMPLATE*', 'ISSUE_TEMPLATE/**', '.github/ISSUE_TEMPLATE*', '.github/ISSUE_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpm419xvb7/wos-blender-plugin"
+    },
+    "github-pull-request-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['PULL_REQUEST_TEMPLATE*', 'PULL_REQUEST_TEMPLATE/**', '.github/PULL_REQUEST_TEMPLATE*', '.github/PULL_REQUEST_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpm419xvb7/wos-blender-plugin"
+    }
+  }
+}

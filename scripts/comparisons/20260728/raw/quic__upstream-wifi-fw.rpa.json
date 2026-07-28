@@ -1,0 +1,70 @@
+{
+  "repo": "quic/upstream-wifi-fw",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: Notice.txt"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: README.md"
+    },
+    "contributing-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CONTRIB*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpjutx0rjr/upstream-wifi-fw"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CODEOFCONDUCT*', '{docs/,.github/,}CODE-OF-CONDUCT*', '{docs/,.github/,}CODE_OF_CONDUCT*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpjutx0rjr/upstream-wifi-fw"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpjutx0rjr/upstream-wifi-fw"
+    },
+    "readme-references-license": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'license|notice' not found in README.md"
+    },
+    "binaries-not-present": {
+      "passed": false,
+      "level": "warning",
+      "message": "Binary file found (MIME: application/x-executable): ath12k-firmware/IPQ5322/hw1.0/1.3.1/WLAN.WBE.1.3.1-00130-QCAHKSWPL_SILICONZ-1/iu_fw.b00"
+    },
+    "test-directory-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found directory: ath11k-firmware/IPQ5018_QCN6122_QCN6122/hw1.0/testing"
+    },
+    "integrates-with-ci": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/workflows/quic-organization-repolinter.yml"
+    },
+    "source-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['**/*.py', '**/*.js', '**/*.c', '**/*.cc', '**/*.cpp', '**/*.h', '**/*.ts', '**/*.rs', '**/*.java', '**/*.go', '**/*.bbclass', '**/*.S', '**/*.hpp'] \u2014 skipped."
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "No files matched ['**/*.py', '**/*.js', '**/*.c', '**/*.cc', '**/*.cpp', '**/*.h', '**/*.ts', '**/*.sh', '**/*.rs', '**/*.java', '**/*.go', '**/*.bbclass', '**/*.S', '**/*.hpp'] \u2014 skipped."
+    },
+    "github-issue-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['ISSUE_TEMPLATE*', 'ISSUE_TEMPLATE/**', '.github/ISSUE_TEMPLATE*', '.github/ISSUE_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpjutx0rjr/upstream-wifi-fw"
+    },
+    "github-pull-request-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['PULL_REQUEST_TEMPLATE*', 'PULL_REQUEST_TEMPLATE/**', '.github/PULL_REQUEST_TEMPLATE*', '.github/PULL_REQUEST_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpjutx0rjr/upstream-wifi-fw"
+    }
+  }
+}

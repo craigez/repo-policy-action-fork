@@ -1,0 +1,80 @@
+{
+  "repo": "qualcomm-linux/kernel",
+  "results": {
+    "license-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: LICENSES/preferred/BSD-3-Clause-Clear"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: README"
+    },
+    "contributing-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CONTRIB*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp91pxwnuy/kernel"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CODEOFCONDUCT*', '{docs/,.github/,}CODE-OF-CONDUCT*', '{docs/,.github/,}CODE_OF_CONDUCT*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp91pxwnuy/kernel"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp91pxwnuy/kernel"
+    },
+    "readme-references-license": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 1 matched file(s)."
+    },
+    "binaries-not-present": {
+      "passed": false,
+      "level": "warning",
+      "message": "Binary file found (MIME: application/x-object): tools/testing/selftests/tc-testing/action-ebpf"
+    },
+    "test-directory-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found directory: tools/testing"
+    },
+    "integrates-with-ci": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['.gitlab-ci.yml', '.travis.yml', 'appveyor.yml', '.appveyor.yml', 'circle.yml', '.circleci/config.yml', 'Jenkinsfile', '.drone.yml', '.github/workflows/*', 'azure-pipelines.yml'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp91pxwnuy/kernel"
+    },
+    "source-license-headers-exist": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'Copyright(\\\\s)*(\\\\(c\\\\)|\u00a9)?' not found in Documentation/conf.py"
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": false,
+      "level": "warning",
+      "message": "Pattern '(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\\\(c\\\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\\\s)*)+ The Linux Foundation' not found in Documentation/admin-guide/aoe/autoload.sh"
+    },
+    "github-issue-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['ISSUE_TEMPLATE*', 'ISSUE_TEMPLATE/**', '.github/ISSUE_TEMPLATE*', '.github/ISSUE_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp91pxwnuy/kernel"
+    },
+    "github-pull-request-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['PULL_REQUEST_TEMPLATE*', 'PULL_REQUEST_TEMPLATE/**', '.github/PULL_REQUEST_TEMPLATE*', '.github/PULL_REQUEST_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp91pxwnuy/kernel"
+    },
+    "python-package-metadata-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['setup.py', 'requirements.txt'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp91pxwnuy/kernel"
+    },
+    "rust-package-metadata-exists": {
+      "passed": false,
+      "level": "error",
+      "message": "No file matching ['**/Cargo.toml', '**/Cargo.lock'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmp91pxwnuy/kernel"
+    }
+  }
+}

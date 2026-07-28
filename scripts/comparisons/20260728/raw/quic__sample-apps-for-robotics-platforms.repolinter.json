@@ -1,0 +1,3832 @@
+{
+  "params": {
+    "targetDir": "/var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpslmntqny/sample-apps-for-robotics-platforms",
+    "filterPaths": [],
+    "rulesetPath": "https://raw.githubusercontent.com/qualcomm/.github/main/repolint.json",
+    "ruleset": {
+      "$schema": "https://raw.githubusercontent.com/todogroup/repolinter/master/rulesets/schema.json",
+      "version": 2,
+      "axioms": {
+        "linguist": "language",
+        "licensee": "license",
+        "packagers": "packager"
+      },
+      "rules": {
+        "license-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "LICENSE*",
+                "COPYING*",
+                "NOTICE*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-file-exists": {
+          "level": "error",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "README*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "contributing-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CONTRIB*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "code-of-conduct-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "{docs/,.github/,}CODEOFCONDUCT*",
+                "{docs/,.github/,}CODE-OF-CONDUCT*",
+                "{docs/,.github/,}CODE_OF_CONDUCT*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "changelog-file-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "CHANGELOG*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "readme-references-license": {
+          "level": "error",
+          "rule": {
+            "type": "file-contents",
+            "options": {
+              "globsAll": [
+                "README*"
+              ],
+              "content": "license|notice",
+              "flags": "i"
+            }
+          }
+        },
+        "binaries-not-present": {
+          "level": "warning",
+          "rule": {
+            "type": "file-type-exclusion",
+            "options": {
+              "type": [
+                "**/*.exe",
+                "**/*.dll",
+                "**/*.o",
+                "**/*.so",
+                "!node_modules/**"
+              ]
+            }
+          }
+        },
+        "test-directory-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "directory-existence",
+            "options": {
+              "globsAny": [
+                "**/test*",
+                "**/specs",
+                "**/*test*"
+              ],
+              "nocase": true
+            }
+          }
+        },
+        "integrates-with-ci": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                ".gitlab-ci.yml",
+                ".travis.yml",
+                "appveyor.yml",
+                ".appveyor.yml",
+                "circle.yml",
+                ".circleci/config.yml",
+                "Jenkinsfile",
+                ".drone.yml",
+                ".github/workflows/*",
+                "azure-pipelines.yml"
+              ]
+            }
+          }
+        },
+        "source-license-headers-exist": {
+          "level": "error",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+                "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+              ],
+              "flags": "i",
+              "succeed-on-non-existent": true
+            }
+          }
+        },
+        "source-qualcomm-license-headers-exist": {
+          "level": "warning",
+          "rule": {
+            "type": "file-starts-with",
+            "options": {
+              "globsAll": [
+                "**/*.py",
+                "**/*.js",
+                "**/*.c",
+                "**/*.cc",
+                "**/*.cpp",
+                "**/*.h",
+                "**/*.ts",
+                "**/*.sh",
+                "**/*.rs",
+                "**/*.java",
+                "**/*.go",
+                "**/*.bbclass",
+                "**/*.S",
+                "**/*.hpp"
+              ],
+              "skip-paths-matching": {
+                "patterns": [
+                  "babel.config.js",
+                  "build/",
+                  "jest.config.js",
+                  "node_modules/",
+                  "types/",
+                  "uthash.h"
+                ]
+              },
+              "lineCount": 200,
+              "patterns": [
+                "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+              ],
+              "flags": "i"
+            }
+          }
+        },
+        "github-issue-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "ISSUE_TEMPLATE*",
+                "ISSUE_TEMPLATE/**",
+                ".github/ISSUE_TEMPLATE*",
+                ".github/ISSUE_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "github-pull-request-template-exists": {
+          "level": "warning",
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "PULL_REQUEST_TEMPLATE*",
+                "PULL_REQUEST_TEMPLATE/**",
+                ".github/PULL_REQUEST_TEMPLATE*",
+                ".github/PULL_REQUEST_TEMPLATE/**"
+              ]
+            }
+          }
+        },
+        "javascript-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=javascript"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "package.json"
+              ]
+            }
+          }
+        },
+        "ruby-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=ruby"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Gemfile"
+              ]
+            }
+          }
+        },
+        "java-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=java"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "pom.xml",
+                "build.xml",
+                "build.gradle"
+              ]
+            }
+          }
+        },
+        "python-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=python"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "setup.py",
+                "requirements.txt"
+              ]
+            }
+          }
+        },
+        "rust-package-metadata-exists": {
+          "level": "error",
+          "where": [
+            "language=rust"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "**/Cargo.toml",
+                "**/Cargo.lock"
+              ]
+            }
+          }
+        },
+        "objective-c-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=objective-c"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Cartfile",
+                "Podfile",
+                "**/*.podspec"
+              ]
+            }
+          }
+        },
+        "swift-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=swift"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "Package.swift"
+              ]
+            }
+          }
+        },
+        "erlang-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=erlang"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "rebar.config"
+              ]
+            }
+          }
+        },
+        "elixir-package-metadata-exists": {
+          "level": "warning",
+          "where": [
+            "language=elixir"
+          ],
+          "rule": {
+            "type": "file-existence",
+            "options": {
+              "globsAny": [
+                "mix.exs"
+              ]
+            }
+          }
+        },
+        "license-detectable-by-licensee": {
+          "level": "off",
+          "where": [
+            "license=*"
+          ],
+          "rule": {
+            "type": "license-detectable-by-licensee",
+            "options": {}
+          }
+        }
+      }
+    }
+  },
+  "passed": false,
+  "errored": false,
+  "results": [
+    {
+      "ruleInfo": {
+        "name": "license-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "LICENSE*",
+            "COPYING*",
+            "NOTICE*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "LICENSE",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-file-exists",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "README*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "contributing-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CONTRIB*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "CONTRIBUTING.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "code-of-conduct-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "{docs/,.github/,}CODEOFCONDUCT*",
+            "{docs/,.github/,}CODE-OF-CONDUCT*",
+            "{docs/,.github/,}CODE_OF_CONDUCT*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "CODE-OF-CONDUCT.md",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "changelog-file-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "CHANGELOG*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "CHANGELOG*"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "readme-references-license",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-contents",
+        "ruleConfig": {
+          "globsAll": [
+            "README*"
+          ],
+          "content": "license|notice",
+          "flags": "i"
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "README.md",
+            "message": "Contains license|notice"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "binaries-not-present",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-type-exclusion",
+        "ruleConfig": {
+          "type": [
+            "**/*.exe",
+            "**/*.dll",
+            "**/*.o",
+            "**/*.so",
+            "!node_modules/**"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "message": "Excluded file type doesn't exist",
+        "targets": [
+          {
+            "passed": true,
+            "pattern": [
+              "**/*.exe",
+              "**/*.dll",
+              "**/*.o",
+              "**/*.so",
+              "!node_modules/**"
+            ]
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "test-directory-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "directory-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/test*",
+            "**/specs",
+            "**/*test*"
+          ],
+          "nocase": true
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": "ROS2-IMU/imu-ros2node/src/imu_node_test.cpp",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "integrates-with-ci",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            ".gitlab-ci.yml",
+            ".travis.yml",
+            "appveyor.yml",
+            ".appveyor.yml",
+            "circle.yml",
+            ".circleci/config.yml",
+            "Jenkinsfile",
+            ".drone.yml",
+            ".github/workflows/*",
+            "azure-pipelines.yml"
+          ]
+        }
+      },
+      "status": "PASSED",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": true,
+            "path": ".github/workflows/quic-organization-repolinter.yml",
+            "message": "Found file"
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-license-headers-exist",
+        "level": "error",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "Copyright(\\s)*(\\(c\\)|\u00a9)?",
+            "SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          ],
+          "flags": "i",
+          "succeed-on-non-existent": true
+        }
+      },
+      "status": "NOT_PASSED_ERROR",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_alsa/alsa.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_audio/audio_playback.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_audio/audio_record.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_camera/ispcam_display.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_camera/usbcam_display.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_gui_app/gui_app.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_encode_decode/ispcam_encode_mpeg.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_encode_decode/mp4_decode_playback.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_encode_decode/usbcam_encode_mpeg.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_streaming/tcp_server.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_transform/transform_display.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_tflite/src/tflite_object_detection.py",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/simple_http_ws_server/server.js",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/AI-ML-apps/snpe_detection/snpe_detection.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/AI-ML-apps/snpe_classification/snpe_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/AI-ML-apps/tflite_posenet/tflite_posenet.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/AI-ML-apps/tflite_classification/tflite_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/AI-ML-apps/tflite_segmentation/tflite_segmentation.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/Weston-Client-Application/simple-egl.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_audio/audio_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_audio/audio_record.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_encode_decode/ispcam_encode_mp4.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_encode_decode/mp4_decode_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_camera/ispcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_camera/usbcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_tflite/tflite_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_streaming/tcp_server.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_transform/transform_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/Codec2-Video/app/src/gst-codec2_h264.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/Device-info/src/qrbx210_info.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/GPIO-samples/src/qrbx210_platform.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/WIFI-OnBoarding/wifi/wifi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/snpe_detection/snpe_detection.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/snpe_classification/snpe_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/tflite_classification/tflite_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/tflite_posenet/tflite_posenet.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/tflite_segmentation/tflite_segmentation.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/Weston-Client-Application/simple-egl.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/snpe_detection/snpe_detection.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/tflite_segmentation/tflite_segmentation.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/tflite_posenet/tflite_posenet.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/snpe_classification/snpe_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/kernel-demo/led.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/Weston-Client-Application/simple-egl.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_alsa/src/gst_audio_sample.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/WIFI-OnBoarding/wifi/wifi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_audio/audio_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_audio/audio_record.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_encode_decode/ispcam_encode_mp4.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_encode_decode/mp4_decode_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_camera/ispcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_camera/usbcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_tflite/tflite_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_streaming/tcp_server.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/GPIO-samples/src/qrb5165_platform.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_transform/transform_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/Device-info/src/qrb5165_info.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/Codec2-Video/app/src/gst-codec2_h264.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_audio/audio_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_audio/audio_record.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_encode_decode/ispcam_encode_mp4.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_encode_decode/usbcam_encode_mp4.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_encode_decode/mp4_decode_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_camera/usbcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_camera/ispcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_streaming/tcp_server.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_transform/transform_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/Device-info/src/qrb5165_info.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/WIFI-OnBoarding/wifi/wifi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/GPIO-samples/src/qrb5165_platform.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_alsa/src/gst_audio_sample.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_tflite/src/tflite_object_detection.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_alsa/src/gst_audio_sample.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/ml_engine_impl.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_base.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_segmentation.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_posenet.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/ml_engine_impl.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_segmentation.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_base.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_detection.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_single_ssd.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_gst_tflite/mle_tflite.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_gst_snpe/mle_snpe.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_gst_snpe/mle_snpe.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/ml_engine_impl.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_detection.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_base.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_yolodetection.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "ROS2-IMU/imu-ros2node/src/imu_node.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ROS2-IMU/imu-ros2node/src/imu_node_test.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ROS2-IMU/sensors-daemon/src/sns_client_example.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ROS2-IMU/sensors-daemon/src/ssc_connection_reference.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ROS2-IMU/sensors-daemon/src/ssc_suid_util.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ROS2-IMU/sensors-client/src/imu_client.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ROS2-IMU/sensors-client/src/imu_client_test.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Config.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Buffer.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Device.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Snapshot.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/OpenCL-Application/matrix_multiply/matrix_multiply.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/OpenCL-Application/matrix_multiply/matrix_multiply.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/C2D-Samples/src/c2d_test.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/CenterfaceSnpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/DecodeQueue.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/GendernetSnpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/Configuration.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/FERplusSnpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/GooglenetSnpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/ModelInference.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/StreamDecode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/StreamEncode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/SNPERuntime.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/main.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/DecodeQueue.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/ModelInference.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/SNPERuntime.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/Configuration.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/YOLOv5Snpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/StreamDecode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/main.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/StreamEncode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/DecodeQueue.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/Configuration.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/SNPERuntime.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/ModelInference.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/StreamEncode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/YOLOv5Snpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/StreamDecode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/main.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/BYTETracker.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/ByteTrackSnpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/DecodeQueue.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/SNPERuntime.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/STrack.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/Configuration.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/StreamDecode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/StreamEncode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/ModelInference.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/lapjv.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/kalmanFilter.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/main.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/utils.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/Configuration.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/DecodeQueue.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/ModelInference.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/SNPERuntime.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/StreamDecode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/main.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/YOLOv5Snpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/StreamEncode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/OpenCL-Application/matrix_multiply/matrix_multiply.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Config.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Buffer.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Device.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Snapshot.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/qgstpipeline.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/qgstthreadcontroller.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/window.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvArithmetic/src/fastcvArithmetic.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvdownscale/src/fastcvdownscale.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvcolorconversion/src/color_conversion.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "ROS2-IMU/sensors-client/inc/imu_client.hpp",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ROS2-IMU/sensors-daemon/inc/sns_imud_ros.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ROS2-IMU/sensors-daemon/inc/ssc_connection_reference.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "ROS2-IMU/sensors-daemon/inc/ssc_suid_util.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Buffer.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Config.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Device.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Snapshot.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/C2D-Samples/src/C2DColorConverter.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/CenterfaceSnpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/DecodeQueue.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/Configuration.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/Detection.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/FERplusSnpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/GooglenetSnpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/GendernetSnpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/SNPERuntime.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/StreamDecode.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/ModelInference.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/StreamEncode.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/Utils.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/Configuration.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/DecodeQueue.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/Detection.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/ModelInference.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/SNPERuntime.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/StreamDecode.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/YOLOv5Snpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/StreamEncode.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/Utils.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/Configuration.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/DecodeQueue.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/Detection.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/SNPERuntime.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/ModelInference.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/StreamEncode.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/Utils.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/YOLOv5Snpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/StreamDecode.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/BYTETracker.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/ByteTrackSnpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/Configuration.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/Detection.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/SNPERuntime.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/DecodeQueue.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/STrack.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/StreamDecode.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/ModelInference.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/StreamEncode.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/Utils.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/kalmanFilter.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/dataType.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/lapjv.h",
+            "message": "The first 200 lines do not contain the pattern(s): SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/Detection.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/Configuration.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/StreamDecode.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/SNPERuntime.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/DecodeQueue.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/ModelInference.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/StreamEncode.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/YOLOv5Snpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/Utils.h",
+            "message": "The first 200 lines do not contain the pattern(s): Copyright(\\s)*(\\(c\\)|\u00a9)?, SPDX-License-Identifier|Redistribution and use in source and binary forms, with or without"
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Config.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Buffer.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Snapshot.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Device.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/qgstpipeline.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/qgstthreadcontroller.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/window.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/common_utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/ml_engine_intf.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_base.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_segmentation.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_posenet.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/common_utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/ml_engine_intf.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_detection.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_segmentation.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_single_ssd.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_base.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_gst_tflite/mle_tflite.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_gst_snpe/mle_snpe.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvArithmetic/inc/fastcv.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvdownscale/inc/fastcv.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvcolorconversion/inc/fastcv.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_gst_snpe/mle_snpe.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/common_utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/ml_engine_intf.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_base.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_detection.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_yolodetection.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/include/ml-meta/ml_meta.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/include/gst/video/c2d-video-converter.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/include/gst/video/gstimagepool.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "source-qualcomm-license-headers-exist",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-starts-with",
+        "ruleConfig": {
+          "globsAll": [
+            "**/*.py",
+            "**/*.js",
+            "**/*.c",
+            "**/*.cc",
+            "**/*.cpp",
+            "**/*.h",
+            "**/*.ts",
+            "**/*.sh",
+            "**/*.rs",
+            "**/*.java",
+            "**/*.go",
+            "**/*.bbclass",
+            "**/*.S",
+            "**/*.hpp"
+          ],
+          "skip-paths-matching": {
+            "patterns": [
+              "babel.config.js",
+              "build/",
+              "jest.config.js",
+              "node_modules/",
+              "types/",
+              "uthash.h"
+            ]
+          },
+          "lineCount": 200,
+          "patterns": [
+            "(Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          ],
+          "flags": "i"
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "targets": [
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_alsa/alsa.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_audio/audio_playback.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_audio/audio_record.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_camera/ispcam_display.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_camera/usbcam_display.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_gui_app/gui_app.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_encode_decode/ispcam_encode_mpeg.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_encode_decode/mp4_decode_playback.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_encode_decode/usbcam_encode_mpeg.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_streaming/tcp_server.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_transform/transform_display.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_tflite/src/tflite_object_detection.py",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/simple_http_ws_server/server.js",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/AI-ML-apps/snpe_detection/snpe_detection.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/AI-ML-apps/snpe_classification/snpe_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/AI-ML-apps/tflite_posenet/tflite_posenet.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/AI-ML-apps/tflite_classification/tflite_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/AI-ML-apps/tflite_segmentation/tflite_segmentation.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/Weston-Client-Application/simple-egl.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_audio/audio_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_audio/audio_record.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_encode_decode/ispcam_encode_mp4.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_encode_decode/mp4_decode_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_camera/ispcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_camera/usbcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_tflite/tflite_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_streaming/tcp_server.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_transform/transform_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/Codec2-Video/app/src/gst-codec2_h264.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/Device-info/src/qrbx210_info.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/GPIO-samples/src/qrbx210_platform.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/WIFI-OnBoarding/wifi/wifi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/snpe_detection/snpe_detection.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/snpe_classification/snpe_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/tflite_classification/tflite_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/tflite_posenet/tflite_posenet.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/tflite_segmentation/tflite_segmentation.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/Weston-Client-Application/simple-egl.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/snpe_detection/snpe_detection.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/tflite_segmentation/tflite_segmentation.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/tflite_posenet/tflite_posenet.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/snpe_classification/snpe_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/kernel-demo/led.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/Weston-Client-Application/simple-egl.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_alsa/src/gst_audio_sample.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/WIFI-OnBoarding/wifi/wifi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_audio/audio_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_audio/audio_record.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_encode_decode/ispcam_encode_mp4.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_encode_decode/mp4_decode_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_camera/ispcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_camera/usbcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_tflite/tflite_classification.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_streaming/tcp_server.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/GPIO-samples/src/qrb5165_platform.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_transform/transform_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/Device-info/src/qrb5165_info.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/Codec2-Video/app/src/gst-codec2_h264.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_audio/audio_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_audio/audio_record.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_encode_decode/ispcam_encode_mp4.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_encode_decode/usbcam_encode_mp4.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_encode_decode/mp4_decode_playback.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_camera/usbcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_camera/ispcam_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_streaming/tcp_server.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_transform/transform_display.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/Device-info/src/qrb5165_info.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/WIFI-OnBoarding/wifi/wifi.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/GPIO-samples/src/qrb5165_platform.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_alsa/src/gst_audio_sample.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_tflite/src/tflite_object_detection.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_alsa/src/gst_audio_sample.c",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/ml_engine_impl.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_base.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_segmentation.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_posenet.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/ml_engine_impl.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_segmentation.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_base.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_detection.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_single_ssd.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_gst_tflite/mle_tflite.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_gst_snpe/mle_snpe.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_gst_snpe/mle_snpe.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/ml_engine_impl.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_detection.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_base.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_yolodetection.cc",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ROS2-IMU/imu-ros2node/src/imu_node.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ROS2-IMU/imu-ros2node/src/imu_node_test.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ROS2-IMU/sensors-daemon/src/sns_client_example.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ROS2-IMU/sensors-daemon/src/ssc_connection_reference.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ROS2-IMU/sensors-daemon/src/ssc_suid_util.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ROS2-IMU/sensors-client/src/imu_client.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ROS2-IMU/sensors-client/src/imu_client_test.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Config.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Buffer.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Device.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Snapshot.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/OpenCL-Application/matrix_multiply/matrix_multiply.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/OpenCL-Application/matrix_multiply/matrix_multiply.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/C2D-Samples/src/c2d_test.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/CenterfaceSnpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/DecodeQueue.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/GendernetSnpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/Configuration.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/FERplusSnpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/GooglenetSnpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/ModelInference.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/StreamDecode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/StreamEncode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/SNPERuntime.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/src/main.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/DecodeQueue.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/ModelInference.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/SNPERuntime.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/Configuration.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/YOLOv5Snpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/StreamDecode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/main.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/src/StreamEncode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/DecodeQueue.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/Configuration.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/SNPERuntime.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/ModelInference.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/StreamEncode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/YOLOv5Snpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/StreamDecode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/src/main.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/BYTETracker.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/ByteTrackSnpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/DecodeQueue.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/SNPERuntime.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/STrack.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/Configuration.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/StreamDecode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/StreamEncode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/ModelInference.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/lapjv.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/kalmanFilter.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/main.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/src/utils.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/Configuration.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/DecodeQueue.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/ModelInference.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/SNPERuntime.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/StreamDecode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/main.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/YOLOv5Snpe.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/src/StreamEncode.cpp",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/OpenCL-Application/matrix_multiply/matrix_multiply.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Config.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Buffer.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Device.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Snapshot.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/qgstpipeline.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/main.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/qgstthreadcontroller.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/window.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvArithmetic/src/fastcvArithmetic.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvdownscale/src/fastcvdownscale.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvcolorconversion/src/color_conversion.cpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/weston.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/create_so_link.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/WIFI-OnBoarding/wifi/ap_switch.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/WIFI-OnBoarding/wifi/get_sta.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/WIFI-OnBoarding/wifi/rm_sta.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/WIFI-OnBoarding/wifi/sta_switch.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/WIFI-OnBoarding/wifi/set_sta.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/WIFI-OnBoarding/wifi/wifi_switch.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/platform-bringup/WIFI-OnBoarding/wifi/set_ap.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/weston.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/C2D-Samples/src/set_env.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/snpe_detection/install.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/snpe_detection/weston.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/tflite_segmentation/install.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/tflite_segmentation/weston.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/tflite_posenet/install.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/tflite_posenet/weston.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/snpe_classification/weston.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/snpe_classification/install.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/weston.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/weston.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/Weston-Client-Application/weston.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_alsa/HWConfig/install.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/GStreamer-apps/cpp/gst_alsa/HWConfig/qc_alsa_restore.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/WIFI-OnBoarding/wifi/ap_switch.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/WIFI-OnBoarding/wifi/rm_sta.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/WIFI-OnBoarding/wifi/set_ap.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/WIFI-OnBoarding/wifi/get_sta.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/WIFI-OnBoarding/wifi/sta_switch.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/WIFI-OnBoarding/wifi/wifi_switch.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/platform-bringup/WIFI-OnBoarding/wifi/set_sta.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_tflite/install.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/create_so_link.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_tflite/install.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_tflite/weston.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/python/gst_tflite/install.sh",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/WIFI-OnBoarding/wifi/get_sta.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/WIFI-OnBoarding/wifi/ap_switch.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/WIFI-OnBoarding/wifi/set_ap.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/WIFI-OnBoarding/wifi/set_sta.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/WIFI-OnBoarding/wifi/sta_switch.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/WIFI-OnBoarding/wifi/wifi_switch.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/platform-bringup/WIFI-OnBoarding/wifi/rm_sta.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_alsa/HWConfig/install.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_5_x/GStreamer-apps/cpp/gst_alsa/HWConfig/qc_alsa_restore.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_alsa/HWConfig/install.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_alsa/HWConfig/qc_alsa_restore.sh",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ROS2-IMU/sensors-client/inc/imu_client.hpp",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ROS2-IMU/sensors-daemon/inc/sns_imud_ros.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ROS2-IMU/sensors-daemon/inc/ssc_connection_reference.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "ROS2-IMU/sensors-daemon/inc/ssc_suid_util.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Buffer.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Config.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Device.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB1RB2/peripheral-devices/camera-hal3-sample/src/CameraHAL3Snapshot.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/C2D-Samples/src/C2DColorConverter.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/CenterfaceSnpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/DecodeQueue.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/Configuration.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/Detection.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/FERplusSnpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/GooglenetSnpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/GendernetSnpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/SNPERuntime.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/StreamDecode.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/ModelInference.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/StreamEncode.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Age_Gender_Emotion_Solution/inc/Utils.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/Configuration.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/DecodeQueue.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/Detection.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/ModelInference.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/SNPERuntime.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/StreamDecode.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/YOLOv5Snpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/StreamEncode.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Heatmap_Solutions/inc/Utils.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/Configuration.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/DecodeQueue.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/Detection.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/SNPERuntime.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/ModelInference.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/StreamEncode.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/Utils.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/YOLOv5Snpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Vision_Solutions/inc/StreamDecode.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/BYTETracker.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/ByteTrackSnpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/Configuration.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/Detection.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/SNPERuntime.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/DecodeQueue.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/STrack.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/StreamDecode.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/ModelInference.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/StreamEncode.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/Utils.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/kalmanFilter.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/dataType.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_5_x/AI-ML-apps/AI_Tracker_Solution/inc/lapjv.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/Detection.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/Configuration.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/StreamDecode.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/SNPERuntime.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/DecodeQueue.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/ModelInference.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/StreamEncode.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/YOLOv5Snpe.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": false,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/AI_Vision_Solutions/inc/Utils.h",
+            "message": "The first 200 lines do not contain the pattern(s): (Copyright|\u00a9).*Qualcomm Innovation Center, Inc|Qualcomm Technologies, Inc|Copyright (\\(c\\)|\u00a9) (20(1[2-9]|2[0-2])(-|,|\\s)*)+ The Linux Foundation"
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Config.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Buffer.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Snapshot.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/peripheral-devices/camera-hal3-sample/src/CameraHAL3Device.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/qgstpipeline.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/qgstthreadcontroller.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/GStreamer-apps/cpp/gst_gui_app/window.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/common_utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/ml_engine_intf.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_base.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_segmentation.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_engine/tflite_posenet.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/common_utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/ml_engine_intf.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_detection.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_segmentation.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_single_ssd.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_engine/snpe_base.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_tflite/mle_gst_tflite/mle_tflite.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/gst_mle_oss/gst_snpe/mle_gst_snpe/mle_snpe.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvArithmetic/inc/fastcv.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvdownscale/inc/fastcv.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/AI-ML-apps/FastCV-Samples/fastcvcolorconversion/inc/fastcv.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_gst_snpe/mle_snpe.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/common_utils.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/ml_engine_intf.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_base.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_detection.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/gst-plugin-mle/mle_engine/snpe_yolodetection.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/include/ml-meta/ml_meta.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/include/gst/video/c2d-video-converter.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          },
+          {
+            "passed": true,
+            "path": "RB5/linux_kernel_4_x/People-Detection-YoloV5/src/include/gst/video/gstimagepool.h",
+            "message": "The first 200 lines contain all of the requested patterns."
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-issue-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "ISSUE_TEMPLATE*",
+            "ISSUE_TEMPLATE/**",
+            ".github/ISSUE_TEMPLATE*",
+            ".github/ISSUE_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "ISSUE_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": "ISSUE_TEMPLATE/**"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/ISSUE_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/ISSUE_TEMPLATE/**"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "github-pull-request-template-exists",
+        "level": "warning",
+        "where": [],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "PULL_REQUEST_TEMPLATE*",
+            "PULL_REQUEST_TEMPLATE/**",
+            ".github/PULL_REQUEST_TEMPLATE*",
+            ".github/PULL_REQUEST_TEMPLATE/**"
+          ]
+        }
+      },
+      "status": "NOT_PASSED_WARN",
+      "lintResult": {
+        "message": "Did not find a file matching the specified patterns",
+        "targets": [
+          {
+            "passed": false,
+            "pattern": "PULL_REQUEST_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": "PULL_REQUEST_TEMPLATE/**"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/PULL_REQUEST_TEMPLATE*"
+          },
+          {
+            "passed": false,
+            "pattern": ".github/PULL_REQUEST_TEMPLATE/**"
+          }
+        ],
+        "passed": false
+      }
+    },
+    {
+      "ruleInfo": {
+        "name": "javascript-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=javascript"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "package.json"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=javascript\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "ruby-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=ruby"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Gemfile"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=ruby\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "java-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=java"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "pom.xml",
+            "build.xml",
+            "build.gradle"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=java\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "python-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=python"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "setup.py",
+            "requirements.txt"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=python\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "rust-package-metadata-exists",
+        "level": "error",
+        "where": [
+          "language=rust"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "**/Cargo.toml",
+            "**/Cargo.lock"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=rust\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "objective-c-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=objective-c"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Cartfile",
+            "Podfile",
+            "**/*.podspec"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=objective-c\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "swift-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=swift"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "Package.swift"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=swift\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "erlang-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=erlang"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "rebar.config"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=erlang\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "elixir-package-metadata-exists",
+        "level": "warning",
+        "where": [
+          "language=elixir"
+        ],
+        "ruleType": "file-existence",
+        "ruleConfig": {
+          "globsAny": [
+            "mix.exs"
+          ]
+        }
+      },
+      "runMessage": "ignored due to unsatisfied condition(s): \"language=elixir\"",
+      "status": "IGNORED"
+    },
+    {
+      "ruleInfo": {
+        "name": "license-detectable-by-licensee",
+        "level": "off",
+        "where": [
+          "license=*"
+        ],
+        "ruleType": "license-detectable-by-licensee",
+        "ruleConfig": {}
+      },
+      "runMessage": "ignored because level is \"off\"",
+      "status": "IGNORED"
+    }
+  ],
+  "targets": {
+    "language": {
+      "message": "Linguist not installed",
+      "targets": [],
+      "passed": false
+    },
+    "license": {
+      "message": "Licensee not installed",
+      "targets": [],
+      "passed": false
+    },
+    "packager": {
+      "targets": [],
+      "passed": true
+    }
+  }
+}

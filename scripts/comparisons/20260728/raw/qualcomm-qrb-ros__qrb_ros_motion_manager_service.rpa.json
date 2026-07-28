@@ -1,0 +1,70 @@
+{
+  "repo": "qualcomm-qrb-ros/qrb_ros_motion_manager_service",
+  "results": {
+    "license-file-exists": {
+      "passed": false,
+      "level": "error",
+      "message": "No file matching ['LICENSE*', 'COPYING*', 'NOTICE*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpjjnmzlj3/qrb_ros_motion_manager_service"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: README.md"
+    },
+    "contributing-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: CONTRIBUTING.md"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CODEOFCONDUCT*', '{docs/,.github/,}CODE-OF-CONDUCT*', '{docs/,.github/,}CODE_OF_CONDUCT*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpjjnmzlj3/qrb_ros_motion_manager_service"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpjjnmzlj3/qrb_ros_motion_manager_service"
+    },
+    "readme-references-license": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'license|notice' not found in README.md"
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No directory matching ['**/test*', '**/specs', '**/*test*'] found under /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmpjjnmzlj3/qrb_ros_motion_manager_service"
+    },
+    "integrates-with-ci": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/workflows/commit-lint.yml"
+    },
+    "source-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 27 matched file(s)."
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 27 matched file(s)."
+    },
+    "github-issue-template-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/ISSUE_TEMPLATE/bug_report.yaml"
+    },
+    "github-pull-request-template-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/PULL_REQUEST_TEMPLATE/pull_request_template.md"
+    }
+  }
+}

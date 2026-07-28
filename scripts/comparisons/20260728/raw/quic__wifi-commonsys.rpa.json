@@ -1,0 +1,75 @@
+{
+  "repo": "quic/wifi-commonsys",
+  "results": {
+    "license-file-exists": {
+      "passed": false,
+      "level": "error",
+      "message": "No file matching ['LICENSE*', 'COPYING*', 'NOTICE*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmptczps295/wifi-commonsys"
+    },
+    "readme-file-exists": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: README.md"
+    },
+    "contributing-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CONTRIB*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmptczps295/wifi-commonsys"
+    },
+    "code-of-conduct-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['{docs/,.github/,}CODEOFCONDUCT*', '{docs/,.github/,}CODE-OF-CONDUCT*', '{docs/,.github/,}CODE_OF_CONDUCT*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmptczps295/wifi-commonsys"
+    },
+    "changelog-file-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['CHANGELOG*'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmptczps295/wifi-commonsys"
+    },
+    "readme-references-license": {
+      "passed": false,
+      "level": "error",
+      "message": "Pattern 'license|notice' not found in README.md"
+    },
+    "binaries-not-present": {
+      "passed": true,
+      "level": "off",
+      "message": "No binary files detected."
+    },
+    "test-directory-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No directory matching ['**/test*', '**/specs', '**/*test*'] found under /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmptczps295/wifi-commonsys"
+    },
+    "integrates-with-ci": {
+      "passed": true,
+      "level": "off",
+      "message": "Found: .github/workflows/quic-organization-repolinter.yml"
+    },
+    "source-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 7 matched file(s)."
+    },
+    "source-qualcomm-license-headers-exist": {
+      "passed": true,
+      "level": "off",
+      "message": "All patterns found in all 7 matched file(s)."
+    },
+    "github-issue-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['ISSUE_TEMPLATE*', 'ISSUE_TEMPLATE/**', '.github/ISSUE_TEMPLATE*', '.github/ISSUE_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmptczps295/wifi-commonsys"
+    },
+    "github-pull-request-template-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['PULL_REQUEST_TEMPLATE*', 'PULL_REQUEST_TEMPLATE/**', '.github/PULL_REQUEST_TEMPLATE*', '.github/PULL_REQUEST_TEMPLATE/**'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmptczps295/wifi-commonsys"
+    },
+    "java-package-metadata-exists": {
+      "passed": false,
+      "level": "warning",
+      "message": "No file matching ['pom.xml', 'build.xml', 'build.gradle'] found in: /var/folders/cj/rh7njyk91lx4s79wxsflz3vw001y2r/T/tmptczps295/wifi-commonsys"
+    }
+  }
+}
