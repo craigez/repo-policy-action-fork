@@ -41,6 +41,47 @@ class RuleResult:
     file_path: str | None = None
 
 
+class RuleResultList(list[RuleResult]):
+    """A list of RuleResult objects that behaves like a single RuleResult.
+
+    This is used when a rule produces multiple failures (e.g. across multiple
+    files) but unit tests or callers expect a single RuleResult-like interface.
+    """
+
+    def __init__(self, results: list[RuleResult]):
+        super().__init__(results)
+        self._primary = (
+            results[0]
+            if results
+            else RuleResult(
+                rule_name="unknown",
+                level="off",
+                passed=True,
+                message="No results.",
+            )
+        )
+
+    @property
+    def passed(self) -> bool:
+        return self._primary.passed
+
+    @property
+    def rule_name(self) -> str:
+        return self._primary.rule_name
+
+    @property
+    def level(self) -> str:
+        return self._primary.level
+
+    @property
+    def message(self) -> str:
+        return self._primary.message
+
+    @property
+    def file_path(self) -> str | None:
+        return self._primary.file_path
+
+
 class Reporter:
     """Emits GitHub Actions workflow command annotations and summaries."""
 
