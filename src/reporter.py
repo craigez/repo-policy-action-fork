@@ -63,22 +63,27 @@ class RuleResultList(list[RuleResult]):
 
     @property
     def passed(self) -> bool:
+        """Return the passed status of the primary (first) result."""
         return self._primary.passed
 
     @property
     def rule_name(self) -> str:
+        """Return the rule name of the primary (first) result."""
         return self._primary.rule_name
 
     @property
     def level(self) -> str:
+        """Return the level of the primary (first) result."""
         return self._primary.level
 
     @property
     def message(self) -> str:
+        """Return the message of the primary (first) result."""
         return self._primary.message
 
     @property
     def file_path(self) -> str | None:
+        """Return the file path of the primary (first) result."""
         return self._primary.file_path
 
 
